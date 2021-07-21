@@ -6,6 +6,7 @@
 }
 
 .Navbar {
+  background-color: lightgray;
   border: 4px dotted grey;
   height: 100%;
   grid-row: 1 / 2;
