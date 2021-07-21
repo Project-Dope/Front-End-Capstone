@@ -21,9 +21,9 @@ export default class Products extends React.Component {
             <div className="product-color"></div>
             <div className="product-size-quantity">
               <select>
-                <option>Small</option>
+                <option>Smaller</option>
                 <option>Medium</option>
-                <option>Large</option>
+                <option>Larger</option>
                 <option>X-Large</option>
               </select>
             </div>
