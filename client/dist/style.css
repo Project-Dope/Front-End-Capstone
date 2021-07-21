@@ -1,3 +1,16 @@
 body {
+  font-family: "adobe-clean", sans-serif;
   margin: 20px 100px;
+}
+
+select {
+  padding: 0;
+  background: none;
+  border: 2px solid gray;
+}
+
+button {
+  padding: 0;
+  background: none;
+  border: 2px solid gray;
 }
