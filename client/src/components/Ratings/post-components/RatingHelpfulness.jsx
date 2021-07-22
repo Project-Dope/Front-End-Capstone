@@ -7,19 +7,21 @@ class RatingHelpfulNess extends React.Component {
 
     }
 
-    // this.incrementHelpfulCount = this.incrementHelpfulCount.bind(this);
+    this.incrementHelpfulCount = this.incrementHelpfulCount.bind(this);
   }
 
-  // incrementHelpfulCount() {
+  incrementHelpfulCount(event) {
 
-  // }
+    console.log('Hello from incrementHelpfulCount!');
+
+  }
 
   render() {
     return (
       <div>
         <h5>Was this review helpful?</h5>
-        <button>Yes</button>
-        <button>No</button>
+        <button value="Yes" onClick={this.incrementHelpfulCount}>Yes</button>
+        <button value="No" onClick={this.incrementHelpfulCount}>No</button>
       </div>
     )
   }
