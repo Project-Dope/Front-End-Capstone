@@ -1,17 +1,33 @@
-// var axios = require('axios');
+const axios = require("axios");
+const config = require("./config/config.js");
 
-// var config = {
-//   method: 'get',
-//   url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/products',
-//   headers: {
-//     'Authorization': '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'
-//   }
-// };
+const params = (endpoint) => ({
+  method: "get",
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
+  headers: {
+    Authorization: `${config.TOKEN}`,
+  },
+});
 
-// axios(config)
-// .then(function (response) {
-//   console.log(JSON.stringify(response.data));
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });
+module.exports = {
+  products: {
+    getProducts: (req, res) => {
+      axios(params("products"))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    getProductInfo: (req, res) => {
+      axios(params(`products/${req.params.id}`))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+  },
+};
