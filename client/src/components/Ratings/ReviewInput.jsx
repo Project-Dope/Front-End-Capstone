@@ -52,6 +52,23 @@ class ReviewInput extends React.Component {
       // body is under 50 characters
       // body is over 1000 characters
 
+    if (summaryLength > 50) {
+      alert('Summary must be at under 50 characters');
+      return;
+    }
+    if (bodyLength < 50) {
+      alert('Body must be at least 50 characters');
+      return;
+    }
+    if (bodyLength > 1000) {
+      alert('Body must be under 1000 characters');
+      return;
+    }
+    if (this.state.recommended === null) {
+      alert('Must make recommended selection');
+      return;
+    }
+
     var newDate = new Date().toLocaleDateString();
 
     var newReview = {

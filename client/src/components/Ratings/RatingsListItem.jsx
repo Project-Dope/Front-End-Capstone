@@ -12,6 +12,7 @@ class RatingsItemsList extends React.Component {
   }
 
   incrementHelpfulCount(event) {
+    console.log(event.target.value);
     if (event.target.value === 'Yes') {
       // create Axios PATCH request for helpfulnessYes
     } else {
