@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingHelpfulNess from './post-components/RatingHelpfulNess.jsx';
 
 class RatingsItemsList extends React.Component {
 
@@ -13,7 +14,6 @@ class RatingsItemsList extends React.Component {
 
     return (
       <div>
-        <h3>RatingsItemsList</h3>
         <p>{this.props.post.starRating}</p>
         <p>{this.props.post.dateOfReview}</p>
         <p>{this.props.post.reviewSummary}</p>
@@ -21,7 +21,8 @@ class RatingsItemsList extends React.Component {
         <p>{this.props.post.recommend}</p>
         <p>{this.props.post.username}</p>
         <h4>Response to Review</h4>
-        <h4>Rating Helpfulness</h4>
+        {/* <h4>Rating Helpfulness</h4> */}
+        <RatingHelpfulNess />
         <h2>---------------------------</h2>
       </div>
     )
