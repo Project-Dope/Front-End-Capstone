@@ -1,4 +1,4 @@
 node_modules
 client/dist/bundle.js
 **/.vscode/
-config/config.js
+server/config/config.js
