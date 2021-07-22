@@ -13,9 +13,9 @@ export default class App extends React.Component {
         <div className="Navbar">
           <NavBar/>
         </div>
-        <div className="Products">
+        {/* <div className="Products">
           <Products/>
-        </div>
+        </div> */}
         <div className="RelatedItems-OutfitCreation">
           <RelatedItems/>
         </div>
