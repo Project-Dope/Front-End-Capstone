@@ -1,14 +1,13 @@
-const path = require('path');
+const path = require("path");
 
-const DIST_Path = path.join(__dirname, 'client/dist');
-const SRC_Path = path.join(__dirname, 'client/src');
-
+const DIST_Path = path.join(__dirname, "client/dist");
+const SRC_Path = path.join(__dirname, "client/src");
 
 module.exports = {
   entry: `${SRC_Path}/index.jsx`,
   output: {
-    filename: 'bundle.js',
-    path: DIST_Path
+    filename: "bundle.js",
+    path: DIST_Path,
   },
   module: {
     rules: [
@@ -16,27 +15,25 @@ module.exports = {
         test: /\.(js|jsx)?/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
             plugins: [
-              ['@babel/plugin-transform-runtime',
+              [
+                "@babel/plugin-transform-runtime",
                 {
-                  'regenerator': true
-                }
-              ]
-            ]
-          }
-        }
+                  regenerator: true,
+                },
+              ],
+            ],
+          },
+        },
       },
       {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: ["style-loader", "css-loader"],
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
