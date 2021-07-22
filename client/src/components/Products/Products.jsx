@@ -1,4 +1,5 @@
 import React from "react";
+import Carousel from "./Products-Components/Carousel.jsx";
 import "./Products.css";
 
 export default class Products extends React.Component {
@@ -12,7 +13,9 @@ export default class Products extends React.Component {
         </div>
         <div className="row product-details">
           <div className="col-7 product-image-carousel">
-            <div className="product-image-selection"></div>
+            <div className="product-image-selection">
+              <Carousel />
+            </div>
             <div className="product-mini-image"></div>
           </div>
           <div className="col-5 product-selection">
