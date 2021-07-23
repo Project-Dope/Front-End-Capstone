@@ -14,4 +14,3 @@ var RatingHelpfulNess = (props) => {
 
 export default RatingHelpfulNess;
 
-// Testing text to push into GitHub branch

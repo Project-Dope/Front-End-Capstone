@@ -48,6 +48,13 @@ export default class Ratings extends React.Component {
       return (
         <div>
           <h1>Ratings</h1>
+          <h4>Sort Options</h4>
+          <select>
+            <option>Helpful</option>
+            <option>Newest</option>
+            <option>Relevant</option>
+          </select>
+          <h3>Reviews</h3>
           <RatingsList list={this.state.ratingsList} />
           <button>Show More Reviews</button>
           <button onClick={this.clickAddReview}>Add a Review</button>
