@@ -12,11 +12,13 @@ export default class Ratings extends React.Component {
     super(props);
     this.state = {
       ratingsList: ratingsSeeds,
-      wasReviewClicked: false
+      wasReviewClicked: false,
+      selectedSort: ''
     }
 
     this.clickAddReview = this.clickAddReview.bind(this);
     this.cancelAddReview = this.cancelAddReview.bind(this);
+    this.selectSortOption = this.selectSortOption.bind(this);
   }
 
   clickAddReview() {
@@ -31,9 +33,20 @@ export default class Ratings extends React.Component {
     })
   }
 
+  selectSortOption(event) {
+
+    this.setState({
+      selectedSort: event.target.value
+    })
+
+  }
+
+
+
   render() {
 
     // console.log('ratingsList: ', ratingsSeeds)
+    // console.log('selectedSort: ', this.state.selectedSort);
 
     if (this.state.wasReviewClicked) {
 
@@ -50,10 +63,10 @@ export default class Ratings extends React.Component {
         <div>
           <h1>Ratings</h1>
           <h4>Sort Options</h4>
-          <select>
-            <option>Relevant</option>
-            <option>Newest</option>
-            <option>Helpful</option>
+          <select onChange={this.selectSortOption} value={this.state.selectedSort} >
+            <option value="Relevant">Relevant</option>
+            <option value="Newest">Newest</option>
+            <option value="Helpful">Helpful</option>
           </select>
           <RatingsBreakdown />
           <h3>Reviews</h3>
