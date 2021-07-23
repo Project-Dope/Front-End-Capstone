@@ -25,7 +25,7 @@ app.get("/products", (req, res) => {
     });
 });
 
-const port = 4000;
+const port = 3000;
 
 app.listen(port, (err) => {
   if (err) {
