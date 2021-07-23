@@ -4,6 +4,7 @@ import './Ratings.css'
 import RatingsList from './RatingsList.jsx';
 import ratingsSeeds from './seeds.js';
 import ReviewInput from './ReviewInput.jsx';
+import RatingsBreakdown from './RatingsBreakdown.jsx';
 
 export default class Ratings extends React.Component {
 
@@ -50,10 +51,11 @@ export default class Ratings extends React.Component {
           <h1>Ratings</h1>
           <h4>Sort Options</h4>
           <select>
-            <option>Helpful</option>
-            <option>Newest</option>
             <option>Relevant</option>
+            <option>Newest</option>
+            <option>Helpful</option>
           </select>
+          <RatingsBreakdown />
           <h3>Reviews</h3>
           <RatingsList list={this.state.ratingsList} />
           <button>Show More Reviews</button>
