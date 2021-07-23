@@ -6,11 +6,15 @@ body {
 select {
   padding: 0;
   background: none;
+  height: 100%;
+  width: 100%;
   border: 2px solid gray;
 }
 
 button {
   padding: 0;
   background: none;
+  height: 100%;
+  width: 100%;
   border: 2px solid gray;
 }

@@ -12,31 +12,51 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      currentProduct: "",
+      render: false,
+      products: [],
+      currentProduct: {},
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    axios.get("api/products").then((response) =>
+      this.setState({
+        render: true,
+        products: response.data,
+        currentProduct: response.data[0],
+      })
+    );
+  }
 
   render() {
     return (
-      <div className="container">
-        <div className="Navbar">
-          <NavBar />
-        </div>
-        <div className="Products">
-          <Products />
-        </div>
-        <div className="RelatedItems-OutfitCreation">
-          <RelatedItems />
-        </div>
-        <div className="Questions-Answers">
-          <Questions />
-        </div>
-        <div className="Ratings-Reviews">
-          <Ratings />
-        </div>
-      </div>
+      <>
+        {this.state.render ? (
+          <div className="container">
+            <div className="Navbar">
+              <NavBar />
+            </div>
+            <div className="Products">
+              <Products currentProduct={this.state.currentProduct} />
+            </div>
+            <div className="RelatedItems-OutfitCreation">
+              <RelatedItems />
+            </div>
+            <div className="Questions-Answers">
+              <Questions />
+            </div>
+            <div className="Ratings-Reviews">
+              <Ratings />
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </>
     );
   }
 }

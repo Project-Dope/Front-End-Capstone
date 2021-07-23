@@ -7,7 +7,7 @@
   height: 500px;
 }
 
-.product-image-carousel {
+.product-image-gallery {
   height: 100%;
   border: 4px dotted grey;
 }
@@ -27,19 +27,24 @@
   border: 4px dotted gray;
 }
 
-.product-review {
-  height: 10%;
-  border: 2px dotted lightgray;
-}
-
-.product-name {
-  height: 40%;
-  font-size: 20px;
-  border: 2px dotted lightgray;
-}
-
-.product-color {
+.product-information {
   height: 30%;
+  border: 2px dotted lightgray;
+}
+
+.product-review {
+  /* height: 10%; */
+  /* border: 2px dotted lightgray; */
+}
+
+.product-title {
+  /* height: 0%; */
+  font-size: 20px;
+  /* border: 2px dotted lightgray; */
+}
+
+.product-styles {
+  height: 40%;
   border: 2px dotted lightgray;
 }
 
