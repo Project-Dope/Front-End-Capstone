@@ -11,6 +11,3 @@ the retail portal designed to address this concern and modernize the site.
 3) Run the command `npm build`
 4) Run the command `npm start`
 5) Paste this link into a browser: http://localhost:3000/
-
-
-(Practice Text for commmit)

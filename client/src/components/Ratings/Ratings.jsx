@@ -42,11 +42,10 @@ export default class Ratings extends React.Component {
   }
 
 
-
   render() {
 
     // console.log('ratingsList: ', ratingsSeeds)
-    // console.log('selectedSort: ', this.state.selectedSort);
+    console.log('selectedSort: ', this.state.selectedSort);
 
     if (this.state.wasReviewClicked) {
 
