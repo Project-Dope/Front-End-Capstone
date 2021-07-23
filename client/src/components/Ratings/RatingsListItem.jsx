@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingHelpfulNess from './post-components/RatingHelpfulNess.jsx';
+import RatingHelpfulNess from './post-components/RatingHelpfulness.jsx';
 
 class RatingsItemsList extends React.Component {
 
