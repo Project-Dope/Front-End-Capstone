@@ -14,6 +14,7 @@ export default class Products extends React.Component {
       slogan: "",
       price: "",
       category: "",
+      styles: [],
     };
   }
 
@@ -22,13 +23,26 @@ export default class Products extends React.Component {
   }
 
   getCurrentProduct() {
-    axios.get(`/api/products/${this.state.productID}`).then((res) => {
+    axios
+      .get(`/api/products/${this.state.productID}`)
+      .then((res) => {
+        this.setState({
+          productID: res.data.id,
+          name: res.data.name,
+          slogan: res.data.slogan,
+          price: res.data.default_price,
+          category: res.data.category,
+        });
+      })
+      .then(() => {
+        this.getStyles();
+      });
+  }
+
+  getStyles() {
+    axios.get(`api/products/${this.state.productID}/styles`).then((res) => {
       this.setState({
-        productID: res.data.id,
-        name: res.data.name,
-        slogan: res.data.slogan,
-        price: res.data.default_price,
-        category: res.data.category,
+        styles: res.data.results,
       });
     });
   }
@@ -56,7 +70,7 @@ export default class Products extends React.Component {
               <div className="product-price">${this.state.price}</div>
             </div>
             <div className="product-styles">
-              <Styles productID={this.state.productID} />
+              <Styles styles={this.state.styles} />
             </div>
             <div className="product-size-quantity">
               <select>
