@@ -76,4 +76,18 @@ module.exports = {
         });
     },
   },
+  qa: {
+    getQuestions: (req, res) => {
+      queryParams = {
+        product_id: req.params.id,
+      };
+      axios(configuration("qa/questions", queryParams))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+  },
 };
