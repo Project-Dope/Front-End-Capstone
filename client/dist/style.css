@@ -1,16 +1,20 @@
 body {
   font-family: "adobe-clean", sans-serif;
-  margin: 20px 100px;
+  margin: 0% 15%;
 }
 
 select {
   padding: 0;
   background: none;
+  height: 100%;
+  width: 100%;
   border: 2px solid gray;
 }
 
 button {
   padding: 0;
   background: none;
+  height: 100%;
+  width: 100%;
   border: 2px solid gray;
 }
