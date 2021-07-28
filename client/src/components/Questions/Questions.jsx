@@ -74,7 +74,7 @@ export default class Questions extends React.Component {
             this.openModal()
             this.setModalType('add question')
           }
-          }>ADD A QUESTION</button>
+          }>ADD A QUESTION</button>ç
           <Modal
             whichType={this.state.modalType}
             show={this.state.show}
