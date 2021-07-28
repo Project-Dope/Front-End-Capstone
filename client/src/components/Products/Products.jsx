@@ -1,7 +1,8 @@
 import React from "react";
-import Carousel from "./Products-Components/Carousel.jsx";
+// import Carousel from "./Products-Components/Carousel.jsx";
 import Styles from "././Products-Components/Styles.jsx";
 import axios from "axios";
+import { Carousel } from "react-bootstrap";
 import "./Products.css";
 
 export default class Products extends React.Component {
@@ -9,12 +10,15 @@ export default class Products extends React.Component {
     super(props);
 
     this.state = {
-      productID: this.props.currentProduct.id,
       name: "",
       slogan: "",
       price: "",
       category: "",
+      styles: [],
+      currentStyles: {},
     };
+
+    this.onClickStyles = this.onClickStyles.bind(this);
   }
 
   componentDidMount() {
@@ -22,18 +26,42 @@ export default class Products extends React.Component {
   }
 
   getCurrentProduct() {
-    axios.get(`/api/products/${this.state.productID}`).then((res) => {
-      this.setState({
-        productID: res.data.id,
-        name: res.data.name,
-        slogan: res.data.slogan,
-        price: res.data.default_price,
-        category: res.data.category,
+    axios
+      .get(`/api/products/${this.props.currentProduct.id}`)
+      .then((res) => {
+        this.setState({
+          name: res.data.name,
+          slogan: res.data.slogan,
+          price: res.data.default_price,
+          category: res.data.category,
+        });
+      })
+      .then(() => {
+        this.getStyles();
       });
+  }
+
+  getStyles() {
+    axios
+      .get(`api/products/${this.props.currentProduct.id}/styles`)
+      .then((res) => {
+        this.setState({
+          styles: res.data.results,
+          currentStyles: res.data.results[0],
+        });
+      });
+  }
+
+  onClickStyles(e) {
+    e.preventDefault();
+    this.setState({
+      currentStyles: this.state.styles[e.target.getAttribute("data-index")],
     });
   }
 
   render() {
+    if (!this.state.styles.length) return null;
+
     return (
       <div className="container">
         <div className="row product-offer">
@@ -44,9 +72,29 @@ export default class Products extends React.Component {
         <div className="row product-details">
           <div className="col-7 product-image-gallery">
             <div className="product-image-selection">
-              <Carousel />
+              <Carousel fade>
+                {this.state.currentStyles.photos.map((photo, index) => {
+                  return (
+                    <Carousel.Item key={index}>
+                      <img
+                        className="d-block w-75 mx-auto"
+                        src={photo.url}
+                        alt="First slide"
+                      />
+                    </Carousel.Item>
+                  );
+                })}
+              </Carousel>
             </div>
-            <div className="product-mini-image"></div>
+            <div className="product-mini-image">
+              {this.state.currentStyles.photos.map((photo, index) => {
+                return (
+                  <div className="product-mini-image-box" key={index}>
+                    <img src={photo.thumbnail_url} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="col-5 product-selection">
             <div className="product-information">
@@ -56,7 +104,10 @@ export default class Products extends React.Component {
               <div className="product-price">${this.state.price}</div>
             </div>
             <div className="product-styles">
-              <Styles productID={this.state.productID} />
+              <Styles
+                styles={this.state.styles}
+                onClickStyles={this.onClickStyles}
+              />
             </div>
             <div className="product-size-quantity">
               <select>

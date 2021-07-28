@@ -12,7 +12,6 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      render: false,
       products: [],
       currentProduct: {},
     };
@@ -25,7 +24,6 @@ export default class App extends React.Component {
   getProducts() {
     axios.get("api/products").then((response) =>
       this.setState({
-        render: true,
         products: response.data,
         currentProduct: response.data[0],
       })
@@ -35,7 +33,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        {this.state.render ? (
+        {this.state.products.length !== 0 ? (
           <div className="container">
             <div className="Navbar">
               <NavBar />
