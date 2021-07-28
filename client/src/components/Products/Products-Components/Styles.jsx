@@ -25,7 +25,11 @@ export default class Styles extends React.Component {
         {this.state.styles.map((style, index) => {
           return (
             <div className="product-style-thumbnail" key={index}>
-              <img src={style.photos[0].thumbnail_url}></img>
+              <img
+                src={style.photos[0].thumbnail_url}
+                data-index={index}
+                onClick={this.props.onClickStyles}
+              ></img>
             </div>
           );
         })}

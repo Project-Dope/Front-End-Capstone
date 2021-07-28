@@ -4,7 +4,7 @@
 }
 
 .product-details {
-  height: 500px;
+  height: 600px;
 }
 
 .product-image-gallery {
@@ -12,50 +12,107 @@
   border: 4px dotted grey;
 }
 
+/* Left Column */
 .product-image-selection {
   height: 80%;
+  display: flex;
+  justify-content: center;
   border: 2px dotted lightgray;
+  overflow: hidden;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  filter: invert(100%);
+}
+
+.carousel-control-prev > span.sr-only,
+.carousel-control-next > span.sr-only {
+  display: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 40px;
+  width: 40px;
 }
 
 .product-mini-image {
+  display: flex;
   height: 20%;
   border: 2px dotted lightgray;
 }
 
+.product-mini-image-box {
+  height: 60px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid black;
+  overflow-y: hidden;
+}
+
+.product-mini-image-box > img {
+  width: 100%;
+}
+
+/* Right Column */
 .product-selection {
   height: 100%;
   border: 4px dotted gray;
 }
 
+/* Selections */
 .product-information {
-  height: 30%;
+  height: 50%;
   border: 2px dotted lightgray;
 }
 
-.product-review {
-  /* height: 10%; */
-  /* border: 2px dotted lightgray; */
-}
-
-.product-title {
-  /* height: 0%; */
-  font-size: 20px;
-  /* border: 2px dotted lightgray; */
-}
-
 .product-styles {
-  height: 40%;
+  height: 36%;
   border: 2px dotted lightgray;
   display: flex;
   flex-direction: row;
 }
 
+.product-size-quantity {
+  height: 7%;
+  border: 2px dotted lightgray;
+}
+
+.product-atc {
+  height: 7%;
+  border: 2px dotted lightgray;
+}
+
+/* Information */
+.product-review {
+  height: 15%;
+  border: 2px dotted lightgray;
+}
+
+.product-category {
+  height: 15%;
+  border: 2px dotted lightgray;
+}
+
+.product-title {
+  height: 30%;
+  font-size: 2.5em;
+  border: 2px dotted lightgray;
+}
+
+.product-price {
+  border: 2px dotted lightgray;
+}
+
+/* Styles Thumbnail */
 .product-style-thumbnail {
   width: 50px;
   height: 50px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .product-style-thumbnail > img {
@@ -63,14 +120,4 @@
   margin: 0 auto;
   height: 100%;
   width: auto;
-}
-
-.product-size-quantity {
-  height: 10%;
-  border: 2px dotted lightgray;
-}
-
-.product-atc {
-  height: 10%;
-  border: 2px dotted lightgray;
 }
