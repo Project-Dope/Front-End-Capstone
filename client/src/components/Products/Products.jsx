@@ -25,6 +25,12 @@ export default class Products extends React.Component {
     this.getCurrentProduct();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.getCurrentProduct();
+    }
+  }
+
   getCurrentProduct() {
     axios
       .get(`/api/products/${this.props.currentProduct.id}`)
@@ -53,7 +59,6 @@ export default class Products extends React.Component {
   }
 
   onClickStyles(e) {
-    e.preventDefault();
     this.setState({
       currentStyles: this.state.styles[e.target.getAttribute("data-index")],
     });

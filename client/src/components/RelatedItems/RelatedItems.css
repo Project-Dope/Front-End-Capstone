@@ -1,0 +1,46 @@
+.related-title {
+  text-align: center;
+}
+
+.related-carousel {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.related-card {
+  background-color: grey;
+  height: 200px;
+  width: 200px;
+  margin: 20px;
+  overflow-y: hidden;
+  cursor: pointer;
+}
+
+.related-table {
+  width: 100%;
+  text-align: center;
+}
+
+.related-table > thead,
+tbody > tr {
+  border-bottom: 1px solid black;
+}
+
+.related-thumbnail > img {
+  width: 100%;
+}
+
+.modal-header > button {
+  width: 5%;
+  border: none;
+}
+
+.modal-header > button > span {
+  font-size: x-large;
+}
+
+.modal-header > .close > .sr-only {
+  visibility: hidden;
+}
