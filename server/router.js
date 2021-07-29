@@ -15,5 +15,6 @@ router.route("/reviews/meta/:id").get(controllers.reviews.getMetadata);
 
 // Question and Answers Routes
 router.route("/qa/questions/:id").get(controllers.qa.getQuestions);
+router.route("/qa/questions/:id/answers").get(controllers.qa.getAnswers);
 
 module.exports = router;

@@ -22,7 +22,7 @@ var Helpful = (props) => {
       <span>
         <span>Helpful?&nbsp;
           <a href="www.replacewithclickhandlernotarealwebsite.com">Yes</a>
-          <span> (25)  |  <a href="www.replacewithReport.com">Report</a></span>
+          <span> {props.answerHelpfulness}  |  <a href="www.replacewithReport.com">Report</a></span>
         </span>
       </span>
     )

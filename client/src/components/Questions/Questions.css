@@ -1,5 +1,5 @@
 .questions-search-bar {
-  width: 90%;
+  width: 95%;
 }
 
 .questions-question span {
@@ -11,6 +11,12 @@
 .questions-answer-subtext {
   white-space: pre;
   font-size: 11px;
+}
+
+.questions-search-button {
+  width: 5%;
+  height: 30px;
+  float: right;
 }
 
 /* .modal {

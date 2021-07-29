@@ -89,5 +89,17 @@ module.exports = {
           res.status(404).send(err);
         });
     },
+    getAnswers: (req, res) => {
+      queryParams = {
+        question_id: req.params.id,
+      };
+      axios(configuration(`qa/questions/${req.params.id}/answers`, queryParams))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    }
   },
 };

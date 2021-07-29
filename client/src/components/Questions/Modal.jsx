@@ -31,7 +31,6 @@ export default class ModalForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    // console.log(event.target.name, event.target.value)
   }
 
   // getValidationState() {
@@ -65,6 +64,7 @@ export default class ModalForm extends React.Component {
             <Form.Control.Feedback type="invalid">
                 Please write a question.
             </Form.Control.Feedback>
+            <br></br>
             <Form.Label>What is your nickname: *</Form.Label>
             <Form.Control
                 type="text"
@@ -75,6 +75,7 @@ export default class ModalForm extends React.Component {
             <Form.Control.Feedback type="invalid">
                 Please choose a username.
             </Form.Control.Feedback>
+            <br></br>
             <Form.Label>Your Email: *</Form.Label>
             <Form.Control
                 type="email"
@@ -113,10 +114,11 @@ export default class ModalForm extends React.Component {
                 onChange={this.onChange}
                 name="answer"
                 value={this.state.answer}
-                placeholder="Your answere here"/>
+                placeholder="Your answer here"/>
             <Form.Control.Feedback type="invalid">
                 Please write an answer.
             </Form.Control.Feedback>
+            <br></br>
             <Form.Label>What is your nickname: *</Form.Label>
             <Form.Control
                 type="text"
@@ -127,6 +129,7 @@ export default class ModalForm extends React.Component {
             <Form.Control.Feedback type="invalid">
                 Please choose a username.
             </Form.Control.Feedback>
+            <br></br>
             <Form.Label>Your Email: *</Form.Label>
             <Form.Control
                 type="email"
