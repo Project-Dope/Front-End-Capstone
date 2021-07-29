@@ -6,25 +6,34 @@ export default class Styles extends React.Component {
     super(props);
 
     this.state = {
-      productID: this.props.productID,
+      styles: [],
     };
-
-    if (this.props.productID) {
-      this.getStyles();
-    }
   }
 
-  getStyles() {
-    axios.get(`api/products/${this.state.productID}/styles`).then((res) => {
-      console.log(res.data);
-    });
+  static getDerivedStateFromProps(props, state) {
+    if (props.styles !== state.styles) {
+      return {
+        styles: props.styles,
+      };
+    }
+    return null;
   }
 
   render() {
     return (
-      <div>
-        <div></div>
-      </div>
+      <>
+        {this.state.styles.map((style, index) => {
+          return (
+            <div className="product-style-thumbnail" key={index}>
+              <img
+                src={style.photos[0].thumbnail_url}
+                data-index={index}
+                onClick={this.props.onClickStyles}
+              ></img>
+            </div>
+          );
+        })}
+      </>
     );
   }
 }

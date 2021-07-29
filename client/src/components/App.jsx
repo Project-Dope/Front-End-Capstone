@@ -12,10 +12,11 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      render: false,
       products: [],
       currentProduct: {},
     };
+
+    this.setCurrentProduct = this.setCurrentProduct.bind(this);
   }
 
   componentDidMount() {
@@ -25,17 +26,22 @@ export default class App extends React.Component {
   getProducts() {
     axios.get("api/products").then((response) =>
       this.setState({
-        render: true,
         products: response.data,
         currentProduct: response.data[0],
       })
     );
   }
 
+  setCurrentProduct(product) {
+    this.setState({
+      currentProduct: product,
+    });
+  }
+
   render() {
     return (
       <>
-        {this.state.render ? (
+        {this.state.products.length ? (
           <div className="container">
             <div className="Navbar">
               <NavBar />
@@ -44,7 +50,10 @@ export default class App extends React.Component {
               <Products currentProduct={this.state.currentProduct} />
             </div>
             <div className="RelatedItems-OutfitCreation">
-              <RelatedItems />
+              <RelatedItems
+                currentProduct={this.state.currentProduct}
+                setCurrentProduct={this.setCurrentProduct}
+              />
             </div>
             <div className="Questions-Answers">
               <Questions />
