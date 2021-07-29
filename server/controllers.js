@@ -1,8 +1,8 @@
 const axios = require("axios");
 const config = require("./config/config.js");
 
-const configuration = (endpoint, queryParams) => ({
-  method: "get",
+const configuration = (endpoint, method, queryParams) => ({
+  method: method,
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
   headers: {
     Authorization: `${config.TOKEN}`,
@@ -13,7 +13,7 @@ const configuration = (endpoint, queryParams) => ({
 module.exports = {
   products: {
     getProducts: (req, res) => {
-      axios(configuration("products"))
+      axios(configuration("products", "get"))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -22,7 +22,7 @@ module.exports = {
         });
     },
     getProductInfo: (req, res) => {
-      axios(configuration(`products/${req.params.id}`))
+      axios(configuration(`products/${req.params.id}`, "get"))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -31,7 +31,7 @@ module.exports = {
         });
     },
     getProductStyles: (req, res) => {
-      axios(configuration(`products/${req.params.id}/styles`))
+      axios(configuration(`products/${req.params.id}/styles`, "get"))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -40,7 +40,7 @@ module.exports = {
         });
     },
     getRelatedProducts: (req, res) => {
-      axios(configuration(`products/${req.params.id}/related`))
+      axios(configuration(`products/${req.params.id}/related`, "get"))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -55,7 +55,7 @@ module.exports = {
         count: 20,
         product_id: req.params.id,
       };
-      axios(configuration(`reviews/`, queryParams))
+      axios(configuration(`reviews/`, "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -67,7 +67,7 @@ module.exports = {
       queryParams = {
         product_id: req.params.id,
       };
-      axios(configuration(`reviews/meta`, queryParams))
+      axios(configuration(`reviews/meta`, "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -81,7 +81,7 @@ module.exports = {
       queryParams = {
         product_id: req.params.id,
       };
-      axios(configuration("qa/questions", queryParams))
+      axios(configuration("qa/questions", "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -89,5 +89,10 @@ module.exports = {
           res.status(404).send(err);
         });
     },
+    // getAnswers:
+
+    // postQuestions:
+
+    // postAnswers:
   },
 };
