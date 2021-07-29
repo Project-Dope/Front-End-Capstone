@@ -59,3 +59,8 @@ export default RatingsItemsList;
 //     <h2>---------------------------</h2>
 //   </div>
 // )
+
+// if Ubuntu copy/paste doesn't work
+  // right click Ubuntu
+    // go to Properties
+      // check the box to enable Ctrl V
