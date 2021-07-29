@@ -57,6 +57,7 @@ module.exports = {
       };
       axios(configuration(`reviews/`, queryParams))
         .then((response) => {
+          // console.log('response.data: ', response.data);
           res.status(200).send(response.data);
         })
         .catch((err) => {
@@ -80,13 +81,25 @@ module.exports = {
     updateHelpfulCount: (req, res) => {
 
       var updateObject = req.body;
-      // increment counter property in updateObject
       console.log('req.body: ', updateObject);
 
       queryParams = {
-        product_id: req.params.review_id
+        review_id: req.params.review_id
       };
       console.log('queryParams: ', queryParams);
+
+      // axios(configuration(`reviews/${queryParams.review_id}/helpful`, updateObject))
+      // .then((response) => {
+
+      //   console.log('server response: ', response.data);
+
+      //   // res.status(200).send(response.data);
+      //   console.log('Received response from axios PUT request in controllers!');
+      // })
+      // .catch((err) => {
+      //   res.status(400).send(err);
+      //   console.log(err);
+      // })
 
     },
 
