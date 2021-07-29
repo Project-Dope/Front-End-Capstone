@@ -1,5 +1,6 @@
 import React from 'react';
 import RatingHelpfulNess from './post-components/RatingHelpfulness.jsx';
+import axios from 'axios';
 
 class RatingsItemsList extends React.Component {
 
@@ -13,8 +14,27 @@ class RatingsItemsList extends React.Component {
 
   incrementHelpfulCount(event) {
     console.log(event.target.value);
+    console.log('selectedItem: ', this.props.post);
+
     if (event.target.value === 'Yes') {
-      // create Axios PATCH request for helpfulnessYes
+      // create Axios PATCH request for helpfulness
+
+      // var updateObject = {
+      //   helpfulness: this.props.post.helpfulness++
+      // };
+      this.props.post.helpfulness++;
+
+      // console.log('updateObject: ', updateObject);
+
+      axios.put(`api/reviews/${this.props.post.review_id}/helpful`, this.props.post)
+      .then((response) => {
+        console.log('response data: ', response.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+
     } else {
       // create Axios PATCH request for helpfulnessNo
     }
@@ -59,6 +79,8 @@ export default RatingsItemsList;
 //     <h2>---------------------------</h2>
 //   </div>
 // )
+
+
 
 // if Ubuntu copy/paste doesn't work
   // right click Ubuntu

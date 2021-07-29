@@ -63,6 +63,7 @@ module.exports = {
           res.status(404).send(err);
         });
     },
+
     getMetadata: (req, res) => {
       queryParams = {
         product_id: req.params.id,
@@ -75,5 +76,19 @@ module.exports = {
           res.status(404).send(err);
         });
     },
+
+    updateHelpfulCount: (req, res) => {
+
+      var updateObject = req.body;
+      // increment counter property in updateObject
+      console.log('req.body: ', updateObject);
+
+      queryParams = {
+        product_id: req.params.review_id
+      };
+      console.log('queryParams: ', queryParams);
+
+    },
+
   },
 };

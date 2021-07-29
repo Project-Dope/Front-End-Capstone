@@ -12,5 +12,6 @@ router
 // Review Routes
 router.route("/reviews/:id").get(controllers.reviews.getReviews);
 router.route("/reviews/meta/:id").get(controllers.reviews.getMetadata);
+router.route("/reviews/:review_id/helpful").put(controllers.reviews.updateHelpfulCount);
 
 module.exports = router;

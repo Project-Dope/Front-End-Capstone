@@ -33,8 +33,8 @@ export default class Ratings extends React.Component {
       this.setState({
         ratingsList: response.data.results
       })
-      console.log('response data: ', response.data)
-      console.log('Recevied response from Axios GET request in Ratings.jsx!')
+      // console.log('response data: ', response.data);
+      console.log('Recevied response from Axios GET request in Ratings.jsx!');
     })
     .then(() => {
       console.log('ratingsList: ', this.state.ratingsList);
@@ -57,19 +57,16 @@ export default class Ratings extends React.Component {
   }
 
   selectSortOption(event) {
-
     this.setState({
       selectedSort: event.target.value
     })
-
   }
-
 
   render() {
 
     // console.log('ratingsList: ', ratingsSeeds)
     // console.log('selectedSort: ', this.state.selectedSort);
-    console.log('productId: ', this.props.productId);
+    // console.log('productId: ', this.props.productId);
 
     if (this.state.wasReviewClicked) {
 
