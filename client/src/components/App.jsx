@@ -15,6 +15,8 @@ export default class App extends React.Component {
       products: [],
       currentProduct: {},
     };
+
+    this.setCurrentProduct = this.setCurrentProduct.bind(this);
   }
 
   componentDidMount() {
@@ -30,10 +32,16 @@ export default class App extends React.Component {
     );
   }
 
+  setCurrentProduct(product) {
+    this.setState({
+      currentProduct: product,
+    });
+  }
+
   render() {
     return (
       <>
-        {this.state.products.length !== 0 ? (
+        {this.state.products.length ? (
           <div className="container">
             <div className="Navbar">
               <NavBar />
@@ -42,7 +50,10 @@ export default class App extends React.Component {
               <Products currentProduct={this.state.currentProduct} />
             </div>
             <div className="RelatedItems-OutfitCreation">
-              <RelatedItems />
+              <RelatedItems
+                currentProduct={this.state.currentProduct}
+                setCurrentProduct={this.setCurrentProduct}
+              />
             </div>
             <div className="Questions-Answers">
               <Questions productId={this.state.currentProduct.id}/>
