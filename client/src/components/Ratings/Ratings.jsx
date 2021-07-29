@@ -11,14 +11,37 @@ export default class Ratings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ratingsList: ratingsSeeds,
+      ratingsList: [],
       wasReviewClicked: false,
       selectedSort: ''
     }
 
+    this.getReviewsList = this.getReviewsList.bind(this);
     this.clickAddReview = this.clickAddReview.bind(this);
     this.cancelAddReview = this.cancelAddReview.bind(this);
     this.selectSortOption = this.selectSortOption.bind(this);
+  }
+
+  componentDidMount() {
+    this.getReviewsList();
+  }
+
+  getReviewsList() {
+    axios.get(`/api/reviews/${this.props.productId}`)
+    .then((response) => {
+
+      this.setState({
+        ratingsList: response.data.results
+      })
+      console.log('response data: ', response.data)
+      console.log('Recevied response from Axios GET request in Ratings.jsx!')
+    })
+    .then(() => {
+      console.log('ratingsList: ', this.state.ratingsList);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   clickAddReview() {
@@ -45,7 +68,8 @@ export default class Ratings extends React.Component {
   render() {
 
     // console.log('ratingsList: ', ratingsSeeds)
-    console.log('selectedSort: ', this.state.selectedSort);
+    // console.log('selectedSort: ', this.state.selectedSort);
+    console.log('productId: ', this.props.productId);
 
     if (this.state.wasReviewClicked) {
 

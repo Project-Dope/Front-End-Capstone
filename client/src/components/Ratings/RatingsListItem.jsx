@@ -24,12 +24,12 @@ class RatingsItemsList extends React.Component {
 
     return (
       <div>
-        <p>{this.props.post.starRating}</p>
-        <p>{this.props.post.dateOfReview}</p>
-        <p>{this.props.post.reviewSummary}</p>
-        <p>{this.props.post.reviewBody}</p>
+        <p>{this.props.post.rating}</p>
+        <p>{this.props.post.date}</p>
+        <p>{this.props.post.summary}</p>
+        <p>{this.props.post.body}</p>
         <p>{this.props.post.recommend}</p>
-        <p>{this.props.post.username}</p>
+        <p>{this.props.post.reviewer_name}</p>
         <h4>Response to Review</h4>
         {/* <RatingHelpfulNess incrementHelpfulCount={this.incrementHelpfulCount} /> */}
         <h5>Was this review helpful?</h5>
