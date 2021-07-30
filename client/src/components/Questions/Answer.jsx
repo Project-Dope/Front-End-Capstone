@@ -24,16 +24,17 @@ class Answer extends React.Component {
 
   reportAnswer() {
     axios.put(`api/qa/answers/${this.props.answer.answer_id}/report`)
-    // .then(() )
+    .then(() => console.log('Answer reported!'))
+    .catch(err => console.log(err))
   }
 
 
   render () {
     return (
-      <div>
-        <div className="questions-answer">A: {this.props.answer.body}</div>
+      <span>
+        <span className="questions-answer-body">{this.props.answer.body}</span>
         <div className="questions-answer-subtext">by {this.props.answer.answerer_name}, {moment(this.props.answer.date).utc().format('MMMM DD, YYYY')}  |  <AnswerHelpful openModal={this.props.openModal} answerId={this.props.answer.answer_id} addAnswerHelpfulness={this.addAnswerHelpfulness} answerHelpfulness={this.props.answer.helpfulness}/> </div>
-    </div>
+    </span>
     )
   }
 }

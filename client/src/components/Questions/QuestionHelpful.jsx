@@ -10,9 +10,9 @@ var QuestionHelpful = (props) => {
   return (
     <span>
       <span>Helpful?&nbsp;
-        <a href="" onClick={() => props.addQuestionHelpfulness()}>Yes</a>
-        <span> {props.questionHelpfulness}  |  <a href='' onClick={answerModal}>
-          Add Answer</a></span>
+        <button className='questions-helpful-buttons' onClick={() => props.addQuestionHelpfulness()}>Yes</button>
+        <span> {props.questionHelpfulness}  |  <button className='questions-helpful-buttons' onClick={answerModal}>
+          Add Answer</button></span>
       </span>
     </span>
   )

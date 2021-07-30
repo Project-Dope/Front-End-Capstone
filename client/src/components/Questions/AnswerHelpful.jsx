@@ -7,11 +7,24 @@ var AnswerHelpful = (props) => {
     props.openModal(props.answerId);
   }
 
+  const hello = function() {
+    console.log('hi!')
+  }
+
+  // return (
+  //   <span>
+  //     <span>Helpful?&nbsp;
+  //       <a href="" onClick={() => props.addAnswerHelpfulness()}>Yes</a>
+  //       <span> {props.answerHelpfulness}  |  <button className='questions-helpful-buttons' onClick={hello}>Report</button></span>
+  //     </span>
+  //   </span>
+  // )
+
   return (
     <span>
       <span>Helpful?&nbsp;
-        <a href="" onClick={() => props.addAnswerHelpfulness()}>Yes</a>
-        <span> {props.answerHelpfulness}  |  <a href="">Report</a></span>
+        <button className='questions-helpful-buttons' onClick={() => props.addAnswerHelpfulness()}>Yes</button>
+        <span> {props.answerHelpfulness}  |  <button className='questions-helpful-buttons' onClick={hello}>Report</button></span>
       </span>
     </span>
   )

@@ -13,10 +13,47 @@
   font-size: 11px;
 }
 
+.questions-answer-body {
+  /* white-space: pre; */
+  font-size: 15px;
+}
+
+.questions-more-answers {
+  width: 3%;
+  background-color: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 11px;
+}
+
 .questions-search-button {
   width: 5%;
   height: 30px;
   float: right;
+}
+
+.questions-more-questions {
+  width: 40%;
+  white-space: pre;
+}
+
+.questions-add-question {
+  width: 25%;
+  white-space: pre;
+}
+
+.questions-helpful-buttons {
+  width: 3%;
+  background-color: transparent;
+  border: none;
+  color: blue;
+  cursor: pointer;
+}
+
+.questions-helpful-buttons:hover {
+  text-decoration: underline;
 }
 
 /* .modal {

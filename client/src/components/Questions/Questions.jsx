@@ -14,13 +14,15 @@ export default class Questions extends React.Component {
       show: false,
       questions: [],
       modalType: null,
-      questionId: null
+      questionId: null,
+      questionsToDisplay: 4
     }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.setModalType = this.setModalType.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
+    this.showMoreQuestions = this.showMoreQuestions.bind(this);
 
   }
 
@@ -38,6 +40,13 @@ export default class Questions extends React.Component {
     })
     // .then(() => console.log('all questions for productId: ', this.state.questions))
     .catch(err => console.log(err))
+  }
+
+  showMoreQuestions() {
+    var twoMoreQuestions = this.state.questionsToDisplay + 2;
+    this.setState({
+      questionsToDisplay: twoMoreQuestions
+    })
   }
 
   onChange(event) {
@@ -82,7 +91,7 @@ export default class Questions extends React.Component {
           <button className="questions-search-button"></button>
         </form>
         <div className="questions-component">
-          {this.state.questions.map((item, index) =>
+          {this.state.questions.slice(0, this.state.questionsToDisplay).map((item, index) =>
           <QuestionAnswer
           question={item}
           getProductQuestions={this.getProductQuestions}
@@ -95,8 +104,9 @@ export default class Questions extends React.Component {
           )}
         </div>
         <div>
-          <button>MORE ANSWERED QUESTIONS  </button>
-          <button onClick={() => {
+          {/* <button className="questions-more-questions" onClick={this.showMoreQuestions} >MORE ANSWERED QUESTIONS  </button> */}
+          {this.state.questionsToDisplay < this.state.questions.length ? (<button className="questions-more-questions" onClick={this.showMoreQuestions} >MORE ANSWERED QUESTIONS  </button>) : null}
+          <button className="questions-add-question" onClick={() => {
             this.setModalType('add question')
             this.openModal()
           }
