@@ -12,6 +12,7 @@ router
 // Review Routes
 router.route("/reviews/:id").get(controllers.reviews.getReviews);
 router.route("/reviews/meta/:id").get(controllers.reviews.getMetadata);
+router.route("/reviews/").post(controllers.reviews.addNewReview);
 router.route("/reviews/:review_id/helpful").put(controllers.reviews.updateHelpfulCount);
 
 // Question and Answers Routes

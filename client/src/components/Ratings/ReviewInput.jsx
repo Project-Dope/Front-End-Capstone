@@ -45,11 +45,6 @@ class ReviewInput extends React.Component {
   handleInputSubmit(event) {
     event.preventDefault();
 
-    var summaryLength = this.state.summaryLength;
-    var bodyLength = this.state.bodyLength;
-    var emailLength = this.state.emailInput.length;
-    var displayLength = this.state.displayInput.length;
-
     // don't submit if
     // input fields are blank
     // recommended is null
@@ -57,11 +52,15 @@ class ReviewInput extends React.Component {
     // body is under 50 characters
     // body is over 1000 characters
 
+    var summaryLength = this.state.summaryLength;
+    var bodyLength = this.state.bodyLength;
+    var emailLength = this.state.emailInput.length;
+    var displayLength = this.state.displayInput.length;
+
     if (summaryLength === 0 || bodyLength === 0 || emailLength === 0 || displayLength === 0) {
       alert("Blank field requires input");
       return;
     }
-
     if (summaryLength > 50) {
       alert("Summary must be at under 50 characters");
       return;
@@ -91,7 +90,7 @@ class ReviewInput extends React.Component {
       response: null,
       // review_id: null,
       reviewer_name: this.state.displayInput,
-      summary: this.state.summaryInput,
+      summary: this.state.summaryInput
     };
 
     // var newReview = {
@@ -118,8 +117,7 @@ class ReviewInput extends React.Component {
         recommended: false,
       });
     }
-
-    console.log("recommended: ", this.state.recommended);
+    // console.log("recommended: ", this.state.recommended);
   }
 
   clickStarRating(event) {
@@ -155,14 +153,14 @@ class ReviewInput extends React.Component {
           <h5>Review Summary</h5>
           <input
             name="summaryInput"
-            placeholder="Type summary here"
+            placeholder="Example: Best purchase ever!"
             value={this.state.summaryInput}
             onChange={this.handleInputChange}
           />
           <h5>Review Body</h5>
           <input
             name="bodyInput"
-            placeholder="Type body here"
+            placeholder="Why did you like the product or not?"
             value={this.state.bodyInput}
             onChange={this.handleInputChange}
           />
@@ -171,16 +169,19 @@ class ReviewInput extends React.Component {
           <h5>Display Name</h5>
           <input
             name="displayInput"
+            placeholder="Example: jackson11!"
             value={this.state.displayInput}
             onChange={this.handleInputChange}
           />
+          <p>*** For privacy reasons, do not use your full name or email address. ***</p>
           <h5>Your email</h5>
           <input
             name="emailInput"
+            placeholder="Example: jackson11@email.com"
             value={this.state.emailInput}
             onChange={this.handleInputChange}
           />
-          <p></p>
+          <p> *** For authentication reasons, you will not be emailed. ***</p>
           <button>Submit Review</button>
         </form>
       </div>

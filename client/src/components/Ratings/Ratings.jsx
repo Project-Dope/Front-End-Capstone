@@ -13,7 +13,8 @@ export default class Ratings extends React.Component {
     this.state = {
       ratingsList: [],
       wasReviewClicked: false,
-      selectedSort: ''
+      selectedSort: '',
+      listViewLength: 2
     }
 
     this.getReviewsList = this.getReviewsList.bind(this);
@@ -21,6 +22,7 @@ export default class Ratings extends React.Component {
     this.cancelAddReview = this.cancelAddReview.bind(this);
     this.selectSortOption = this.selectSortOption.bind(this);
     this.clickSubmitReview = this.clickSubmitReview.bind(this);
+    this.showMoreReviews = this.showMoreReviews.bind(this);
   }
 
   componentDidMount() {
@@ -76,6 +78,15 @@ export default class Ratings extends React.Component {
     })
   }
 
+  showMoreReviews(event) {
+    // console.log('Hello from showMoreReviews!');
+    this.setState({
+      listViewLength: this.state.listViewLength+=2
+    })
+    // console.log('listViewLength: ', this.state.listViewLength);
+  }
+
+
   render() {
 
     // console.log('ratingsList: ', ratingsSeeds)
@@ -107,7 +118,7 @@ export default class Ratings extends React.Component {
           <RatingsBreakdown />
           <h3>Reviews</h3>
           <RatingsList list={this.state.ratingsList} />
-          <button>Show More Reviews</button>
+          <button onClick={this.showMoreReviews}>Show More Reviews</button>
           <button onClick={this.clickAddReview}>Add a Review</button>
         </div>
       );

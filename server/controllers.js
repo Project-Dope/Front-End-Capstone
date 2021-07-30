@@ -78,6 +78,22 @@ module.exports = {
         });
     },
 
+    addNewReview: (req, res) => {
+
+      var addObject = req.body;
+      console.log('addObject: ', addObject);
+
+      axios(configuration(`/reviews`, "post", addObject))
+      .then((response) => {
+        console.log('response data: ', response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+
+    },
+
     updateHelpfulCount: (req, res) => {
 
       var updateObject = req.body;
@@ -88,6 +104,7 @@ module.exports = {
       // console.log('queryParams: ', queryParams);
       axios(configuration(`reviews/${queryParams.review_id}/helpful`, "put", updateObject))
       .then(() => {
+        // no need to send a response back during PUT request
         res.status(200);
         console.log('Received response from axios PUT request in controllers!');
       })
