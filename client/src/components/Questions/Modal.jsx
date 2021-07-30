@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import {Button} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './Questions.css';
+import axios from 'axios';
 
 export default class ModalForm extends React.Component {
   constructor(props) {
@@ -12,19 +13,38 @@ export default class ModalForm extends React.Component {
       name: '',
       email: '',
       question: '',
-      answer: ''
+      answer: '',
+      photos: null
     }
 
     this.onChange = this.onChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addQuestion = this.addQuestion.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
 
   }
 
-  handleSubmit(event) {
-    // event.preventDefault();
-    console.log(this.state.question);
-    console.log(this.state.name);
-    console.log(this.state.email);
+  addQuestion(event) {
+    var questionDetails = {
+      body: this.state.question,
+      name: this.state.name,
+      email: this.state.email,
+      product_id: this.props.productId
+    }
+    axios.post('api/qa/questions', questionDetails)
+    .then(() => console.log('Question submitted successfully'))
+    .catch(err => console.log(err))
+  }
+
+  addAnswer(event) {
+    var answerDetails = {
+      body: this.state.question,
+      name: this.state.name,
+      email: this.state.email,
+      photos: this.state.photos
+    }
+    axios.post(`qa/questions/${this.props.questionId}/answers`, answerDetails)
+    .then(() => console.log('Question submitted successfully'))
+    .catch(err => console.log(err))
   }
 
   onChange(event) {
@@ -42,7 +62,8 @@ export default class ModalForm extends React.Component {
   // }
 
   render() {
-    if (this.props.whichType === 'add question') {
+    if (this.props.type === 'add question') {
+      // console.log(this.props.productId)
       return (
         <Modal
           show={this.props.show}
@@ -89,7 +110,7 @@ export default class ModalForm extends React.Component {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={() => this.handleSubmit()}>
+          <Button variant="primary" type="submit" onClick={() => this.addQuestion()}>
             Submit
           </Button>
         </Modal.Footer>
@@ -97,6 +118,7 @@ export default class ModalForm extends React.Component {
       )
     }
     else {
+      // console.log(this.props.questionId)
       return (
         <Modal
           show={this.props.show}
@@ -143,7 +165,7 @@ export default class ModalForm extends React.Component {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={() => this.handleSubmit()}>
+          <Button variant="primary" type="submit" onClick={() => this.addAnswer()}>
             Submit
           </Button>
         </Modal.Footer>

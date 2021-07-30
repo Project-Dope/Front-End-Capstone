@@ -1,55 +1,42 @@
 import React from 'react';
-import Helpful from './Helpful.jsx';
+import AnswerHelpful from './AnswerHelpful.jsx';
 import moment from 'moment';
+import axios from 'axios';
 
-var Answer = (props) => {
-  // if (props.answers.answerer_name === "Seller") {
-  //   return (
-  //     <div>
-  //       <div className="questions-answer">A: answer here</div>
-  //       <div className="questions-answer-subtext">by username, month day, year  |  <Helpful whichText="answer"/> </div>
-  //     </div>
-  //   )
-  // }
-  // else {
+class Answer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      questionId: this.props.questionId,
+      answers: []
+    }
+
+    this.addAnswerHelpfulness = this.addAnswerHelpfulness.bind(this);
+
+  }
+
+  addAnswerHelpfulness() {
+    axios.put(`api/qa/answers/${this.props.answer.answer_id}/helpful`)
+    .then(() => console.log('hi'))
+    .catch(err => console.log(err))
+  }
+
+  reportAnswer() {
+    axios.put(`api/qa/answers/${this.props.answer.answer_id}/report`)
+    // .then(() )
+  }
+
+
+  render () {
     return (
       <div>
-        <div className="questions-answer">A: {props.answer.body}</div>
-        <div className="questions-answer-subtext">by {props.answer.answerer_name}, {moment(props.answer.date).utc().format('MMMM DD, YYYY')}  |  <Helpful answerHelpfulness={props.answer.helpfulness} whichText="answer"/> </div>
-      </div>
+        <div className="questions-answer">A: {this.props.answer.body}</div>
+        <div className="questions-answer-subtext">by {this.props.answer.answerer_name}, {moment(this.props.answer.date).utc().format('MMMM DD, YYYY')}  |  <AnswerHelpful openModal={this.props.openModal} answerId={this.props.answer.answer_id} addAnswerHelpfulness={this.addAnswerHelpfulness} answerHelpfulness={this.props.answer.helpfulness}/> </div>
+    </div>
     )
-  // }
+  }
 }
-
-// class Answer extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       questionId: this.props.questionId,
-//       answers: []
-//     }
-
-//   }
-
-//   getProductAnswers() {
-//     axios.get(`/api/qa/questions/${this.props.productId}/answers`)
-//     .then(answers => {
-//       this.setState({
-//       answers: questions.data.results
-//       })
-//     })
-//     .then(() => console.log('this.state.questions: ', this.state.questions))
-//     .catch(err => console.log(err))
-//   }
-
-//   render () {
-//     <div>
-//       <div className="questions-answer">A: answer here</div>
-//       <div className="questions-answer-subtext">by username - <b>Seller</b>, month day, year  |  <Helpful whichText="answer"/> </div>
-//     </div>
-//   }
-// }
 
 
 export default Answer;

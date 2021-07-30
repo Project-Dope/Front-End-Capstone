@@ -12,13 +12,15 @@ export default class Questions extends React.Component {
     this.state = {
       searchValue: '',
       show: false,
+      questions: [],
       modalType: null,
-      questions: []
+      questionId: null
     }
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.setModalType = this.setModalType.bind(this);
+    this.getProductQuestions = this.getProductQuestions.bind(this);
 
   }
 
@@ -28,7 +30,7 @@ export default class Questions extends React.Component {
   }
 
   getProductQuestions() {
-    axios.get(`/api/qa/questions/${this.props.productId}`)
+    axios.get(`api/qa/questions/${this.props.productId}`)
     .then(questions => {
       this.setState({
       questions: questions.data.results
@@ -44,8 +46,9 @@ export default class Questions extends React.Component {
     })
   }
 
-  openModal(event) {
+  openModal(input) {
     this.setState({
+      questionId: input,
       show: true
     })
   }
@@ -82,6 +85,7 @@ export default class Questions extends React.Component {
           {this.state.questions.map((item, index) =>
           <QuestionAnswer
           question={item}
+          getProductQuestions={this.getProductQuestions}
           key={index}
           show={this.state.show}
           openModal={this.openModal}
@@ -98,8 +102,10 @@ export default class Questions extends React.Component {
           }
           }>ADD A QUESTION</button>
           <Modal
-            whichType={this.state.modalType}
+            productId={this.props.productId}
+            questionId={this.state.questionId}
             show={this.state.show}
+            type={this.state.modalType}
             closeModal={this.closeModal}
           />
         </div>
