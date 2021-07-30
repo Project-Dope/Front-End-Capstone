@@ -12,6 +12,7 @@ export default class Ratings extends React.Component {
     super(props);
     this.state = {
       ratingsList: [],
+      averageRating: '',
       wasReviewClicked: false,
       selectedSort: '',
       listViewLength: 2
@@ -36,11 +37,22 @@ export default class Ratings extends React.Component {
       this.setState({
         ratingsList: response.data.results
       })
+
+      var totalRating = 0;
+      this.state.ratingsList.forEach((number) => {
+        totalRating += number.rating
+      })
+      var averageRating = totalRating / this.state.ratingsList.length;
+      // console.log('averageRating: ', averageRating);
+      this.setState({
+        averageRating: averageRating
+      })
       // console.log('response data: ', response.data);
       console.log('Recevied response from Axios GET request in Ratings.jsx!');
     })
     .then(() => {
       console.log('ratingsList: ', this.state.ratingsList);
+      console.log('averageRating: ', this.state.averageRating);
     })
     .catch((err) => {
       console.log(err);
