@@ -69,16 +69,30 @@ class ReviewInput extends React.Component {
     var newDate = new Date().toLocaleDateString();
 
     var newReview = {
-      starRating: null,
-      dateOfReview: newDate,
-      reviewSummary: this.state.summaryInput,
-      reviewBody: this.state.bodyInput,
+      body: this.state.bodyInput,
+      date: newDate,
+      helpfulness: 0,
+      photos: [],
+      rating: null,
       recommend: this.state.recommended,
-      username: this.state.displayInput,
-      helpfulnessYes: 0,
-      helpfulnessNo: 0,
+      response: null,
+      // review_id: null,
+      reviewer_name: this.state.displayInput,
+      summary: this.state.summaryInput,
     };
-    console.log("newReview: ", newReview);
+
+    // var newReview = {
+    //   starRating: null,
+    //   dateOfReview: newDate,
+    //   reviewSummary: this.state.summaryInput,
+    //   reviewBody: this.state.bodyInput,
+    //   recommend: this.state.recommended,
+    //   username: this.state.displayInput,
+    //   helpfulnessYes: 0,
+    //   helpfulnessNo: 0,
+    // };
+
+    this.props.clickSubmitReview(newReview);
   }
 
   recommendClick(event) {

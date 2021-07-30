@@ -20,6 +20,7 @@ export default class Ratings extends React.Component {
     this.clickAddReview = this.clickAddReview.bind(this);
     this.cancelAddReview = this.cancelAddReview.bind(this);
     this.selectSortOption = this.selectSortOption.bind(this);
+    this.clickSubmitReview = this.clickSubmitReview.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +51,17 @@ export default class Ratings extends React.Component {
     })
   }
 
+  clickSubmitReview(addObject) {
+    console.log('addObject: ', addObject);
+
+    this.setState({
+      ratingsList: [...this.state.ratingsList, addObject],
+      wasReviewClicked: false
+    })
+
+    console.log('new ratingsList: ', this.state.ratingsList);
+  }
+
   cancelAddReview() {
     this.setState({
       wasReviewClicked: false
@@ -72,7 +84,9 @@ export default class Ratings extends React.Component {
 
       return (
         <div>
-          <ReviewInput />
+          <ReviewInput
+            list={this.state.ratingsList}
+            clickSubmitReview={this.clickSubmitReview} />
           <button onClick={this.cancelAddReview}>Cancel</button>
         </div>
       )

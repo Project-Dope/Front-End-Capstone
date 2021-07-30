@@ -3,7 +3,7 @@ var RatingsListArray = [
     starRating: 5,
     dateOfReview: 'July 21, 2021',
     reviewSummary: 'Great product!',
-    reviewBody: "Recently received my jeans in the mail. Great fit and looks great! Definitely would like to shop more from here!",
+    reviewBody: "Recently received my jeans in the mail. It's a great fit and looks great! Definitely would like to shop more from here and check out the rest of the catalog!",
     recommend: true,
     username: 'jane1234',
     helpfulnessYes: 0,
