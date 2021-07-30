@@ -24,6 +24,7 @@ export default class Ratings extends React.Component {
     this.selectSortOption = this.selectSortOption.bind(this);
     this.clickSubmitReview = this.clickSubmitReview.bind(this);
     this.showMoreReviews = this.showMoreReviews.bind(this);
+    this.getAverageRating = this.getAverageRating.bind(this);
   }
 
   componentDidMount() {
@@ -38,15 +39,7 @@ export default class Ratings extends React.Component {
         ratingsList: response.data.results
       })
 
-      var totalRating = 0;
-      this.state.ratingsList.forEach((number) => {
-        totalRating += number.rating
-      })
-      var averageRating = totalRating / this.state.ratingsList.length;
-      // console.log('averageRating: ', averageRating);
-      this.setState({
-        averageRating: averageRating
-      })
+      this.getAverageRating(this.state.ratingsList);
       // console.log('response data: ', response.data);
       console.log('Recevied response from Axios GET request in Ratings.jsx!');
     })
@@ -98,6 +91,20 @@ export default class Ratings extends React.Component {
     // console.log('listViewLength: ', this.state.listViewLength);
   }
 
+  getAverageRating(ratingsArray) {
+    // console.log('ratingsArray: ', ratingsArray);
+    var totalRating = 0;
+    ratingsArray.forEach((number) => {
+      totalRating += number.rating
+    })
+    var averageRating = totalRating / ratingsArray.length;
+    // console.log('averageRating: ', averageRating);
+    this.setState({
+      averageRating: averageRating
+    })
+    // console.log('this.state.averageRating: ', this.state.averageRating);
+  }
+
 
   render() {
 
@@ -127,7 +134,9 @@ export default class Ratings extends React.Component {
             <option value="Newest">Newest</option>
             <option value="Helpful">Helpful</option>
           </select>
-          <RatingsBreakdown />
+          <RatingsBreakdown
+          list={this.state.ratingsList}
+          averageRating={this.state.averageRating} />
           <h3>Reviews</h3>
           <RatingsList list={this.state.ratingsList} />
           <button onClick={this.showMoreReviews}>Show More Reviews</button>
