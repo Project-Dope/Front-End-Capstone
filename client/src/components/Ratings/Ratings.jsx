@@ -25,6 +25,7 @@ export default class Ratings extends React.Component {
     this.clickSubmitReview = this.clickSubmitReview.bind(this);
     this.showMoreReviews = this.showMoreReviews.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
+    this.getEachRatingCount = this.getEachRatingCount.bind(this);
   }
 
   componentDidMount() {
@@ -38,12 +39,13 @@ export default class Ratings extends React.Component {
       this.setState({
         ratingsList: response.data.results
       })
-
-      this.getAverageRating(this.state.ratingsList);
       // console.log('response data: ', response.data);
       console.log('Recevied response from Axios GET request in Ratings.jsx!');
     })
     .then(() => {
+      this.getAverageRating(this.state.ratingsList);
+      this.getEachRatingCount(this.state.ratingsList);
+
       console.log('ratingsList: ', this.state.ratingsList);
       console.log('averageRating: ', this.state.averageRating);
     })
@@ -98,11 +100,25 @@ export default class Ratings extends React.Component {
       totalRating += number.rating
     })
     var averageRating = totalRating / ratingsArray.length;
-    // console.log('averageRating: ', averageRating);
+
     this.setState({
       averageRating: averageRating
     })
-    // console.log('this.state.averageRating: ', this.state.averageRating);
+  }
+
+  getEachRatingCount(ratingsArray) {
+
+    var ratingObject = {};
+
+    ratingsArray.forEach((number) => {
+      if (ratingObject[number.rating] === undefined) {
+        ratingObject[number.rating] = 1
+      } else {
+        ratingObject[number.rating]++;
+      }
+    })
+
+    console.log('ratingObject: ', ratingObject);
   }
 
 
