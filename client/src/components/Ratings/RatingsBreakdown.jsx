@@ -9,10 +9,15 @@ var RatingsBreakdown = (props) => (
     <p>Average Rating in stars</p>
     <h3>Ratings Breakdown</h3>
     <button>5 Stars</button>
+    <p>{props.ratingsCountList['5']}</p>
     <button>4 Stars</button>
+    <p>{props.ratingsCountList['4']}</p>
     <button>3 Stars</button>
+    <p>{props.ratingsCountList['3']}</p>
     <button>2 Stars</button>
+    <p>{props.ratingsCountList['2']}</p>
     <button>1 Star</button>
+    <p>{props.ratingsCountList['1']}</p>
   </div>
 
 )

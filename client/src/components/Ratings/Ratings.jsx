@@ -13,6 +13,7 @@ export default class Ratings extends React.Component {
     this.state = {
       ratingsList: [],
       averageRating: '',
+      ratingsCountList: [],
       wasReviewClicked: false,
       selectedSort: '',
       listViewLength: 2
@@ -107,7 +108,6 @@ export default class Ratings extends React.Component {
   }
 
   getEachRatingCount(ratingsArray) {
-
     var ratingObject = {};
 
     ratingsArray.forEach((number) => {
@@ -118,7 +118,11 @@ export default class Ratings extends React.Component {
       }
     })
 
-    console.log('ratingObject: ', ratingObject);
+    this.setState({
+      ratingsCountList: ratingObject
+    })
+
+    console.log('ratingsCountList: ', this.state.ratingsCountList);
   }
 
 
@@ -152,7 +156,8 @@ export default class Ratings extends React.Component {
           </select>
           <RatingsBreakdown
           list={this.state.ratingsList}
-          averageRating={this.state.averageRating} />
+          averageRating={this.state.averageRating}
+          ratingsCountList={this.state.ratingsCountList} />
           <h3>Reviews</h3>
           <RatingsList list={this.state.ratingsList} />
           <button onClick={this.showMoreReviews}>Show More Reviews</button>
