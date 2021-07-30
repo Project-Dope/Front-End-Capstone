@@ -6,6 +6,7 @@ class ReviewInput extends React.Component {
     this.state = {
       summaryInput: "",
       summaryLength: null,
+      starRating: null,
       bodyInput: "",
       bodyLength: null,
       displayInput: "",
@@ -16,6 +17,7 @@ class ReviewInput extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
     this.recommendClick = this.recommendClick.bind(this);
+    this.clickStarRating = this.clickStarRating.bind(this);
   }
 
   handleInputChange(event) {
@@ -34,6 +36,10 @@ class ReviewInput extends React.Component {
       });
       // console.log(this.state.bodyLength);
     }
+
+    if (this.state.bodyInput.length === 50) {
+      console.log('Minimum reached');
+    }
   }
 
   handleInputSubmit(event) {
@@ -41,6 +47,8 @@ class ReviewInput extends React.Component {
 
     var summaryLength = this.state.summaryLength;
     var bodyLength = this.state.bodyLength;
+    var emailLength = this.state.emailInput.length;
+    var displayLength = this.state.displayInput.length;
 
     // don't submit if
     // input fields are blank
@@ -48,6 +56,11 @@ class ReviewInput extends React.Component {
     // summary is over 50 characters
     // body is under 50 characters
     // body is over 1000 characters
+
+    if (summaryLength === 0 || bodyLength === 0 || emailLength === 0 || displayLength === 0) {
+      alert("Blank field requires input");
+      return;
+    }
 
     if (summaryLength > 50) {
       alert("Summary must be at under 50 characters");
@@ -73,7 +86,7 @@ class ReviewInput extends React.Component {
       date: newDate,
       helpfulness: 0,
       photos: [],
-      rating: null,
+      rating: this.state.starRating,
       recommend: this.state.recommended,
       response: null,
       // review_id: null,
@@ -109,16 +122,29 @@ class ReviewInput extends React.Component {
     console.log("recommended: ", this.state.recommended);
   }
 
+  clickStarRating(event) {
+    // console.log('clicked rating: ', event.target.value);
+    this.setState({
+      starRating: parseInt(event.target.value)
+    })
+  }
+
+
   render() {
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
           <p>Choose star rating here</p>
-          <p>Poor</p>
+          {/* <p>Poor</p>
           <p>Fair</p>
           <p>Average</p>
           <p>Good</p>
-          <p>Great</p>
+          <p>Great</p> */}
+          <button value="1" onClick={this.clickStarRating}>Poor</button>
+          <button value="2" onClick={this.clickStarRating}>Fair</button>
+          <button value="3" onClick={this.clickStarRating}>Average</button>
+          <button value="4" onClick={this.clickStarRating}>Good</button>
+          <button value="5" onClick={this.clickStarRating}>Great</button>
           <h5>Do you recommend this product?</h5>
           <button onClick={this.recommendClick} value="Yes">
             Yes
@@ -129,12 +155,14 @@ class ReviewInput extends React.Component {
           <h5>Review Summary</h5>
           <input
             name="summaryInput"
+            placeholder="Type summary here"
             value={this.state.summaryInput}
             onChange={this.handleInputChange}
           />
           <h5>Review Body</h5>
           <input
             name="bodyInput"
+            placeholder="Type body here"
             value={this.state.bodyInput}
             onChange={this.handleInputChange}
           />

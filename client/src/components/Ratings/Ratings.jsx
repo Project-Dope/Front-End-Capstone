@@ -59,7 +59,9 @@ export default class Ratings extends React.Component {
       wasReviewClicked: false
     })
 
-    console.log('new ratingsList: ', this.state.ratingsList);
+    // // invoke getReviewsList when POST req is functional
+    // this.getReviewsList();
+    // console.log('new ratingsList: ', this.state.ratingsList);
   }
 
   cancelAddReview() {
