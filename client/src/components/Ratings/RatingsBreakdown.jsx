@@ -60,6 +60,12 @@ export default RatingsBreakdown;
 
 //   render() {
 
+  // if (this.state.subRatingList.length === 0) {
+  //   return null;
+  // } else {
+
+  // }
+
 //     return (
 
 //       <div>

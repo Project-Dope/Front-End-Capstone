@@ -137,6 +137,7 @@ export default class Ratings extends React.Component {
       return (
         <div>
           <ReviewInput
+            productId={this.props.productId}
             list={this.state.ratingsList}
             clickSubmitReview={this.clickSubmitReview} />
           <button onClick={this.cancelAddReview}>Cancel</button>

@@ -81,16 +81,20 @@ class ReviewInput extends React.Component {
     var newDate = new Date().toLocaleDateString();
 
     var newReview = {
+      product_Id: this.props.productId,
       body: this.state.bodyInput,
-      date: newDate,
-      helpfulness: 0,
+      // date: newDate,
+      // helpfulness: 0,
       photos: [],
       rating: this.state.starRating,
       recommend: this.state.recommended,
-      response: null,
+      // response: null,
       // review_id: null,
-      reviewer_name: this.state.displayInput,
+      name: this.state.displayInput,
+      // reviewer_name: this.state.displayInput,
+      email: this.state.emailInput,
       summary: this.state.summaryInput
+      // need to have characteristics property
     };
 
     // var newReview = {
