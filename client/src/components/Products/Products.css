@@ -44,11 +44,12 @@
 }
 
 .product-mini-image-box {
-  height: 60px;
+  height: 80px;
   padding: 5px;
   margin: 5px;
   border: 1px solid black;
   overflow-y: hidden;
+  cursor: pointer;
 }
 
 .product-mini-image-box > img {

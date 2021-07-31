@@ -14,10 +14,12 @@ export default class Products extends React.Component {
       slogan: "",
       price: "",
       category: "",
+      carouselIndex: 0,
       styles: [],
       currentStyles: {},
     };
 
+    this.handleSelect = this.handleSelect.bind(this);
     this.onClickStyles = this.onClickStyles.bind(this);
   }
 
@@ -25,10 +27,15 @@ export default class Products extends React.Component {
     this.getCurrentProduct();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       this.getCurrentProduct();
     }
+    // if (prevState !== this.state) {
+    //   console.log("previos", prevState);
+    //   console.log("current", this.state);
+    //   this.handleSelect(0);
+    // }
   }
 
   getCurrentProduct() {
@@ -54,6 +61,7 @@ export default class Products extends React.Component {
         this.setState({
           styles: res.data.results,
           currentStyles: res.data.results[0],
+          carouselIndex: 0,
         });
       });
   }
@@ -61,6 +69,12 @@ export default class Products extends React.Component {
   onClickStyles(e) {
     this.setState({
       currentStyles: this.state.styles[e.target.getAttribute("data-index")],
+    });
+  }
+
+  handleSelect(selectedIndex) {
+    this.setState({
+      carouselIndex: selectedIndex,
     });
   }
 
@@ -77,7 +91,13 @@ export default class Products extends React.Component {
         <div className="row product-details">
           <div className="col-7 product-image-gallery">
             <div className="product-image-selection">
-              <Carousel fade>
+              <Carousel
+                fade
+                activeIndex={this.state.carouselIndex}
+                onSelect={this.handleSelect}
+                interval={null}
+              >
+                {/* {console.log(this.state.currentStyles)} */}
                 {this.state.currentStyles.photos.map((photo, index) => {
                   return (
                     <Carousel.Item key={index}>
@@ -94,7 +114,11 @@ export default class Products extends React.Component {
             <div className="product-mini-image">
               {this.state.currentStyles.photos.map((photo, index) => {
                 return (
-                  <div className="product-mini-image-box" key={index}>
+                  <div
+                    className="product-mini-image-box"
+                    key={index}
+                    onClick={() => this.handleSelect(index)}
+                  >
                     <img src={photo.thumbnail_url} />
                   </div>
                 );

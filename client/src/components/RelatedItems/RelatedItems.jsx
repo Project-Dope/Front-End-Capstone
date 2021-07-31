@@ -25,6 +25,7 @@ export default class RelatedItems extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
+      console.log("updated");
       this.getRelatedProducts();
     }
   }
@@ -95,6 +96,7 @@ export default class RelatedItems extends React.Component {
           <Modal
             show={this.state.showComparisonModal}
             onHide={this.openComparisonModal}
+            dialogClassName="related-modal"
           >
             <Modal.Header closeButton>
               <Modal.Title>Product Comparison</Modal.Title>

@@ -18,6 +18,7 @@
   cursor: pointer;
 }
 
+/* Table */
 .related-table {
   width: 100%;
   text-align: center;
@@ -28,10 +29,12 @@ tbody > tr {
   border-bottom: 1px solid black;
 }
 
+/* Thumbnail */
 .related-thumbnail > img {
   width: 100%;
 }
 
+/* Modal */
 .modal-header > button {
   width: 5%;
   border: none;
@@ -43,4 +46,8 @@ tbody > tr {
 
 .modal-header > .close > .sr-only {
   visibility: hidden;
+}
+
+.related-modal {
+  max-width: 50vw;
 }
