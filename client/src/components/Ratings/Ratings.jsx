@@ -91,7 +91,7 @@ export default class Ratings extends React.Component {
     this.setState({
       listViewLength: this.state.listViewLength+=2
     })
-    // console.log('listViewLength: ', this.state.listViewLength);
+    console.log('listViewLength: ', this.state.listViewLength);
   }
 
   getAverageRating(ratingsArray) {
@@ -103,7 +103,7 @@ export default class Ratings extends React.Component {
     var averageRating = totalRating / ratingsArray.length;
 
     this.setState({
-      averageRating: averageRating
+      averageRating: averageRating.toFixed(1)
     })
   }
 
@@ -159,7 +159,9 @@ export default class Ratings extends React.Component {
           averageRating={this.state.averageRating}
           ratingsCountList={this.state.ratingsCountList} />
           <h3>Reviews</h3>
-          <RatingsList list={this.state.ratingsList} />
+          <RatingsList
+          list={this.state.ratingsList}
+          listLength={this.state.listViewLength} />
           <button onClick={this.showMoreReviews}>Show More Reviews</button>
           <button onClick={this.clickAddReview}>Add a Review</button>
         </div>

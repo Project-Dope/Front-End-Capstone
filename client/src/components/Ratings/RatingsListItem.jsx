@@ -1,6 +1,7 @@
 import React from 'react';
 import RatingHelpfulNess from './post-components/RatingHelpfulness.jsx';
 import axios from 'axios';
+import moment from 'moment';
 
 class RatingsItemsList extends React.Component {
 
@@ -38,7 +39,7 @@ class RatingsItemsList extends React.Component {
     return (
       <div>
         <p>{this.props.post.rating}</p>
-        <p>{this.props.post.date}</p>
+        <p>{moment(this.props.post.date).utc().format('MMMM DD, YYYY')}</p>
         <p>{this.props.post.summary}</p>
         <p>{this.props.post.body}</p>
         <p>{this.props.post.recommend}</p>
