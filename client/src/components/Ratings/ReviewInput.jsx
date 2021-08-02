@@ -53,13 +53,6 @@ class ReviewInput extends React.Component {
   handleInputSubmit(event) {
     event.preventDefault();
 
-    // don't submit if
-    // input fields are blank
-    // recommended is null
-    // summary is over 50 characters
-    // body is under 50 characters
-    // body is over 1000 characters
-
     var summaryLength = this.state.summaryLength;
     var bodyLength = this.state.bodyLength;
     var emailLength = this.state.emailInput.length;
@@ -126,17 +119,6 @@ class ReviewInput extends React.Component {
 
     };
 
-    // var newReview = {
-    //   starRating: null,
-    //   dateOfReview: newDate,
-    //   reviewSummary: this.state.summaryInput,
-    //   reviewBody: this.state.bodyInput,
-    //   recommend: this.state.recommended,
-    //   username: this.state.displayInput,
-    //   helpfulnessYes: 0,
-    //   helpfulnessNo: 0,
-    // };
-
     this.props.clickSubmitReview(newReview);
   }
 
@@ -173,13 +155,8 @@ class ReviewInput extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
-          <p>Choose star rating here</p>
-          {/* <button value="1" onClick={this.clickStarRating}>Poor</button>
-          <button value="2" onClick={this.clickStarRating}>Fair</button>
-          <button value="3" onClick={this.clickStarRating}>Average</button>
-          <button value="4" onClick={this.clickStarRating}>Good</button>
-          <button value="5" onClick={this.clickStarRating}>Great</button> */}
           <div>
+            <p>Choose star rating here</p>
             <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
             <label>Poor</label>
             <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
@@ -194,8 +171,8 @@ class ReviewInput extends React.Component {
 
           <Characteristics clickCharacteristics={this.clickCharacteristics}/>
 
-          <h5>Do you recommend this product?</h5>
           <div>
+            <h5>Do you recommend this product?</h5>
             <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
               <label>Yes</label>
             <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />

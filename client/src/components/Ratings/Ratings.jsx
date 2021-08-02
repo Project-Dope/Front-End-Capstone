@@ -27,6 +27,7 @@ export default class Ratings extends React.Component {
     this.showMoreReviews = this.showMoreReviews.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
     this.getEachRatingCount = this.getEachRatingCount.bind(this);
+    // this.filterByRating = this.filterByRating.bind(this);
   }
 
   componentDidMount() {
@@ -123,6 +124,10 @@ export default class Ratings extends React.Component {
     console.log('ratingsCountList: ', this.state.ratingsCountList);
   }
 
+  // filterByRating(event) {
+  //   console.log('clickedFilter: ', event.target.value);
+  // }
+
 
   render() {
 
@@ -156,7 +161,8 @@ export default class Ratings extends React.Component {
           <RatingsBreakdown
           list={this.state.ratingsList}
           averageRating={this.state.averageRating}
-          ratingsCountList={this.state.ratingsCountList} />
+          ratingsCountList={this.state.ratingsCountList}
+          filterByRating={this.filterByRating} />
           <h3>Reviews</h3>
           <RatingsList
           list={this.state.ratingsList}
