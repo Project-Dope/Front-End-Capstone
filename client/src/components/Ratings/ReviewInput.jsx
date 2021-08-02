@@ -7,6 +7,12 @@ class ReviewInput extends React.Component {
       summaryInput: "",
       summaryLength: null,
       starRating: null,
+      sizeRating: null,
+      widthRating: null,
+      comfortRating: null,
+      qualityRating: null,
+      lengthRating: null,
+      fitRating: null,
       bodyInput: "",
       bodyLength: null,
       displayInput: "",
@@ -18,6 +24,7 @@ class ReviewInput extends React.Component {
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
     this.recommendClick = this.recommendClick.bind(this);
     this.clickStarRating = this.clickStarRating.bind(this);
+    this.clickCharacteristics = this.clickCharacteristics.bind(this);
   }
 
   handleInputChange(event) {
@@ -131,22 +138,62 @@ class ReviewInput extends React.Component {
     })
   }
 
+  clickCharacteristics(event) {
+    console.log('clicked characteristic: ', event.target.value);
+    // this.setState({
+    //   [event.target.name]: event.target.value
+    // })
+  }
+
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
           <p>Choose star rating here</p>
-          {/* <p>Poor</p>
-          <p>Fair</p>
-          <p>Average</p>
-          <p>Good</p>
-          <p>Great</p> */}
           <button value="1" onClick={this.clickStarRating}>Poor</button>
           <button value="2" onClick={this.clickStarRating}>Fair</button>
           <button value="3" onClick={this.clickStarRating}>Average</button>
           <button value="4" onClick={this.clickStarRating}>Good</button>
           <button value="5" onClick={this.clickStarRating}>Great</button>
+          <h5>Characteristics</h5>
+          <p>Size</p>
+          <button value="1" onClick={this.clickCharacteristics}>A size too small</button>
+          <button value="2" onClick={this.clickCharacteristics}>½ a size too small</button>
+          <button value="3" onClick={this.clickCharacteristics}>Perfect</button>
+          <button value="4" onClick={this.clickCharacteristics}>½ a size too big</button>
+          <button value="4" onClick={this.clickCharacteristics}>½ a size too big</button>
+          <button value="5" onClick={this.clickCharacteristics}>A size too wide</button>
+          <p>Width</p>
+          <button value="1" onClick={this.clickCharacteristics}>Too narrow</button>
+          <button value="2" onClick={this.clickCharacteristics}>Slightly narrow</button>
+          <button value="3" onClick={this.clickCharacteristics}>Perfect</button>
+          <button value="4" onClick={this.clickCharacteristics}>Slightly wide</button>
+          <button value="5" onClick={this.clickCharacteristics}>Too wide</button>
+          <p>Comfort</p>
+          <button value="1" onClick={this.clickCharacteristics}>Uncomfortable</button>
+          <button value="2" onClick={this.clickCharacteristics}>Slightly uncomfortable</button>
+          <button value="3" onClick={this.clickCharacteristics}>Ok</button>
+          <button value="4" onClick={this.clickCharacteristics}>Comfortable</button>
+          <button value="5" onClick={this.clickCharacteristics}>Perfect</button>
+          <p>Quality</p>
+          <button value="1" onClick={this.clickCharacteristics}>Poor</button>
+          <button value="2" onClick={this.clickCharacteristics}>Below Average</button>
+          <button value="3" onClick={this.clickCharacteristics}>What I expected</button>
+          <button value="4" onClick={this.clickCharacteristics}>Prety great</button>
+          <button value="5" onClick={this.clickCharacteristics}>Perfect</button>
+          <p>Length</p>
+          <button value="1" onClick={this.clickCharacteristics}>Runs short</button>
+          <button value="2" onClick={this.clickCharacteristics}>Runs slightly short</button>
+          <button value="3" onClick={this.clickCharacteristics}>Perfect</button>
+          <button value="4" onClick={this.clickCharacteristics}>Runs slightly long</button>
+          <button value="5" onClick={this.clickCharacteristics}>Runs long</button>
+          <p>Fit</p>
+          <button value="1" onClick={this.clickCharacteristics}>Runs tight</button>
+          <button value="2" onClick={this.clickCharacteristics}>Runs slightly tight</button>
+          <button value="3" onClick={this.clickCharacteristics}>Perfect</button>
+          <button value="4" onClick={this.clickCharacteristics}>Runs slightly long</button>
+          <button value="5" onClick={this.clickCharacteristics}>Runs long</button>
           <h5>Do you recommend this product?</h5>
           <button onClick={this.recommendClick} value="Yes">
             Yes

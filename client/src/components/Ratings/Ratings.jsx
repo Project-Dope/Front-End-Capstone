@@ -68,7 +68,6 @@ export default class Ratings extends React.Component {
       ratingsList: [...this.state.ratingsList, addObject],
       wasReviewClicked: false
     })
-
     // // invoke getReviewsList when POST req is functional
     // this.getReviewsList();
     // console.log('new ratingsList: ', this.state.ratingsList);
@@ -87,11 +86,10 @@ export default class Ratings extends React.Component {
   }
 
   showMoreReviews(event) {
-    // console.log('Hello from showMoreReviews!');
     this.setState({
       listViewLength: this.state.listViewLength+=2
     })
-    console.log('listViewLength: ', this.state.listViewLength);
+    // console.log('listViewLength: ', this.state.listViewLength);
   }
 
   getAverageRating(ratingsArray) {
