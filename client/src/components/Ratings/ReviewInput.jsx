@@ -104,12 +104,24 @@ class ReviewInput extends React.Component {
       summary: this.state.summaryInput,
       // need to have characteristics property
       characteristics: {
-        size: this.state.sizeRating,
-        width: this.state.widthRating,
-        comfort: this.state.comfortRating,
-        quality: this.state.qualityRating,
-        length: this.state.lengthRating,
-        fit: this.state.fitRating
+        Size: {
+          value: this.state.sizeRating
+        },
+        Width: {
+          value: this.state.widthRating
+        },
+        Comfort: {
+          value: this.state.comfortRating
+        },
+        Quality: {
+          value: this.state.qualityRating
+        },
+        Length: {
+          value: this.state.lengthRating
+        },
+        Fit: {
+          value: this.state.fitRating
+        }
       }
 
     };
@@ -142,7 +154,7 @@ class ReviewInput extends React.Component {
   }
 
   clickStarRating(event) {
-    // console.log('clicked rating: ', event.target.value);
+    console.log('clicked rating: ', event.target.value);
     this.setState({
       starRating: parseInt(event.target.value)
     })
@@ -153,7 +165,7 @@ class ReviewInput extends React.Component {
     this.setState({
       [event.target.name]: parseInt(event.target.value)
     })
-    console.log('fitRating: ', this.state.fitRating);
+    // console.log('fitRating: ', this.state.fitRating);
   }
 
 
@@ -162,21 +174,33 @@ class ReviewInput extends React.Component {
       <div>
         <form onSubmit={this.handleInputSubmit}>
           <p>Choose star rating here</p>
-          <button value="1" onClick={this.clickStarRating}>Poor</button>
+          {/* <button value="1" onClick={this.clickStarRating}>Poor</button>
           <button value="2" onClick={this.clickStarRating}>Fair</button>
           <button value="3" onClick={this.clickStarRating}>Average</button>
           <button value="4" onClick={this.clickStarRating}>Good</button>
-          <button value="5" onClick={this.clickStarRating}>Great</button>
+          <button value="5" onClick={this.clickStarRating}>Great</button> */}
+          <div>
+            <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
+            <label>Poor</label>
+            <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
+            <label>Fair</label>
+            <input type="radio" name="starRating" value="3" onClick={this.clickStarRating}/>
+            <label>Average</label>
+            <input type="radio" name="starRating" value="4" onClick={this.clickStarRating}/>
+            <label>Good</label>
+            <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
+            <label>Great</label>
+          </div>
 
           <Characteristics clickCharacteristics={this.clickCharacteristics}/>
 
           <h5>Do you recommend this product?</h5>
-          <button onClick={this.recommendClick} value="Yes">
-            Yes
-          </button>
-          <button onClick={this.recommendClick} value="No">
-            No
-          </button>
+          <div>
+            <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
+              <label>Yes</label>
+            <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
+              <label>No</label>
+          </div>
           <h5>Review Summary</h5>
           <input
             name="summaryInput"
