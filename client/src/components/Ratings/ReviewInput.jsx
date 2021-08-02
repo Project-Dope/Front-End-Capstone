@@ -1,4 +1,5 @@
 import React from "react";
+import Characteristics from './post-components/Characteristics.jsx';
 
 class ReviewInput extends React.Component {
   constructor(props) {
@@ -139,10 +140,12 @@ class ReviewInput extends React.Component {
   }
 
   clickCharacteristics(event) {
-    console.log('clicked characteristic: ', event.target.value);
-    // this.setState({
-    //   [event.target.name]: event.target.value
-    // })
+    // console.log('clicked characteristic: ', event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+
+    console.log('fitRating: ', this.state.fitRating);
   }
 
 
@@ -156,7 +159,10 @@ class ReviewInput extends React.Component {
           <button value="3" onClick={this.clickStarRating}>Average</button>
           <button value="4" onClick={this.clickStarRating}>Good</button>
           <button value="5" onClick={this.clickStarRating}>Great</button>
-          <h5>Characteristics</h5>
+
+          <Characteristics clickCharacteristics={this.clickCharacteristics}/>
+
+          {/* <h5>Characteristics</h5>
           <p>Size</p>
           <button value="1" onClick={this.clickCharacteristics}>A size too small</button>
           <button value="2" onClick={this.clickCharacteristics}>½ a size too small</button>
@@ -193,7 +199,8 @@ class ReviewInput extends React.Component {
           <button value="2" onClick={this.clickCharacteristics}>Runs slightly tight</button>
           <button value="3" onClick={this.clickCharacteristics}>Perfect</button>
           <button value="4" onClick={this.clickCharacteristics}>Runs slightly long</button>
-          <button value="5" onClick={this.clickCharacteristics}>Runs long</button>
+          <button value="5" onClick={this.clickCharacteristics}>Runs long</button> */}
+
           <h5>Do you recommend this product?</h5>
           <button onClick={this.recommendClick} value="Yes">
             Yes
