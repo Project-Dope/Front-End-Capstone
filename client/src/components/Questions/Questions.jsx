@@ -26,11 +26,7 @@ export default class Questions extends React.Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
     this.getProductQuestions();
-    console.log("product id: ", this.props.productId);
-=======
-    this.getProductQuestions()
     // console.log('product id: ', this.props.productId)
   }
 
@@ -38,7 +34,6 @@ export default class Questions extends React.Component {
     if (prevProps !== this.props) {
       this.getProductQuestions();
     }
->>>>>>> 70aa41bfd0ef95aa87d86a4c7de03137a4a66597
   }
 
   getProductQuestions() {
