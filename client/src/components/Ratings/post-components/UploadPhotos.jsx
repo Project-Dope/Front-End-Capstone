@@ -3,7 +3,7 @@ import React from 'react';
 var UploadPhotos = (props) => (
 
   <div>
-    <h4>Hello from UploadPhotos!</h4>
+    <h5>Drop files here, or select photo to upload</h5>
   </div>
 
 )

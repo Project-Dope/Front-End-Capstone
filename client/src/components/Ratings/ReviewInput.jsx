@@ -1,5 +1,8 @@
 import React from "react";
 import Characteristics from './post-components/Characteristics.jsx';
+import UploadPhotos from './post-components/UploadPhotos.jsx';
+import ReactModal from 'react-modal';
+ReactModal.setAppElement('#app');
 
 class ReviewInput extends React.Component {
   constructor(props) {
@@ -19,6 +22,7 @@ class ReviewInput extends React.Component {
       displayInput: "",
       emailInput: "",
       recommended: null,
+      wasPhotoUploadClicked: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,6 +30,8 @@ class ReviewInput extends React.Component {
     this.recommendClick = this.recommendClick.bind(this);
     this.clickStarRating = this.clickStarRating.bind(this);
     this.clickCharacteristics = this.clickCharacteristics.bind(this);
+    this.clickPhotoUpload = this.clickPhotoUpload.bind(this);
+    this.cancelPhotoUpload = this.cancelPhotoUpload.bind(this);
   }
 
   handleInputChange(event) {
@@ -150,6 +156,17 @@ class ReviewInput extends React.Component {
     // console.log('fitRating: ', this.state.fitRating);
   }
 
+  clickPhotoUpload() {
+    this.setState({
+      wasPhotoUploadClicked: true
+    })
+  }
+
+  cancelPhotoUpload() {
+    this.setState({
+      wasPhotoUploadClicked: false
+    })
+  }
 
   render() {
     return (
@@ -198,7 +215,11 @@ class ReviewInput extends React.Component {
           </div>
           <div>
             <p></p>
-            <button>Upload Photos</button>
+            <button onClick={this.clickPhotoUpload}>Upload Photos</button>
+            <ReactModal isOpen={this.state.wasPhotoUploadClicked}>
+              <UploadPhotos />
+              <button onClick={this.cancelPhotoUpload}>Go Back</button>
+            </ReactModal>
           </div>
           <div>
             <h5>Display Name</h5>
