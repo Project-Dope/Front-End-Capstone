@@ -38,6 +38,12 @@ export default class Ratings extends React.Component {
     this.getReviewsList();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.getReviewsList();
+    }
+  }
+
   getReviewsList() {
     axios.get(`/api/reviews/${this.props.productId}`)
     .then((response) => {
