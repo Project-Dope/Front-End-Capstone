@@ -176,7 +176,9 @@ export default class Ratings extends React.Component {
             <RatingsList
             list={this.state.ratingsList}
             listLength={this.state.listViewLength} />
-            <button onClick={this.showMoreReviews}>Show More Reviews</button>
+
+            {this.state.listViewLength < this.state.ratingsList.length ? (<button onClick={this.showMoreReviews}>Show More Reviews</button>) : null}
+
             <button onClick={this.clickAddReview}>Add a Review</button>
           </div>
           <div>
