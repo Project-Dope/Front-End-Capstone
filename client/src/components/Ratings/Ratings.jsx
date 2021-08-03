@@ -1,10 +1,12 @@
 import React from 'react';
+import ReactModal from 'react-modal';
 import axios from 'axios';
 import './Ratings.css'
 import RatingsList from './RatingsList.jsx';
 import ratingsSeeds from './seeds.js';
 import ReviewInput from './ReviewInput.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
+ReactModal.setAppElement('#app');
 
 export default class Ratings extends React.Component {
 
@@ -92,7 +94,6 @@ export default class Ratings extends React.Component {
     this.setState({
       listViewLength: this.state.listViewLength+=2
     })
-    // console.log('listViewLength: ', this.state.listViewLength);
   }
 
   getAverageRating(ratingsArray) {
@@ -151,21 +152,8 @@ export default class Ratings extends React.Component {
     // console.log('selectedSort: ', this.state.selectedSort);
     // console.log('productId: ', this.props.productId);
 
-    if (this.state.wasReviewClicked) {
-
       return (
-        <div>
-          <ReviewInput
-            productId={this.props.productId}
-            list={this.state.ratingsList}
-            clickSubmitReview={this.clickSubmitReview} />
-          <button onClick={this.cancelAddReview}>Cancel</button>
-        </div>
-      )
 
-    } else {
-
-      return (
         <div>
           <h1>Ratings</h1>
           <h4>Sort Options</h4>
@@ -174,23 +162,93 @@ export default class Ratings extends React.Component {
             <option value="Newest">Newest</option>
             <option value="Helpful">Helpful</option>
           </select>
-          <RatingsBreakdown
-          list={this.state.ratingsList}
-          filteredList={this.state.filteredList}
-          deselectFilter={this.deselectFilter}
-          averageRating={this.state.averageRating}
-          ratingsCountList={this.state.ratingsCountList}
-          filterByRating={this.filterByRating} />
-          <h3>Reviews</h3>
-          <RatingsList
-          list={this.state.ratingsList}
-          listLength={this.state.listViewLength} />
-          <button onClick={this.showMoreReviews}>Show More Reviews</button>
-          <button onClick={this.clickAddReview}>Add a Review</button>
+          <div>
+            <RatingsBreakdown
+            list={this.state.ratingsList}
+            filteredList={this.state.filteredList}
+            deselectFilter={this.deselectFilter}
+            averageRating={this.state.averageRating}
+            ratingsCountList={this.state.ratingsCountList}
+            filterByRating={this.filterByRating} />
+            <h3>Reviews</h3>
+          </div>
+          <div>
+            <RatingsList
+            list={this.state.ratingsList}
+            listLength={this.state.listViewLength} />
+            <button onClick={this.showMoreReviews}>Show More Reviews</button>
+            <button onClick={this.clickAddReview}>Add a Review</button>
+          </div>
+          <div>
+          <ReactModal isOpen={this.state.wasReviewClicked}>
+            <ReviewInput
+              productId={this.props.productId}
+              list={this.state.ratingsList}
+              clickSubmitReview={this.clickSubmitReview} />
+            <button onClick={this.cancelAddReview}>Cancel</button>
+          </ReactModal>
+          </div>
         </div>
-      );
 
-    }
+      )
+
 
   }
+
 }
+
+
+
+
+
+
+
+// render() {
+
+//   // console.log('selectedSort: ', this.state.selectedSort);
+//   // console.log('productId: ', this.props.productId);
+
+//   if (this.state.wasReviewClicked) {
+
+//     return (
+//       <div>
+//         <Modal>
+//         <ReviewInput
+//           productId={this.props.productId}
+//           list={this.state.ratingsList}
+//           clickSubmitReview={this.clickSubmitReview} />
+//         <button onClick={this.cancelAddReview}>Cancel</button>
+//       </Modal>
+//       </div>
+//     )
+
+//   } else {
+
+//     return (
+//       <div>
+//         <h1>Ratings</h1>
+//         <h4>Sort Options</h4>
+//         <select onChange={this.selectSortOption} value={this.state.selectedSort} >
+//           <option value="Relevant">Relevant</option>
+//           <option value="Newest">Newest</option>
+//           <option value="Helpful">Helpful</option>
+//         </select>
+//         <RatingsBreakdown
+//         list={this.state.ratingsList}
+//         filteredList={this.state.filteredList}
+//         deselectFilter={this.deselectFilter}
+//         averageRating={this.state.averageRating}
+//         ratingsCountList={this.state.ratingsCountList}
+//         filterByRating={this.filterByRating} />
+//         <h3>Reviews</h3>
+//         <RatingsList
+//         list={this.state.ratingsList}
+//         listLength={this.state.listViewLength} />
+//         <button onClick={this.showMoreReviews}>Show More Reviews</button>
+//         <button onClick={this.clickAddReview}>Add a Review</button>
+//       </div>
+//     );
+
+//   }
+
+// }
