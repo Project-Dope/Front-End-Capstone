@@ -12,6 +12,12 @@ export default class Ratings extends React.Component {
     super(props);
     this.state = {
       ratingsList: [],
+      filteredList: [],
+      fiveRatingClicked: false,
+      fourRatingClicked: false,
+      threeRatingClicked: false,
+      twoRatingClicked: false,
+      oneRatingClicked: false,
       averageRating: '',
       ratingsCountList: [],
       wasReviewClicked: false,
@@ -27,7 +33,7 @@ export default class Ratings extends React.Component {
     this.showMoreReviews = this.showMoreReviews.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
     this.getEachRatingCount = this.getEachRatingCount.bind(this);
-    // this.filterByRating = this.filterByRating.bind(this);
+    this.filterByRating = this.filterByRating.bind(this);
   }
 
   componentDidMount() {
@@ -124,14 +130,34 @@ export default class Ratings extends React.Component {
     console.log('ratingsCountList: ', this.state.ratingsCountList);
   }
 
-  // filterByRating(event) {
-  //   console.log('clickedFilter: ', event.target.value);
-  // }
+  filterByRating(event) {
+    // console.log('clicked filter: ', event.target.name);
+    var filteredArray = [];
+
+    this.state.ratingsList.filter((item) => {
+      if (item.rating === parseInt(event.target.value)) {
+        filteredArray.push(item);
+      }
+    })
+
+    console.log('filteredArray: ', filteredArray);
+
+    // check if event.target.name was already clicked
+    if (!this.state[event.target.name]) {
+      this.setState({
+        filteredList: [...this.state.filteredList, filteredArray],
+        [event.target.name]: true
+      })
+    } else {
+      console.log('Need to remove items from seleccted rating');
+    }
+
+    console.log('filteredList: ', this.state.filteredList);
+  }
 
 
   render() {
 
-    // console.log('ratingsList: ', ratingsSeeds)
     // console.log('selectedSort: ', this.state.selectedSort);
     // console.log('productId: ', this.props.productId);
 
