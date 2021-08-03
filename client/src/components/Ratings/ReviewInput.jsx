@@ -1,4 +1,8 @@
 import React from "react";
+import Characteristics from './post-components/Characteristics.jsx';
+import UploadPhotos from './post-components/UploadPhotos.jsx';
+import ReactModal from 'react-modal';
+ReactModal.setAppElement('#app');
 
 class ReviewInput extends React.Component {
   constructor(props) {
@@ -6,16 +10,28 @@ class ReviewInput extends React.Component {
     this.state = {
       summaryInput: "",
       summaryLength: null,
+      starRating: null,
+      sizeRating: null,
+      widthRating: null,
+      comfortRating: null,
+      qualityRating: null,
+      lengthRating: null,
+      fitRating: null,
       bodyInput: "",
       bodyLength: null,
       displayInput: "",
       emailInput: "",
       recommended: null,
+      wasPhotoUploadClicked: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
     this.recommendClick = this.recommendClick.bind(this);
+    this.clickStarRating = this.clickStarRating.bind(this);
+    this.clickCharacteristics = this.clickCharacteristics.bind(this);
+    this.clickPhotoUpload = this.clickPhotoUpload.bind(this);
+    this.cancelPhotoUpload = this.cancelPhotoUpload.bind(this);
   }
 
   handleInputChange(event) {
@@ -34,6 +50,10 @@ class ReviewInput extends React.Component {
       });
       // console.log(this.state.bodyLength);
     }
+
+    if (this.state.bodyInput.length === 50) {
+      console.log('Minimum reached');
+    }
   }
 
   handleInputSubmit(event) {
@@ -41,14 +61,13 @@ class ReviewInput extends React.Component {
 
     var summaryLength = this.state.summaryLength;
     var bodyLength = this.state.bodyLength;
+    var emailLength = this.state.emailInput.length;
+    var displayLength = this.state.displayInput.length;
 
-    // don't submit if
-    // input fields are blank
-    // recommended is null
-    // summary is over 50 characters
-    // body is under 50 characters
-    // body is over 1000 characters
-
+    if (summaryLength === 0 || bodyLength === 0 || emailLength === 0 || displayLength === 0) {
+      alert("Blank field requires input");
+      return;
+    }
     if (summaryLength > 50) {
       alert("Summary must be at under 50 characters");
       return;
@@ -69,16 +88,44 @@ class ReviewInput extends React.Component {
     var newDate = new Date().toLocaleDateString();
 
     var newReview = {
-      starRating: null,
-      dateOfReview: newDate,
-      reviewSummary: this.state.summaryInput,
-      reviewBody: this.state.bodyInput,
+      product_Id: this.props.productId,
+      body: this.state.bodyInput,
+      // date: newDate,
+      // helpfulness: 0,
+      photos: [],
+      rating: this.state.starRating,
       recommend: this.state.recommended,
-      username: this.state.displayInput,
-      helpfulnessYes: 0,
-      helpfulnessNo: 0,
+      // response: null,
+      // review_id: null,
+      name: this.state.displayInput,
+      // reviewer_name: this.state.displayInput,
+      email: this.state.emailInput,
+      summary: this.state.summaryInput,
+      // need to have characteristics property
+      characteristics: {
+        Size: {
+          value: this.state.sizeRating
+        },
+        Width: {
+          value: this.state.widthRating
+        },
+        Comfort: {
+          value: this.state.comfortRating
+        },
+        Quality: {
+          value: this.state.qualityRating
+        },
+        Length: {
+          value: this.state.lengthRating
+        },
+        Fit: {
+          value: this.state.fitRating
+        }
+      }
+
     };
-    console.log("newReview: ", newReview);
+
+    this.props.clickSubmitReview(newReview);
   }
 
   recommendClick(event) {
@@ -91,54 +138,109 @@ class ReviewInput extends React.Component {
         recommended: false,
       });
     }
+    // console.log("recommended: ", this.state.recommended);
+  }
 
-    console.log("recommended: ", this.state.recommended);
+  clickStarRating(event) {
+    console.log('clicked rating: ', event.target.value);
+    this.setState({
+      starRating: parseInt(event.target.value)
+    })
+  }
+
+  clickCharacteristics(event) {
+    // console.log('clicked characteristic: ', event.target.value);
+    this.setState({
+      [event.target.name]: parseInt(event.target.value)
+    })
+    // console.log('fitRating: ', this.state.fitRating);
+  }
+
+  clickPhotoUpload() {
+    this.setState({
+      wasPhotoUploadClicked: true
+    })
+  }
+
+  cancelPhotoUpload() {
+    this.setState({
+      wasPhotoUploadClicked: false
+    })
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
-          <p>Choose star rating here</p>
-          <p>Poor</p>
-          <p>Fair</p>
-          <p>Average</p>
-          <p>Good</p>
-          <p>Great</p>
-          <h5>Do you recommend this product?</h5>
-          <button onClick={this.recommendClick} value="Yes">
-            Yes
-          </button>
-          <button onClick={this.recommendClick} value="No">
-            No
-          </button>
-          <h5>Review Summary</h5>
-          <input
-            name="summaryInput"
-            value={this.state.summaryInput}
-            onChange={this.handleInputChange}
-          />
-          <h5>Review Body</h5>
-          <input
-            name="bodyInput"
-            value={this.state.bodyInput}
-            onChange={this.handleInputChange}
-          />
-          <p></p>
-          <button>Upload Photos</button>
-          <h5>Display Name</h5>
-          <input
-            name="displayInput"
-            value={this.state.displayInput}
-            onChange={this.handleInputChange}
-          />
-          <h5>Your email</h5>
-          <input
-            name="emailInput"
-            value={this.state.emailInput}
-            onChange={this.handleInputChange}
-          />
-          <p></p>
+          <div>
+            <p>Choose star rating here</p>
+            <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
+            <label>Poor</label>
+            <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
+            <label>Fair</label>
+            <input type="radio" name="starRating" value="3" onClick={this.clickStarRating}/>
+            <label>Average</label>
+            <input type="radio" name="starRating" value="4" onClick={this.clickStarRating}/>
+            <label>Good</label>
+            <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
+            <label>Great</label>
+          </div>
+          <div>
+            <Characteristics clickCharacteristics={this.clickCharacteristics}/>
+          </div>
+          <div>
+            <h5>Do you recommend this product?</h5>
+            <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
+              <label>Yes</label>
+            <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
+              <label>No</label>
+          </div>
+          <div>
+            <h5>Review Summary</h5>
+            <input
+              name="summaryInput"
+              placeholder="Example: Best purchase ever!"
+              value={this.state.summaryInput}
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div>
+            <h5>Review Body</h5>
+            <input
+              name="bodyInput"
+              placeholder="Why did you like the product or not?"
+              value={this.state.bodyInput}
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div>
+            <p></p>
+            <button onClick={this.clickPhotoUpload}>Upload Photos</button>
+            <ReactModal isOpen={this.state.wasPhotoUploadClicked}>
+              <UploadPhotos />
+              <button onClick={this.cancelPhotoUpload}>Go Back</button>
+            </ReactModal>
+          </div>
+          <div>
+            <h5>Display Name</h5>
+            <input
+              name="displayInput"
+              placeholder="Example: jackson11!"
+              value={this.state.displayInput}
+              onChange={this.handleInputChange}
+            />
+            <p>*** For privacy reasons, do not use your full name or email address. ***</p>
+          </div>
+          <div>
+            <h5>Your email</h5>
+            <input
+              name="emailInput"
+              placeholder="Example: jackson11@email.com"
+              value={this.state.emailInput}
+              onChange={this.handleInputChange}
+            />
+            <p> *** For authentication reasons, you will not be emailed. ***</p>
+          </div>
           <button>Submit Review</button>
         </form>
       </div>

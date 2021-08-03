@@ -61,7 +61,7 @@ export default class App extends React.Component {
               <Questions />
             </div>
             <div className="Ratings-Reviews">
-              <Ratings />
+              <Ratings productId={this.state.currentProduct.id} />
             </div>
           </div>
         ) : (
