@@ -1,5 +1,5 @@
-import React from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+// import React from "react";
+// import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default class Carousel extends React.Component {
   constructor(props) {

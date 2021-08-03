@@ -58,7 +58,7 @@ export default class App extends React.Component {
               />
             </div>
             <div className="Questions-Answers">
-              <Questions />
+              <Questions productId={this.state.currentProduct.id}/>
             </div>
             <div className="Ratings-Reviews">
               <Ratings productId={this.state.currentProduct.id} />

@@ -130,10 +130,38 @@ module.exports = {
           res.status(404).send(err);
         });
     },
-    // getAnswers:
+    getAnswers: (req, res) => {
+      axios(configuration(`qa/questions/${req.params.id}/answers`, "get"))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    updateQuestionHelpfulness: (req, res) => {
+      axios(configuration(`qa/questions/${req.params.id}/helpful`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    updateAnswerHelpfulness: (req, res) => {
+      axios(configuration(`qa/answers/${req.params.id}/helpful`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    }
 
     // postQuestions:
 
     // postAnswers:
+
+    //
   },
 };
