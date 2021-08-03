@@ -10,62 +10,71 @@ export default class Products extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
-      slogan: "",
-      price: "",
-      category: "",
+      carouselIndex: 0,
       styles: [],
       currentStyles: {},
+      currentSize: null,
     };
 
-    this.onClickStyles = this.onClickStyles.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.changeStyles = this.changeStyles.bind(this);
+    this.changeSize = this.changeSize.bind(this);
   }
 
   componentDidMount() {
-    this.getCurrentProduct();
+    this.initializeStyles();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      this.getCurrentProduct();
+      this.initializeStyles();
     }
   }
 
-  getCurrentProduct() {
-    axios
-      .get(`/api/products/${this.props.currentProduct.id}`)
-      .then((res) => {
-        this.setState({
-          name: res.data.name,
-          slogan: res.data.slogan,
-          price: res.data.default_price,
-          category: res.data.category,
-        });
-      })
-      .then(() => {
-        this.getStyles();
-      });
-  }
-
-  getStyles() {
+  initializeStyles() {
     axios
       .get(`api/products/${this.props.currentProduct.id}/styles`)
       .then((res) => {
+        const results = res.data.results;
         this.setState({
-          styles: res.data.results,
-          currentStyles: res.data.results[0],
+          carouselIndex: 0,
+          styles: results,
+          currentStyles: results[0],
+          // currentSize: Object.keys(results[0].skus)[0],
         });
       });
   }
 
-  onClickStyles(e) {
+  changeStyles(e) {
     this.setState({
+      carouselIndex: 0,
       currentStyles: this.state.styles[e.target.getAttribute("data-index")],
+      currentSize: null,
     });
   }
 
+  changeSize(e) {
+    this.setState({
+      currentSize: e.target.value,
+    });
+  }
+
+  handleSelect(selectedIndex) {
+    this.setState({
+      carouselIndex: selectedIndex,
+    });
+  }
+
+  // addToCart() {
+  //   if(this.state.)
+  // }
+
   render() {
     if (!this.state.styles.length) return null;
+
+    const quantity = this.state.currentSize
+      ? this.state.currentStyles.skus[this.state.currentSize].quantity
+      : 0;
 
     return (
       <div className="container">
@@ -77,7 +86,12 @@ export default class Products extends React.Component {
         <div className="row product-details">
           <div className="col-7 product-image-gallery">
             <div className="product-image-selection">
-              <Carousel fade>
+              <Carousel
+                fade
+                activeIndex={this.state.carouselIndex}
+                onSelect={this.handleSelect}
+                interval={null}
+              >
                 {this.state.currentStyles.photos.map((photo, index) => {
                   return (
                     <Carousel.Item key={index}>
@@ -94,7 +108,11 @@ export default class Products extends React.Component {
             <div className="product-mini-image">
               {this.state.currentStyles.photos.map((photo, index) => {
                 return (
-                  <div className="product-mini-image-box" key={index}>
+                  <div
+                    className="product-mini-image-box"
+                    key={index}
+                    onClick={() => this.handleSelect(index)}
+                  >
                     <img src={photo.thumbnail_url} />
                   </div>
                 );
@@ -104,23 +122,53 @@ export default class Products extends React.Component {
           <div className="col-5 product-selection">
             <div className="product-information">
               <div className="product-review"></div>
-              <div className="product-category">{this.state.category}</div>
-              <div className="product-title">{this.state.name}</div>
-              <div className="product-price">${this.state.price}</div>
+              <div className="product-category">
+                {this.props.currentProduct.category}
+              </div>
+              <div className="product-title">
+                {this.props.currentProduct.name}
+              </div>
+              <div className="product-price">
+                ${this.props.currentProduct.default_price}
+              </div>
             </div>
             <div className="product-styles">
               <Styles
                 styles={this.state.styles}
-                onClickStyles={this.onClickStyles}
+                changeStyles={this.changeStyles}
               />
             </div>
             <div className="product-size-quantity">
-              <select>
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
-                <option>X-Large</option>
-              </select>
+              {/* <text>Please select size</text> */}
+              <div className="product-selectors">
+                <select onChange={this.changeSize} defaultValue={"DEFAULT"}>
+                  <option disabled="disabled" value="DEFAULT">
+                    Select Size
+                  </option>
+                  {Object.keys(this.state.currentStyles.skus).map(
+                    (key, index) => {
+                      return (
+                        <option key={index} value={key}>
+                          {this.state.currentStyles.skus[key].size}
+                        </option>
+                      );
+                    }
+                  )}
+                </select>
+                <select className="product-quantity">
+                  {quantity < 15
+                    ? Array.from({ length: quantity }, (_, i) => i + 1).map(
+                        (num, index) => {
+                          return <option key={index}>{num}</option>;
+                        }
+                      )
+                    : Array.from({ length: 15 }, (_, i) => i + 1).map(
+                        (num, index) => {
+                          return <option key={index}>{num}</option>;
+                        }
+                      )}
+                </select>
+              </div>
             </div>
             <div className="product-atc">
               <button>Add To Bag</button>
