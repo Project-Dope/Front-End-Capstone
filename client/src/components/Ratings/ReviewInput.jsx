@@ -168,9 +168,9 @@ class ReviewInput extends React.Component {
             <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
             <label>Great</label>
           </div>
-
-          <Characteristics clickCharacteristics={this.clickCharacteristics}/>
-
+          <div>
+            <Characteristics clickCharacteristics={this.clickCharacteristics}/>
+          </div>
           <div>
             <h5>Do you recommend this product?</h5>
             <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
@@ -178,38 +178,48 @@ class ReviewInput extends React.Component {
             <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
               <label>No</label>
           </div>
-          <h5>Review Summary</h5>
-          <input
-            name="summaryInput"
-            placeholder="Example: Best purchase ever!"
-            value={this.state.summaryInput}
-            onChange={this.handleInputChange}
-          />
-          <h5>Review Body</h5>
-          <input
-            name="bodyInput"
-            placeholder="Why did you like the product or not?"
-            value={this.state.bodyInput}
-            onChange={this.handleInputChange}
-          />
-          <p></p>
-          <button>Upload Photos</button>
-          <h5>Display Name</h5>
-          <input
-            name="displayInput"
-            placeholder="Example: jackson11!"
-            value={this.state.displayInput}
-            onChange={this.handleInputChange}
-          />
-          <p>*** For privacy reasons, do not use your full name or email address. ***</p>
-          <h5>Your email</h5>
-          <input
-            name="emailInput"
-            placeholder="Example: jackson11@email.com"
-            value={this.state.emailInput}
-            onChange={this.handleInputChange}
-          />
-          <p> *** For authentication reasons, you will not be emailed. ***</p>
+          <div>
+            <h5>Review Summary</h5>
+            <input
+              name="summaryInput"
+              placeholder="Example: Best purchase ever!"
+              value={this.state.summaryInput}
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div>
+            <h5>Review Body</h5>
+            <input
+              name="bodyInput"
+              placeholder="Why did you like the product or not?"
+              value={this.state.bodyInput}
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div>
+            <p></p>
+            <button>Upload Photos</button>
+          </div>
+          <div>
+            <h5>Display Name</h5>
+            <input
+              name="displayInput"
+              placeholder="Example: jackson11!"
+              value={this.state.displayInput}
+              onChange={this.handleInputChange}
+            />
+            <p>*** For privacy reasons, do not use your full name or email address. ***</p>
+          </div>
+          <div>
+            <h5>Your email</h5>
+            <input
+              name="emailInput"
+              placeholder="Example: jackson11@email.com"
+              value={this.state.emailInput}
+              onChange={this.handleInputChange}
+            />
+            <p> *** For authentication reasons, you will not be emailed. ***</p>
+          </div>
           <button>Submit Review</button>
         </form>
       </div>
