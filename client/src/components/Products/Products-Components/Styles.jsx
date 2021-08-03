@@ -26,9 +26,9 @@ export default class Styles extends React.Component {
           return (
             <div className="product-style-thumbnail" key={index}>
               <img
-                src={style.photos[0].thumbnail_url}
+                src={style.photos[0] ? style.photos[0].thumbnail_url : null}
                 data-index={index}
-                onClick={this.props.onClickStyles}
+                onClick={this.props.changeStyles}
               ></img>
             </div>
           );
