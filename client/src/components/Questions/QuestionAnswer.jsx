@@ -15,6 +15,7 @@ class QuestionAnswer extends React.Component {
 
     this.addQuestionHelpfulness = this.addQuestionHelpfulness.bind(this);
     this.showMoreAnswers = this.showMoreAnswers.bind(this);
+    this.getProductAnswers = this.getProductAnswers.bind(this);
 
   }
 
@@ -43,7 +44,7 @@ class QuestionAnswer extends React.Component {
 
   addQuestionHelpfulness() {
       axios.put(`api/qa/questions/${this.props.question.question_id}/helpful`)
-      .then(() => getProductQuestion())
+      .then(() => this.props.getProductQuestions())
       .catch(err => console.log(err))
   }
 
@@ -71,6 +72,7 @@ class QuestionAnswer extends React.Component {
           <Answer
           answer={item}
           setModalType={this.props.setModalType}
+          getProductAnswers={this.getProductAnswers}
           key={index}/>
           )}
         </div>

@@ -88,7 +88,7 @@ export default class Questions extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label></label>
           <input className="questions-search-bar" value={this.state.searchValue} onChange={this.onChange} name="searchValue" type="text" placeholder="Have a question? Search for answers..."></input>
-          <button className="questions-search-button"></button>
+          {/* <button className="questions-search-button"></button> */}
         </form>
         <div className="questions-component">
           {this.state.questions.slice(0, this.state.questionsToDisplay).map((item, index) =>

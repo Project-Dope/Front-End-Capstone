@@ -56,6 +56,12 @@
   text-decoration: underline;
 }
 
+.questions-photos {
+  width: 10%;
+  height: auto;
+  border: black;
+}
+
 /* .modal {
   width: 500px;
   background: white;

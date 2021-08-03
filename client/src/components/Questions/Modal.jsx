@@ -14,12 +14,14 @@ export default class ModalForm extends React.Component {
       email: '',
       question: '',
       answer: '',
-      photos: null
+      photos: [],
+      photo: ''
     }
 
     this.onChange = this.onChange.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
+    this.addPhotos = this.addPhotos.bind(this);
 
   }
 
@@ -51,6 +53,13 @@ export default class ModalForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+    console.log(this.state.photos)
+  }
+
+  addPhotos(event) {
+    this.setState({
+      photos: [...this.state.photos, event.target.value]
+    }, () => (console.log(this.state.photos)))
   }
 
   // getValidationState() {
@@ -162,6 +171,13 @@ export default class ModalForm extends React.Component {
             <Form.Control.Feedback type="invalid">
                 Please provide an email.
             </Form.Control.Feedback>
+            <br></br>
+            <Form.Label>Add photos: </Form.Label>
+            <Form.Control
+                type="file"
+                name="photos"
+                value={event.target.value}
+                onChange={this.addPhotos}/>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -175,6 +191,11 @@ export default class ModalForm extends React.Component {
   }
 
 }
+
+<form>
+  <label></label>
+  <input type="radio" ></input>
+</form>
 
 // export default class Modal extends React.Component {
 //   constructor(props) {
