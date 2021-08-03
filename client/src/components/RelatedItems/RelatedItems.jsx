@@ -95,6 +95,7 @@ export default class RelatedItems extends React.Component {
           <Modal
             show={this.state.showComparisonModal}
             onHide={this.openComparisonModal}
+            dialogClassName="related-modal"
           >
             <Modal.Header closeButton>
               <Modal.Title>Product Comparison</Modal.Title>
@@ -141,9 +142,10 @@ export default class RelatedItems extends React.Component {
                     data-key={key}
                     onClick={this.onClickRelatedProduct}
                   >
+                    {/* {console.log(this.state.relatedItems[key])} */}
                     <img
                       src={
-                        this.state.relatedItems[key].photos[0]
+                        this.state.relatedItems[key].photos.length
                           ? this.state.relatedItems[key].photos[0].thumbnail_url
                           : null
                       }

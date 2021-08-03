@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
@@ -7,6 +8,10 @@ import ratingsSeeds from './seeds.js';
 import ReviewInput from './ReviewInput.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 ReactModal.setAppElement('#app');
+=======
+import React from "react";
+import "./Ratings.css";
+>>>>>>> main
 
 export default class Ratings extends React.Component {
 
