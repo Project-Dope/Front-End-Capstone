@@ -13,11 +13,6 @@ export default class Ratings extends React.Component {
     this.state = {
       ratingsList: [],
       filteredList: [],
-      fiveRatingClicked: false,
-      fourRatingClicked: false,
-      threeRatingClicked: false,
-      twoRatingClicked: false,
-      oneRatingClicked: false,
       averageRating: '',
       ratingsCountList: [],
       wasReviewClicked: false,
@@ -34,6 +29,7 @@ export default class Ratings extends React.Component {
     this.getAverageRating = this.getAverageRating.bind(this);
     this.getEachRatingCount = this.getEachRatingCount.bind(this);
     this.filterByRating = this.filterByRating.bind(this);
+    this.deselectFilter = this.deselectFilter.bind(this);
   }
 
   componentDidMount() {
@@ -55,7 +51,7 @@ export default class Ratings extends React.Component {
       this.getEachRatingCount(this.state.ratingsList);
 
       console.log('ratingsList: ', this.state.ratingsList);
-      console.log('averageRating: ', this.state.averageRating);
+      // console.log('averageRating: ', this.state.averageRating);
     })
     .catch((err) => {
       console.log(err);
@@ -126,33 +122,27 @@ export default class Ratings extends React.Component {
     this.setState({
       ratingsCountList: ratingObject
     })
-
-    console.log('ratingsCountList: ', this.state.ratingsCountList);
+    // console.log('ratingsCountList: ', this.state.ratingsCountList);
   }
 
-  filterByRating(event) {
-    // console.log('clicked filter: ', event.target.name);
-    var filteredArray = [];
+  filterByRating(inputArrayFalse) {
+    console.log('inputArrayFalse: ', inputArrayFalse);
 
-    this.state.ratingsList.filter((item) => {
-      if (item.rating === parseInt(event.target.value)) {
-        filteredArray.push(item);
-      }
+    this.setState({
+      filteredList: inputArrayFalse
     })
 
-    console.log('filteredArray: ', filteredArray);
+    console.log('without selected filter: ', this.state.filteredList);
+  }
 
-    // check if event.target.name was already clicked
-    if (!this.state[event.target.name]) {
-      this.setState({
-        filteredList: [...this.state.filteredList, filteredArray],
-        [event.target.name]: true
-      })
-    } else {
-      console.log('Need to remove items from seleccted rating');
-    }
+  deselectFilter(inputArrayTrue) {
+    console.log('inputArrayTrue: ', inputArrayTrue);
 
-    console.log('filteredList: ', this.state.filteredList);
+    this.setState({
+      filteredList: inputArrayTrue
+    })
+    // cannot remove deselected filter
+    console.log('after deselected filter: ', this.state.filteredList);
   }
 
 
@@ -186,6 +176,8 @@ export default class Ratings extends React.Component {
           </select>
           <RatingsBreakdown
           list={this.state.ratingsList}
+          filteredList={this.state.filteredList}
+          deselectFilter={this.deselectFilter}
           averageRating={this.state.averageRating}
           ratingsCountList={this.state.ratingsCountList}
           filterByRating={this.filterByRating} />
