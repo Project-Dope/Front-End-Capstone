@@ -13,6 +13,8 @@ export default class App extends React.Component {
 
     this.state = {
       currentProduct: {},
+      // currentReview: {},
+      // currentQA: {},
     };
 
     this.setCurrentProduct = this.setCurrentProduct.bind(this);

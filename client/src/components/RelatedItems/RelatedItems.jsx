@@ -25,7 +25,6 @@ export default class RelatedItems extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      console.log("updated");
       this.getRelatedProducts();
     }
   }
@@ -143,9 +142,10 @@ export default class RelatedItems extends React.Component {
                     data-key={key}
                     onClick={this.onClickRelatedProduct}
                   >
+                    {/* {console.log(this.state.relatedItems[key])} */}
                     <img
                       src={
-                        this.state.relatedItems[key].photos[0]
+                        this.state.relatedItems[key].photos.length
                           ? this.state.relatedItems[key].photos[0].thumbnail_url
                           : null
                       }
