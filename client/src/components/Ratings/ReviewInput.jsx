@@ -86,7 +86,7 @@ class ReviewInput extends React.Component {
 
     // input object for POST request
     var newReview = {
-      product_Id: this.props.productId,
+      product_id: this.props.productId,
       body: this.state.bodyInput,
       photos: [],
       rating: this.state.starRating,
@@ -96,23 +96,9 @@ class ReviewInput extends React.Component {
       summary: this.state.summaryInput,
       characteristics: {}
 
-      // characteristics: {
-      //   "53841": 3,
-      //   "53842": 4,
-      //   "53843": 2,
-      //   "53844": 3
-      // }
-
     };
 
-    // need to have characteristics property
-    // need to reference meta
-      // send meta GET request
-    // some products don't have every characteristic
-    // some products have different characteristics
-
-    // id will be the key pair
-    // selected rating will be the value pair
+    // using conditionals to add to characteristics object based on meta data
     var metaData = this.props.metaData.characteristics;
     console.log('metaData from ReviewInput: ', metaData.Comfort);
 

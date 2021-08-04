@@ -95,8 +95,8 @@ export default class Ratings extends React.Component {
     console.log('addObject: ', addObject);
 
     this.setState({
-      ratingsList: [...this.state.ratingsList, addObject]
-      // wasReviewClicked: false
+      ratingsList: [...this.state.ratingsList, addObject],
+      wasReviewClicked: false
     })
 
     axios.post(`/api/reviews/`, addObject)
@@ -107,7 +107,6 @@ export default class Ratings extends React.Component {
       console.log('Error received during Axios POST request');
     })
 
-    // invoke getReviewsList when POST req is functional
     this.getReviewsList();
     console.log('new ratingsList: ', this.state.ratingsList);
   }
