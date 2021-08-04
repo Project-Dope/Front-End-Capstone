@@ -1,12 +1,22 @@
 const axios = require("axios");
 const config = require("./config/config.js");
 
-const configuration = (endpoint, method, queryParams) => ({
+// const configuration = (endpoint, method, queryParams) => ({
+//   method: method,
+//   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
+//   headers: {
+//     Authorization: `${config.TOKEN}`,
+//   },
+//   params: queryParams,
+// });
+
+const configuration = (endpoint, method, queryParams, bodyParams) => ({
   method: method,
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
   headers: {
     Authorization: `${config.TOKEN}`,
   },
+  data: bodyParams,
   params: queryParams,
 });
 
@@ -83,9 +93,14 @@ module.exports = {
 
       // make sure req.body is exactly like Postman req
       var addObject = req.body;
+
+      queryParams = {
+        product_id: addObject.product_id
+      };
+
       console.log('addObject: ', addObject);
 
-      axios(configuration(`reviews/`, "post", addObject))
+      axios(configuration(`reviews/`, "post", queryParams, addObject))
         .then((response) => {
           res.status(200).send();
           console.log('Received response from addNewReview!');
