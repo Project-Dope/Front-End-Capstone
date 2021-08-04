@@ -1,4 +1,5 @@
 import React from 'react';
+import CharacteristicsItem from './CharacteristicsItem.jsx';
 
 var Characteristics = (props) => {
 
@@ -31,7 +32,7 @@ var Characteristics = (props) => {
     <label>Too wide</label>
   </div>;
 
-  var comfortDiv = <div>
+  var comfortDiv = <div id={props.metaData.Comfort}>
     <p></p>
     <p>Comfort</p>
     <input type="radio" name="comfortRating" value="1" onClick={props.clickCharacteristics} />
@@ -95,7 +96,7 @@ var Characteristics = (props) => {
   var divArrayForRender = [];
 
   for (var key in props.metaData) {
-    // console.log('key: ', key);
+    // console.log('value: ', props.metaData[key]);
     if (key === 'Size') {
       divArrayForRender.push(sizeDiv);
     }
@@ -115,9 +116,20 @@ var Characteristics = (props) => {
       divArrayForRender.push(fitDiv);
     }
   }
+
+  // return (
+  //   <div>
+  //     {
+  //       divArrayForRender.map((item, index) => {
+  //         <CharacteristicsItem div={item} key={index} />
+  //       })
+  //     }
+  //   </div>
+  // )
+
   // console.log('divArrayForRender: ', divArrayForRender);
-  return divArrayForRender;
   // console.log('metaData from sub-component: ', props.metaData);
+  return divArrayForRender;
 }
 
 export default Characteristics;

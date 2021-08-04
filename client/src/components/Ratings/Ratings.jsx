@@ -99,16 +99,16 @@ export default class Ratings extends React.Component {
       // wasReviewClicked: false
     })
 
-    // axios.post(`reviews`, addObject)
-    // .then(() => {
-    //   console.log('Received response from Axios POST request!');
-    // })
-    // .catch((err) => {
-    //   console.log('Error received during Axios POST request');
-    // })
+    axios.post(`/api/reviews/`, addObject)
+    .then(() => {
+      console.log('Received response from Axios POST request!');
+    })
+    .catch((err) => {
+      console.log('Error received during Axios POST request');
+    })
 
-    // // invoke getReviewsList when POST req is functional
-    // this.getReviewsList();
+    // invoke getReviewsList when POST req is functional
+    this.getReviewsList();
     console.log('new ratingsList: ', this.state.ratingsList);
   }
 

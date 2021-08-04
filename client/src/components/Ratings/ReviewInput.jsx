@@ -43,12 +43,10 @@ class ReviewInput extends React.Component {
       this.setState({
         summaryLength: this.state.summaryInput.length,
       });
-      // console.log(this.state.summaryLength);
     } else if (event.target.name === "bodyInput") {
       this.setState({
         bodyLength: this.state.bodyInput.length,
       });
-      // console.log(this.state.bodyLength);
     }
 
     if (this.state.bodyInput.length === 50) {
@@ -59,6 +57,7 @@ class ReviewInput extends React.Component {
   handleInputSubmit(event) {
     event.preventDefault();
 
+    // check minimum requirements
     var summaryLength = this.state.summaryLength;
     var bodyLength = this.state.bodyLength;
     var emailLength = this.state.emailInput.length;
@@ -85,32 +84,17 @@ class ReviewInput extends React.Component {
       return;
     }
 
-    var newDate = new Date().toLocaleDateString();
-
-    // id will be the key pair
-    // selected rating will be the value pair
-    var metaData = this.props.metaData.characteristics;
-    console.log('metaData from ReviewInput: ', metaData);
-
+    // input object for POST request
     var newReview = {
       product_Id: this.props.productId,
       body: this.state.bodyInput,
-      // date: newDate,
-      // helpfulness: 0,
       photos: [],
       rating: this.state.starRating,
       recommend: this.state.recommended,
-      // response: null,
-      // review_id: null,
       name: this.state.displayInput,
-      // reviewer_name: this.state.displayInput,
       email: this.state.emailInput,
       summary: this.state.summaryInput,
-      // need to have characteristics property
-        // need to reference meta
-          // send meta GET request
-        // some products don't have every characteristic
-        // some products have different characteristics
+      characteristics: {}
 
       // characteristics: {
       //   "53841": 3,
@@ -120,6 +104,36 @@ class ReviewInput extends React.Component {
       // }
 
     };
+
+    // need to have characteristics property
+    // need to reference meta
+      // send meta GET request
+    // some products don't have every characteristic
+    // some products have different characteristics
+
+    // id will be the key pair
+    // selected rating will be the value pair
+    var metaData = this.props.metaData.characteristics;
+    console.log('metaData from ReviewInput: ', metaData.Comfort);
+
+    if (this.state.sizeRating !== null) {
+      newReview.characteristics[metaData.Size.id] = this.state.sizeRating
+    }
+    if (this.state.widthRating !== null) {
+      newReview.characteristics[metaData.Width.id] = this.state.widthRating
+    }
+    if (this.state.comfortRating !== null) {
+      newReview.characteristics[metaData.Comfort.id] = this.state.comfortRating
+    }
+    if (this.state.qualityRating !== null) {
+      newReview.characteristics[metaData.Quality.id] = this.state.qualityRating
+    }
+    if (this.state.lengthRating !== null) {
+      newReview.characteristics[metaData.Length.id] = this.state.lengthRating
+    }
+    if (this.state.fitRating !== null) {
+      newReview.characteristics[metaData.Fit.id] = this.state.fitRating
+    }
 
     this.props.clickSubmitReview(newReview);
   }

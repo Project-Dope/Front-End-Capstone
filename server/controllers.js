@@ -85,7 +85,7 @@ module.exports = {
       var addObject = req.body;
       console.log('addObject: ', addObject);
 
-      axios(configuration(`/reviews`, "post", addObject))
+      axios(configuration(`reviews/`, "post", addObject))
         .then((response) => {
           res.status(200).send();
           console.log('Received response from addNewReview!');
