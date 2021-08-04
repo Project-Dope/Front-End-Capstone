@@ -222,6 +222,7 @@ export default class Ratings extends React.Component {
             <ReviewInput
               productId={this.props.productId}
               list={this.state.ratingsList}
+              getMetaData={this.getMetaData}
               metaData={this.state.metaData}
               clickSubmitReview={this.clickSubmitReview} />
             <button onClick={this.cancelAddReview}>Cancel</button>

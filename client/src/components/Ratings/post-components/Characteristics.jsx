@@ -91,12 +91,11 @@ var Characteristics = (props) => {
     <label>Runs long</label>
   </div>;
 
-
+  // array to contain all divs from meta data
   var divArrayForRender = [];
 
   for (var key in props.metaData) {
-    console.log('key: ', key);
-
+    // console.log('key: ', key);
     if (key === 'Size') {
       divArrayForRender.push(sizeDiv);
     }

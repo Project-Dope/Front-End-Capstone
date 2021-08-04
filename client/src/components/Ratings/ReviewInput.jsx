@@ -87,6 +87,11 @@ class ReviewInput extends React.Component {
 
     var newDate = new Date().toLocaleDateString();
 
+    // id will be the key pair
+    // selected rating will be the value pair
+    var metaData = this.props.metaData.characteristics;
+    console.log('metaData from ReviewInput: ', metaData);
+
     var newReview = {
       product_Id: this.props.productId,
       body: this.state.bodyInput,
@@ -108,24 +113,10 @@ class ReviewInput extends React.Component {
         // some products have different characteristics
 
       // characteristics: {
-      //   Size: {
-      //     value: this.state.sizeRating
-      //   },
-      //   Width: {
-      //     value: this.state.widthRating
-      //   },
-      //   Comfort: {
-      //     value: this.state.comfortRating
-      //   },
-      //   Quality: {
-      //     value: this.state.qualityRating
-      //   },
-      //   Length: {
-      //     value: this.state.lengthRating
-      //   },
-      //   Fit: {
-      //     value: this.state.fitRating
-      //   }
+      //   "53841": 3,
+      //   "53842": 4,
+      //   "53843": 2,
+      //   "53844": 3
       // }
 
     };
