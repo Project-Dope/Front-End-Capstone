@@ -191,7 +191,9 @@ class ReviewInput extends React.Component {
             <label>Great</label>
           </div>
           <div>
-            <Characteristics clickCharacteristics={this.clickCharacteristics}/>
+            <Characteristics
+            clickCharacteristics={this.clickCharacteristics}
+            metaData={this.props.metaData.characteristics}/>
           </div>
           <div>
             <h5>Do you recommend this product?</h5>

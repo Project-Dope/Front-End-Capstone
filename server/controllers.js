@@ -69,6 +69,7 @@ module.exports = {
       queryParams = {
         product_id: req.params.id,
       };
+      // console.log('req.params: ', req.params);
       axios(configuration(`reviews/meta`, "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
@@ -80,6 +81,7 @@ module.exports = {
 
     addNewReview: (req, res) => {
 
+      // make sure req.body is exactly like Postman req
       var addObject = req.body;
       console.log('addObject: ', addObject);
 
@@ -91,7 +93,6 @@ module.exports = {
         .catch((err) => {
           res.status(404).send();
           console.log(err);
-          // res.end();
         })
 
     },

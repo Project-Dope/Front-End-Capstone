@@ -15,6 +15,7 @@ export default class Ratings extends React.Component {
     this.state = {
       ratingsList: [],
       filteredList: [],
+      metaData: [],
       averageRating: '',
       ratingsCountList: [],
       wasReviewClicked: false,
@@ -23,6 +24,7 @@ export default class Ratings extends React.Component {
     }
 
     this.getReviewsList = this.getReviewsList.bind(this);
+    this.getMetaData = this.getMetaData.bind(this);
     this.clickAddReview = this.clickAddReview.bind(this);
     this.cancelAddReview = this.cancelAddReview.bind(this);
     this.selectSortOption = this.selectSortOption.bind(this);
@@ -36,6 +38,7 @@ export default class Ratings extends React.Component {
 
   componentDidMount() {
     this.getReviewsList();
+    this.getMetaData();
   }
 
   componentDidUpdate(prevProps) {
@@ -60,6 +63,22 @@ export default class Ratings extends React.Component {
 
       console.log('ratingsList: ', this.state.ratingsList);
       // console.log('averageRating: ', this.state.averageRating);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  getMetaData() {
+    axios.get(`/api/reviews/meta/${this.props.productId}`)
+    .then((response) => {
+      this.setState({
+        metaData: response.data
+      })
+    })
+    .then(() => {
+      console.log('metaData: ', this.state.metaData);
+      console.log('Received response from Axios POST request in client!');
     })
     .catch((err) => {
       console.log(err);
@@ -167,7 +186,7 @@ export default class Ratings extends React.Component {
   render() {
 
     // console.log('selectedSort: ', this.state.selectedSort);
-    console.log('productId: ', this.props.productId);
+    // console.log('productId: ', this.props.productId);
 
       return (
 
@@ -203,6 +222,7 @@ export default class Ratings extends React.Component {
             <ReviewInput
               productId={this.props.productId}
               list={this.state.ratingsList}
+              metaData={this.state.metaData}
               clickSubmitReview={this.clickSubmitReview} />
             <button onClick={this.cancelAddReview}>Cancel</button>
           </ReactModal>
