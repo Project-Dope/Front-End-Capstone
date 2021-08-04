@@ -76,12 +76,21 @@ export default class Ratings extends React.Component {
     console.log('addObject: ', addObject);
 
     this.setState({
-      ratingsList: [...this.state.ratingsList, addObject],
-      wasReviewClicked: false
+      ratingsList: [...this.state.ratingsList, addObject]
+      // wasReviewClicked: false
     })
+
+    // axios.post(`reviews`, addObject)
+    // .then(() => {
+    //   console.log('Received response from Axios POST request!');
+    // })
+    // .catch((err) => {
+    //   console.log('Error received during Axios POST request');
+    // })
+
     // // invoke getReviewsList when POST req is functional
     // this.getReviewsList();
-    // console.log('new ratingsList: ', this.state.ratingsList);
+    console.log('new ratingsList: ', this.state.ratingsList);
   }
 
   cancelAddReview() {
@@ -94,6 +103,8 @@ export default class Ratings extends React.Component {
     this.setState({
       selectedSort: event.target.value
     })
+    // if event.target.value is 'helpful'
+    // if event.target.value is 'newest'
   }
 
   showMoreReviews(event) {
@@ -156,7 +167,7 @@ export default class Ratings extends React.Component {
   render() {
 
     // console.log('selectedSort: ', this.state.selectedSort);
-    // console.log('productId: ', this.props.productId);
+    console.log('productId: ', this.props.productId);
 
       return (
 

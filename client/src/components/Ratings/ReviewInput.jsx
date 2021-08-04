@@ -102,26 +102,31 @@ class ReviewInput extends React.Component {
       email: this.state.emailInput,
       summary: this.state.summaryInput,
       // need to have characteristics property
-      characteristics: {
-        Size: {
-          value: this.state.sizeRating
-        },
-        Width: {
-          value: this.state.widthRating
-        },
-        Comfort: {
-          value: this.state.comfortRating
-        },
-        Quality: {
-          value: this.state.qualityRating
-        },
-        Length: {
-          value: this.state.lengthRating
-        },
-        Fit: {
-          value: this.state.fitRating
-        }
-      }
+        // need to reference meta
+          // send meta GET request
+        // some products don't have every characteristic
+        // some products have different characteristics
+
+      // characteristics: {
+      //   Size: {
+      //     value: this.state.sizeRating
+      //   },
+      //   Width: {
+      //     value: this.state.widthRating
+      //   },
+      //   Comfort: {
+      //     value: this.state.comfortRating
+      //   },
+      //   Quality: {
+      //     value: this.state.qualityRating
+      //   },
+      //   Length: {
+      //     value: this.state.lengthRating
+      //   },
+      //   Fit: {
+      //     value: this.state.fitRating
+      //   }
+      // }
 
     };
 
@@ -249,3 +254,26 @@ class ReviewInput extends React.Component {
 }
 
 export default ReviewInput;
+
+
+
+
+
+// SAMPLE TEMPLATE FOR POST REQUEST
+
+// {
+//   "product_id": 16056,
+//   "body": "Recently received my jeans in the mail. It's a great fit and looks great! Definitely would like to shop more from here and check out the rest of the catalog!",
+//   "photos": [],
+//   "rating": 5,
+//   "recommend": true,
+//   "name": "jane1234",
+//   "email": "jane@aol.com",
+//   "summary": "Great product!",
+//   "characteristics": {
+//     "53841": 5,
+//     "53842": 5,
+//     "53843": 5,
+//     "53844": 5
+//   }
+// }

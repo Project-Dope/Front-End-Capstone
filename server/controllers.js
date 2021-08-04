@@ -91,6 +91,7 @@ module.exports = {
         .catch((err) => {
           res.status(404).send();
           console.log(err);
+          // res.end();
         })
 
     },

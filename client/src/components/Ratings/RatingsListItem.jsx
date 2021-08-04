@@ -49,7 +49,7 @@ class RatingsItemsList extends React.Component {
         <h5>Was this review helpful?</h5>
         <button value="Yes" onClick={this.incrementHelpfulCount}>Yes</button>
         <p>{this.props.post.helpfulness}</p>
-        <button value="No" onClick={this.incrementHelpfulCount}>No</button>
+        {/* <button value="No" onClick={this.incrementHelpfulCount}>No</button> */}
         <h2>------------------------------------</h2>
       </div>
     )
