@@ -52,13 +52,13 @@ export default class Ratings extends React.Component {
         ratingsList: response.data.results
       })
       // console.log('response data: ', response.data);
-      console.log('Recevied response from Axios GET request in Ratings.jsx!');
+      // console.log('Recevied response from Axios GET request in Ratings.jsx!');
     })
     .then(() => {
       this.getAverageRating(this.state.ratingsList);
       this.getEachRatingCount(this.state.ratingsList);
 
-      console.log('ratingsList: ', this.state.ratingsList);
+      // console.log('ratingsList: ', this.state.ratingsList);
       // console.log('averageRating: ', this.state.averageRating);
     })
     .catch((err) => {

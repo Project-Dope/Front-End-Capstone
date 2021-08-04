@@ -1,13 +1,23 @@
 const axios = require("axios");
 const config = require("./config/config.js");
 
-const configuration = (endpoint, method, queryParams) => ({
+// const configuration = (endpoint, method, queryParams) => ({
+//   method: method,
+//   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
+//   headers: {
+//     Authorization: `${config.TOKEN}`,
+//   },
+//   params: queryParams,
+// });
+
+const configuration = (endpoint, method, queryParams, bodyParams) => ({
   method: method,
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
   headers: {
     Authorization: `${config.TOKEN}`,
   },
   params: queryParams,
+  data: bodyParams
 });
 
 module.exports = {
@@ -156,12 +166,26 @@ module.exports = {
         .catch((err) => {
           res.status(404).send(err);
         });
+    },
+    postQuestions: (req, res) => {
+      questionObject = req.body;
+      axios(configuration(`qa/questions/`, "post", req.body.product_id, questionObject))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    postAnswers: (req, res) => {
+      answerObject = req.body;
+      axios(configuration(`qa/questions/${req.params.id}/answers/`, "post", null, answerObject))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
     }
-
-    // postQuestions:
-
-    // postAnswers:
-
-    //
   },
 };
