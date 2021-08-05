@@ -21,13 +21,18 @@ export default class Ratings extends React.Component {
       wasReviewClicked: false,
       selectedSort: '',
       listViewLength: 2,
-      clickedRatings: {
-        fiveRatingClicked: false,
-        fourRatingClicked: false,
-        threeRatingClicked: false,
-        twoRatingClicked: false,
-        oneRatingClicked: false
-      }
+      // clickedRatings: {
+      //   fiveRatingClicked: false,
+      //   fourRatingClicked: false,
+      //   threeRatingClicked: false,
+      //   twoRatingClicked: false,
+      //   oneRatingClicked: false
+      // }
+      fiveRatingClicked: false,
+      fourRatingClicked: false,
+      threeRatingClicked: false,
+      twoRatingClicked: false,
+      oneRatingClicked: false
     }
 
     this.getReviewsList = this.getReviewsList.bind(this);
@@ -59,40 +64,40 @@ export default class Ratings extends React.Component {
 
   getReviewsList() {
     axios.get(`/api/reviews/${this.props.productId}`)
-    .then((response) => {
+      .then((response) => {
 
-      this.setState({
-        ratingsList: response.data.results
+        this.setState({
+          ratingsList: response.data.results
+        })
+        // console.log('response data: ', response.data);
+        console.log('Recevied response from Axios GET request in Ratings.jsx!');
       })
-      // console.log('response data: ', response.data);
-      console.log('Recevied response from Axios GET request in Ratings.jsx!');
-    })
-    .then(() => {
-      this.getAverageRating(this.state.ratingsList);
-      this.getEachRatingCount(this.state.ratingsList);
+      .then(() => {
+        this.getAverageRating(this.state.ratingsList);
+        this.getEachRatingCount(this.state.ratingsList);
 
-      console.log('ratingsList: ', this.state.ratingsList);
-      // console.log('averageRating: ', this.state.averageRating);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+        console.log('ratingsList: ', this.state.ratingsList);
+        // console.log('averageRating: ', this.state.averageRating);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   getMetaData() {
     axios.get(`/api/reviews/meta/${this.props.productId}`)
-    .then((response) => {
-      this.setState({
-        metaData: response.data
+      .then((response) => {
+        this.setState({
+          metaData: response.data
+        })
       })
-    })
-    .then(() => {
-      console.log('metaData: ', this.state.metaData);
-      console.log('Received response from Axios POST request in client!');
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then(() => {
+        console.log('metaData: ', this.state.metaData);
+        console.log('Received response from Axios POST request in client!');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   clickAddReview() {
@@ -105,19 +110,19 @@ export default class Ratings extends React.Component {
     console.log('addObject: ', addObject);
 
     axios.post(`/api/reviews/`, addObject)
-    .then(() => {
-      this.setState({
-        // ratingsList: [...this.state.ratingsList, addObject],
-        wasReviewClicked: false
+      .then(() => {
+        this.setState({
+          // ratingsList: [...this.state.ratingsList, addObject],
+          wasReviewClicked: false
+        })
+        console.log('Received response from Axios POST request!');
       })
-      console.log('Received response from Axios POST request!');
-    })
-    .then(() => {
-      this.getReviewsList();
-    })
-    .catch((err) => {
-      console.log('Error received during Axios POST request');
-    })
+      .then(() => {
+        this.getReviewsList();
+      })
+      .catch((err) => {
+        console.log('Error received during Axios POST request');
+      })
 
     console.log('new ratingsList: ', this.state.ratingsList);
   }
@@ -138,7 +143,7 @@ export default class Ratings extends React.Component {
 
   showMoreReviews(event) {
     this.setState({
-      listViewLength: this.state.listViewLength+=2
+      listViewLength: this.state.listViewLength += 2
     })
   }
 
@@ -194,9 +199,7 @@ export default class Ratings extends React.Component {
 
   toggleRating() {
     this.setState(prevState => ({
-      clickedRatings: {
-        [event.target.name]: !prevState[event.target.name]
-      }
+      [event.target.name]: !prevState[event.target.name]
     }))
   }
 
@@ -206,18 +209,18 @@ export default class Ratings extends React.Component {
     // console.log('selectedSort: ', this.state.selectedSort);
     // console.log('productId: ', this.props.productId);
 
-      return (
+    return (
 
+      <div>
+        <h1>Ratings</h1>
+        <h4>Sort Options</h4>
+        <select onChange={this.selectSortOption} value={this.state.selectedSort} >
+          <option value="Relevant">Relevant</option>
+          <option value="Newest">Newest</option>
+          <option value="Helpful">Helpful</option>
+        </select>
         <div>
-          <h1>Ratings</h1>
-          <h4>Sort Options</h4>
-          <select onChange={this.selectSortOption} value={this.state.selectedSort} >
-            <option value="Relevant">Relevant</option>
-            <option value="Newest">Newest</option>
-            <option value="Helpful">Helpful</option>
-          </select>
-          <div>
-            <RatingsBreakdown
+          <RatingsBreakdown
             list={this.state.ratingsList}
             filteredList={this.state.filteredList}
             toggleRating={this.toggleRating}
@@ -225,25 +228,26 @@ export default class Ratings extends React.Component {
             averageRating={this.state.averageRating}
             ratingsCountList={this.state.ratingsCountList}
             filterByRating={this.filterByRating} />
-            <h3>Reviews</h3>
-          </div>
-          <div>
-            <RatingsList
+          <h3>Reviews</h3>
+        </div>
+        <div>
+          <RatingsList
             list={this.state.ratingsList}
             listLength={this.state.listViewLength}
-            clickedRatings={this.state.clickedRatings}
-            // oneRatingClicked={this.state.oneRatingClicked}
-            // twoRatingClicked={this.state.twoRatingClicked}
-            // threeRatingClicked={this.state.threeRatingClicked}
-            // fourRatingClicked={this.state.fourRatingClicked}
-            // fiveRatingClicked={this.state.fiveRatingClicked}
-             />
+            // clickedRatings={this.state.clickedRatings}
+            oneRatingClicked={this.state.oneRatingClicked}
+            twoRatingClicked={this.state.twoRatingClicked}
+            threeRatingClicked={this.state.threeRatingClicked}
+            fourRatingClicked={this.state.fourRatingClicked}
+            fiveRatingClicked={this.state.fiveRatingClicked}
 
-            {this.state.listViewLength < this.state.ratingsList.length ? (<button onClick={this.showMoreReviews}>Show More Reviews</button>) : null}
+          />
 
-            <button onClick={this.clickAddReview}>Add a Review</button>
-          </div>
-          <div>
+          {this.state.listViewLength < this.state.ratingsList.length ? (<button onClick={this.showMoreReviews}>Show More Reviews</button>) : null}
+
+          <button onClick={this.clickAddReview}>Add a Review</button>
+        </div>
+        <div>
           <ReactModal isOpen={this.state.wasReviewClicked}>
             <ReviewInput
               productId={this.props.productId}
@@ -253,10 +257,10 @@ export default class Ratings extends React.Component {
               clickSubmitReview={this.clickSubmitReview} />
             <button onClick={this.cancelAddReview}>Cancel</button>
           </ReactModal>
-          </div>
         </div>
+      </div>
 
-      )
+    )
 
 
   }
