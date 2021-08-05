@@ -14,7 +14,6 @@ var RatingsList = (props) => {
   }
 
   return (
-
     <div>
       {props.list.filter(post => {
 
@@ -36,7 +35,6 @@ var RatingsList = (props) => {
         <RatingsItemsList post={post} key={index} />
       )}
     </div>
-
   )
 
 }

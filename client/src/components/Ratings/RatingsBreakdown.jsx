@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRatingComponent from 'react-star-rating-component';
 
 class RatingsBreakdown extends React.Component {
 
@@ -10,6 +11,8 @@ class RatingsBreakdown extends React.Component {
 
   render() {
 
+    var barStyle = {height: 20, width: '50%', backgroundColor: 'grey'};
+
     return (
       <div>
         <h3>Ratings Summary</h3>
@@ -17,15 +20,15 @@ class RatingsBreakdown extends React.Component {
         <h4>{this.props.averageRating}</h4>
         <p>Average Rating in stars</p>
         <h3>Ratings Breakdown</h3>
-        <button name="fiveRatingClicked" value="5" onClick={this.props.toggleRating}>5 Stars</button>
+        <button name="fiveRatingClicked" value="5" style={barStyle} onClick={this.props.toggleRating}>5 Stars</button>
         <p>{this.props.ratingsCountList['5']}</p>
-        <button name="fourRatingClicked" value="4" onClick={this.props.toggleRating}>4 Stars</button>
+        <button name="fourRatingClicked" value="4" style={barStyle} onClick={this.props.toggleRating}>4 Stars</button>
         <p>{this.props.ratingsCountList['4']}</p>
-        <button name="threeRatingClicked" value="3" onClick={this.props.toggleRating}>3 Stars</button>
+        <button name="threeRatingClicked" value="3" style={barStyle} onClick={this.props.toggleRating}>3 Stars</button>
         <p>{this.props.ratingsCountList['3']}</p>
-        <button name="twoRatingClicked" value="2" onClick={this.props.toggleRating}>2 Stars</button>
+        <button name="twoRatingClicked" value="2" style={barStyle} onClick={this.props.toggleRating}>2 Stars</button>
         <p>{this.props.ratingsCountList['2']}</p>
-        <button name="oneRatingClicked" value="1" onClick={this.props.toggleRating}>1 Star</button>
+        <button name="oneRatingClicked" value="1" style={barStyle} onClick={this.props.toggleRating}>1 Star</button>
         <p>{this.props.ratingsCountList['1']}</p>
       </div>
 
