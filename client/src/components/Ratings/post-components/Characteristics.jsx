@@ -4,7 +4,7 @@ import '../Ratings.css';
 
 var Characteristics = (props) => {
 
-  var sizeDiv = <div class="characteristics">
+  var sizeDiv = <div className="characteristics">
     <p></p>
     <h5>Size</h5>
     <input type="radio" name="sizeRating" value="1" onClick={props.clickCharacteristics} />
@@ -23,7 +23,7 @@ var Characteristics = (props) => {
     <label>A size too wide</label>
   </div>;
 
-  var widthDiv = <div class="characteristics">
+  var widthDiv = <div className="characteristics">
     <p></p>
     <h5>Width</h5>
     <input type="radio" name="widthRating" value="1" onClick={props.clickCharacteristics} />
@@ -42,7 +42,7 @@ var Characteristics = (props) => {
     <label>Too wide</label>
   </div>;
 
-  var comfortDiv = <div class="characteristics">
+  var comfortDiv = <div className="characteristics">
     <p></p>
     <h5>Comfort</h5>
     <input type="radio" name="comfortRating" value="1" onClick={props.clickCharacteristics} />
@@ -61,7 +61,7 @@ var Characteristics = (props) => {
     <label>Perfect</label>
   </div>;
 
-  var qualityDiv = <div class="characteristics">
+  var qualityDiv = <div className="characteristics">
     <p></p>
     <h5>Quality</h5>
     <input type="radio" name="qualityRating" value="1" onClick={props.clickCharacteristics} />
@@ -80,7 +80,7 @@ var Characteristics = (props) => {
     <label>Perfect</label>
   </div>;
 
-  var lengthDiv = <div class="characteristics">
+  var lengthDiv = <div className="characteristics">
     <p></p>
     <h5>Length</h5>
     <input type="radio" name="lengthRating" value="1" onClick={props.clickCharacteristics} />
@@ -99,7 +99,7 @@ var Characteristics = (props) => {
     <label>Runs long</label>
   </div>;
 
-  var fitDiv = <div class="characteristics">
+  var fitDiv = <div className="characteristics">
     <p></p>
     <h5>Fit</h5>
     <input type="radio" name="fitRating" value="1" onClick={props.clickCharacteristics} />

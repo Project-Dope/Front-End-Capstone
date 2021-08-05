@@ -188,12 +188,11 @@ export default class Ratings extends React.Component {
         <div>
           <RatingsBreakdown
             list={this.state.ratingsList}
-            filteredList={this.state.filteredList}
+            metaData={this.state.metaData}
             toggleRating={this.toggleRating}
-            deselectFilter={this.deselectFilter}
             averageRating={this.state.averageRating}
             ratingsCountList={this.state.ratingsCountList}
-            filterByRating={this.filterByRating} />
+            />
           <h3>Reviews</h3>
         </div>
         <div>
@@ -217,7 +216,6 @@ export default class Ratings extends React.Component {
             <ReviewInput
               productId={this.props.productId}
               list={this.state.ratingsList}
-              getMetaData={this.getMetaData}
               metaData={this.state.metaData}
               clickSubmitReview={this.clickSubmitReview} />
             <button onClick={this.cancelAddReview}>Cancel</button>

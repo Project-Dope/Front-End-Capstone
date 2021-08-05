@@ -1,11 +1,33 @@
 import React from 'react';
 
-var CharacteristicsItem = (props) => (
+var CharacteristicsBreakdown = (props) => {
+  // console.log('metaData from char breakdown: ', props.metaData);
 
-  <div>
-    Hello from CharacteristicsItem!
-  </div>
+  var characteristicsData = props.metaData.characteristics
+  var characteristicsArray = [];
 
-)
+  for (var key in characteristicsData) {
+    characteristicsArray.push([key, characteristicsData[key]])
+  }
+  // console.log('characteristicsArray: ', characteristicsArray);
+  var barStyle = {height: 10, width: '20%', backgroundColor: 'grey'};
 
-export default CharacteristicsItem;
+  return (
+
+    <div>
+      {characteristicsArray.map((data, index) => {
+        return (
+          <div key={index}>
+            {data[0]}
+            <div style={barStyle}></ div>
+          </div>
+        )
+      })}
+      <h2></h2>
+    </div>
+
+  )
+
+}
+
+export default CharacteristicsBreakdown;

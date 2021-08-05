@@ -104,7 +104,7 @@ class ReviewInput extends React.Component {
 
     // using conditionals to add to characteristics object based on meta data
     var metaData = this.props.metaData.characteristics;
-    console.log('metaData from ReviewInput: ', metaData.Comfort);
+    // console.log('metaData from ReviewInput: ', metaData);
 
     if (this.state.sizeRating !== null) {
       newReview.characteristics[metaData.Size.id] = this.state.sizeRating
@@ -176,6 +176,9 @@ class ReviewInput extends React.Component {
   }
 
   render() {
+
+    console.log('metaData from ReviewInput: ', this.props.metaData.characteristics);
+
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
