@@ -74,7 +74,7 @@ class RatingsBreakdown extends React.Component {
         <p>Average Rating in stars</p>
         <h3>Ratings Breakdown</h3>
         <button name="fiveRatingClicked" value="5" onClick={this.clickRating}>5 Stars</button>
-        <p>{this.props.ratingsCountList['5']}</p>
+        <span>{this.props.ratingsCountList['5']}</span>
         <button name="fourRatingClicked" value="4" onClick={this.clickRating}>4 Stars</button>
         <p>{this.props.ratingsCountList['4']}</p>
         <button name="threeRatingClicked" value="3" onClick={this.clickRating}>3 Stars</button>

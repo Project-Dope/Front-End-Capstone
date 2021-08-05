@@ -92,7 +92,7 @@ class QuestionAnswer extends React.Component {
           <Answer
           answer={item}
           setModalType={this.props.setModalType}
-          // getProductAnswers={this.getProductAnswers}
+          getProductAnswers={this.getProductAnswers}
           key={index}/>
           )}
         </div>

@@ -109,8 +109,7 @@ export default class Questions extends React.Component {
             if (value.question_body.toLowerCase().includes(this.state.searchValue.toLowerCase())) {
               return value;
             }
-          })
-            .map((item, index) => (
+          }).map((item, index) => (
               <QuestionAnswer
                 question={item}
                 getProductQuestions={this.getProductQuestions}

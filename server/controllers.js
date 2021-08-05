@@ -131,6 +131,7 @@ module.exports = {
     getQuestions: (req, res) => {
       queryParams = {
         product_id: req.params.id,
+        count: 100
       };
       axios(configuration("qa/questions", "get", queryParams))
         .then((response) => {
@@ -141,7 +142,10 @@ module.exports = {
         });
     },
     getAnswers: (req, res) => {
-      axios(configuration(`qa/questions/${req.params.id}/answers`, "get"))
+      queryParams = {
+        count: 100
+      };
+      axios(configuration(`qa/questions/${req.params.id}/answers`, "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -169,7 +173,7 @@ module.exports = {
     },
     postQuestions: (req, res) => {
       questionObject = req.body;
-      axios(configuration(`qa/questions/`, "post", req.body.product_id, questionObject))
+      axios(configuration(`qa/questions/`, "post", null, questionObject))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -186,6 +190,15 @@ module.exports = {
         .catch((err) => {
           res.status(404).send(err);
         });
-    }
+    },
+    reportAnswer: (req, res) => {
+      axios(configuration(`qa/answers/${req.params.id}/report`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
   },
 };

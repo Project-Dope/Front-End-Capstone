@@ -8,13 +8,14 @@ class AnswerHelpful extends React.Component {
       reported: false
     }
 
-    this.hello = this.hello.bind(this);
+    this.report = this.report.bind(this);
   }
 
-  hello() {
+  report() {
     this.setState({
       reported: true
     })
+    this.props.reportAnswer();
   }
 
   render() {
@@ -22,7 +23,7 @@ class AnswerHelpful extends React.Component {
       <span>
         <span>Helpful?&nbsp;
           <button className='questions-helpful-buttons' onClick={() => this.props.addAnswerHelpfulness()}>Yes</button>
-          <span> {this.props.answerHelpfulness}  |  {this.state.reported ? (<span>Reported</span>) : (<button className='questions-helpful-buttons' onClick={this.hello}>Report</button>)}</span>
+          <span> {this.props.answerHelpfulness}  |  {this.state.reported ? (<span>Reported</span>) : (<button className='questions-helpful-buttons' onClick={this.report}>Report</button>)}</span>
         </span>
       </span>
     )

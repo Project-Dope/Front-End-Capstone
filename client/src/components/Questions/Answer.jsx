@@ -31,7 +31,6 @@ class Answer extends React.Component {
 
   addAnswerHelpfulness() {
     axios.put(`api/qa/answers/${this.props.answer.answer_id}/helpful`)
-    .then(() => console.log(this.state.photos))
     .then(() => this.props.getProductAnswers())
     .catch(err => console.log(err))
   }
