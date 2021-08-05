@@ -6,54 +6,6 @@ class RatingsBreakdown extends React.Component {
     super(props);
     this.state = {
     }
-    this.clickRating = this.clickRating.bind(this);
-  }
-
-  clickRating(event) {
-    // console.log('clicked filter: ', event.target.name);
-
-    // check if event.target.name was already clicked
-    if (!this.state.wasRatingClicked[event.target.name]) {
-
-      var filteredArray = [];
-
-      // iterate over nested object in state
-        // if states are true
-          // use filter and push values to filteredArray
-      this.props.list.filter((item) => {
-        if (item.rating === parseInt(event.target.value)) {
-          filteredArray.push(item);
-        }
-      })
-      // console.log('filteredArray: ', filteredArray);
-      this.props.filterByRating(filteredArray);
-
-      this.setState({
-        wasRatingClicked: {
-          [event.target.name]: true
-        }
-      })
-
-    } else {
-
-      var filteredArrayTrue = [];
-
-      this.props.filteredList.filter((item) => {
-        if (item.rating !== parseInt(event.target.value)) {
-          filteredArrayTrue.push(item);
-        }
-      })
-
-      console.log('filteredArrayTrue: ', filteredArrayTrue);
-      // this.props.deselectFilter(filteredArrayTrue);
-
-      this.setState({
-        wasRatingClicked: {
-          [event.target.name]: false
-        }
-      })
-
-    }
   }
 
   render() {

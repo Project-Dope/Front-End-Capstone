@@ -21,13 +21,6 @@ export default class Ratings extends React.Component {
       wasReviewClicked: false,
       selectedSort: '',
       listViewLength: 2,
-      // clickedRatings: {
-      //   fiveRatingClicked: false,
-      //   fourRatingClicked: false,
-      //   threeRatingClicked: false,
-      //   twoRatingClicked: false,
-      //   oneRatingClicked: false
-      // }
       fiveRatingClicked: false,
       fourRatingClicked: false,
       threeRatingClicked: false,
@@ -44,8 +37,6 @@ export default class Ratings extends React.Component {
     this.showMoreReviews = this.showMoreReviews.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
     this.getEachRatingCount = this.getEachRatingCount.bind(this);
-    this.filterByRating = this.filterByRating.bind(this);
-    this.deselectFilter = this.deselectFilter.bind(this);
     this.toggleRating = this.toggleRating.bind(this);
   }
 
@@ -65,11 +56,9 @@ export default class Ratings extends React.Component {
   getReviewsList() {
     axios.get(`/api/reviews/${this.props.productId}`)
       .then((response) => {
-
         this.setState({
           ratingsList: response.data.results
         })
-        // console.log('response data: ', response.data);
         console.log('Recevied response from Axios GET request in Ratings.jsx!');
       })
       .then(() => {
@@ -77,7 +66,6 @@ export default class Ratings extends React.Component {
         this.getEachRatingCount(this.state.ratingsList);
 
         console.log('ratingsList: ', this.state.ratingsList);
-        // console.log('averageRating: ', this.state.averageRating);
       })
       .catch((err) => {
         console.log(err);
@@ -148,7 +136,6 @@ export default class Ratings extends React.Component {
   }
 
   getAverageRating(ratingsArray) {
-    // console.log('ratingsArray: ', ratingsArray);
     var totalRating = 0;
     ratingsArray.forEach((number) => {
       totalRating += number.rating
@@ -174,27 +161,6 @@ export default class Ratings extends React.Component {
     this.setState({
       ratingsCountList: ratingObject
     })
-    // console.log('ratingsCountList: ', this.state.ratingsCountList);
-  }
-
-  filterByRating(inputArrayFalse) {
-    console.log('inputArrayFalse: ', inputArrayFalse);
-
-    this.setState({
-      filteredList: inputArrayFalse
-    })
-
-    console.log('without selected filter: ', this.state.filteredList);
-  }
-
-  deselectFilter(inputArrayTrue) {
-    console.log('inputArrayTrue: ', inputArrayTrue);
-
-    this.setState({
-      filteredList: inputArrayTrue
-    })
-    // cannot remove deselected filter
-    console.log('after deselected filter: ', this.state.filteredList);
   }
 
   toggleRating() {
@@ -262,63 +228,7 @@ export default class Ratings extends React.Component {
 
     )
 
-
   }
 
 }
 
-
-
-
-
-
-
-// render() {
-
-//   // console.log('selectedSort: ', this.state.selectedSort);
-//   // console.log('productId: ', this.props.productId);
-
-//   if (this.state.wasReviewClicked) {
-
-//     return (
-//       <div>
-//         <Modal>
-//         <ReviewInput
-//           productId={this.props.productId}
-//           list={this.state.ratingsList}
-//           clickSubmitReview={this.clickSubmitReview} />
-//         <button onClick={this.cancelAddReview}>Cancel</button>
-//       </Modal>
-//       </div>
-//     )
-
-//   } else {
-
-//     return (
-//       <div>
-//         <h1>Ratings</h1>
-//         <h4>Sort Options</h4>
-//         <select onChange={this.selectSortOption} value={this.state.selectedSort} >
-//           <option value="Relevant">Relevant</option>
-//           <option value="Newest">Newest</option>
-//           <option value="Helpful">Helpful</option>
-//         </select>
-//         <RatingsBreakdown
-//         list={this.state.ratingsList}
-//         filteredList={this.state.filteredList}
-//         deselectFilter={this.deselectFilter}
-//         averageRating={this.state.averageRating}
-//         ratingsCountList={this.state.ratingsCountList}
-//         filterByRating={this.filterByRating} />
-//         <h3>Reviews</h3>
-//         <RatingsList
-//         list={this.state.ratingsList}
-//         listLength={this.state.listViewLength} />
-//         <button onClick={this.showMoreReviews}>Show More Reviews</button>
-//         <button onClick={this.clickAddReview}>Add a Review</button>
-//       </div>
-//     );
-
-//   }
-
-// }
