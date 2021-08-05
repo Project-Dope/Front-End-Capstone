@@ -3,6 +3,7 @@ import RatingsItemsList from './RatingsListItem.jsx';
 
 var RatingsList = (props) => {
 
+  // displays all reviews if no ratings are clicked
   if (!props.fiveRatingClicked && !props.fourRatingClicked && !props.threeRatingClicked && !props.twoRatingClicked && !props.oneRatingClicked) {
     return (
       <div>
@@ -13,6 +14,7 @@ var RatingsList = (props) => {
     )
   }
 
+  // displays reviews based on clicked ratings
   return (
     <div>
       {props.list.filter(post => {

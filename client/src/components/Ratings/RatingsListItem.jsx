@@ -2,6 +2,9 @@ import React from 'react';
 import RatingHelpfulNess from './post-components/RatingHelpfulness.jsx';
 import axios from 'axios';
 import moment from 'moment';
+// first review when filtering becomes 5 stars by default
+import ReactStars from 'react-rating-stars-component';
+import StarRating from "react-star-rating-component";
 
 class RatingsItemsList extends React.Component {
 
@@ -38,7 +41,15 @@ class RatingsItemsList extends React.Component {
 
     return (
       <div>
-        <p>{this.props.post.rating}</p>
+        {/* <p>{this.props.post.rating}</p> */}
+        <div style={{fontSize: 30}}>
+          <StarRating
+          class="reviewRatingStar"
+          name="reviewRating"
+          starCount={this.props.post.rating}
+          editing={true}
+          />
+        </div>
         <p>{moment(this.props.post.date).utc().format('MMMM DD, YYYY')}</p>
         <p>{this.props.post.summary}</p>
         <p>{this.props.post.body}</p>
@@ -50,7 +61,7 @@ class RatingsItemsList extends React.Component {
         <button value="Yes" onClick={this.incrementHelpfulCount}>Yes</button>
         <p>{this.props.post.helpfulness}</p>
         {/* <button value="No" onClick={this.incrementHelpfulCount}>No</button> */}
-        <h2>------------------------------------</h2>
+        <h2>----------------------------------------</h2>
       </div>
     )
 

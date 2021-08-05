@@ -200,7 +200,6 @@ export default class Ratings extends React.Component {
           <RatingsList
             list={this.state.ratingsList}
             listLength={this.state.listViewLength}
-            // clickedRatings={this.state.clickedRatings}
             oneRatingClicked={this.state.oneRatingClicked}
             twoRatingClicked={this.state.twoRatingClicked}
             threeRatingClicked={this.state.threeRatingClicked}

@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from 'react-rating-stars-component';
 
 class RatingsBreakdown extends React.Component {
 
@@ -11,6 +11,7 @@ class RatingsBreakdown extends React.Component {
 
   render() {
 
+    // used to style element
     var barStyle = {height: 20, width: '50%', backgroundColor: 'grey'};
 
     return (
@@ -19,6 +20,7 @@ class RatingsBreakdown extends React.Component {
         <h4>Average Rating</h4>
         <h4>{this.props.averageRating}</h4>
         <p>Average Rating in stars</p>
+        {/* <ReactStars name="averageRating" count={this.props.averageRating}/> */}
         <h3>Ratings Breakdown</h3>
         <button name="fiveRatingClicked" value="5" style={barStyle} onClick={this.props.toggleRating}>5 Stars</button>
         <p>{this.props.ratingsCountList['5']}</p>
