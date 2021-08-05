@@ -167,7 +167,9 @@ class ReviewInput extends React.Component {
   }
 
   onStarClickEmptyInitial(nextValue, prevValue, name) {
-    console.log('name: %s, nextValue: %s, prevValue: %s', name, nextValue, prevValue);
+    // console.log('name: %s, nextValue: %s, prevValue: %s', name, nextValue, prevValue);
+
+    // nextValue is the star rating chosen
     this.setState({
       rating_empty_initial: nextValue
     });
@@ -177,19 +179,6 @@ class ReviewInput extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
-          {/* <div>
-            <p>Choose star rating here</p>
-            <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
-            <label>Poor</label>
-            <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
-            <label>Fair</label>
-            <input type="radio" name="starRating" value="3" onClick={this.clickStarRating}/>
-            <label>Average</label>
-            <input type="radio" name="starRating" value="4" onClick={this.clickStarRating}/>
-            <label>Good</label>
-            <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
-            <label>Great</label>
-          </div> */}
           <h5>Choose star rating here</h5>
           <div style={{fontSize: 35}}>
             <StarRating
@@ -271,6 +260,19 @@ export default ReviewInput;
 
 
 
+{/* <div>
+  <p>Choose star rating here</p>
+  <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
+  <label>Poor</label>
+  <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
+  <label>Fair</label>
+  <input type="radio" name="starRating" value="3" onClick={this.clickStarRating}/>
+  <label>Average</label>
+  <input type="radio" name="starRating" value="4" onClick={this.clickStarRating}/>
+  <label>Good</label>
+  <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
+  <label>Great</label>
+</div> */}
 
 
 // SAMPLE TEMPLATE FOR POST REQUEST
