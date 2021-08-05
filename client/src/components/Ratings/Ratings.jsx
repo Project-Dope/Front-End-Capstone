@@ -221,7 +221,9 @@ export default class Ratings extends React.Component {
               list={this.state.ratingsList}
               metaData={this.state.metaData}
               clickSubmitReview={this.clickSubmitReview} />
-            <button onClick={this.cancelAddReview}>Cancel</button>
+            <div>
+              <button className="cancelReview" onClick={this.cancelAddReview}>Cancel</button>
+            </div>
           </ReactModal>
         </div>
       </div>

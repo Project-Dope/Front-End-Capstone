@@ -177,7 +177,7 @@ class ReviewInput extends React.Component {
     // console.log('metaData from ReviewInput: ', this.props.metaData.characteristics);
 
     return (
-      <div>
+      <div className="reviewInput">
         <form onSubmit={this.handleInputSubmit}>
           <h5>Choose star rating here</h5>
           <div style={{fontSize: 35}}>
@@ -205,6 +205,7 @@ class ReviewInput extends React.Component {
             <h2></h2>
             <h5>Review Summary</h5>
             <input
+              className="summaryField"
               name="summaryInput"
               placeholder="Example: Best purchase ever!"
               value={this.state.summaryInput}
@@ -214,16 +215,21 @@ class ReviewInput extends React.Component {
           <div>
             <h2></h2>
             <h5>Review Body</h5>
+            <div>
             <input
+              className="inputField"
               name="bodyInput"
               placeholder="Why did you like the product or not?"
               value={this.state.bodyInput}
               onChange={this.handleInputChange}
             />
+            </div>
           </div>
           <div>
             <p></p>
-            <button onClick={this.clickPhotoUpload}>Upload Photos</button>
+            <div className="uploadPhotos">
+              <button onClick={this.clickPhotoUpload}>Upload Photos</button>
+            </div>
             <ReactModal isOpen={this.state.wasPhotoUploadClicked}>
               <UploadPhotos />
               <button onClick={this.cancelPhotoUpload}>Go Back</button>
@@ -231,12 +237,14 @@ class ReviewInput extends React.Component {
           </div>
           <div>
             <h5>Display Name</h5>
-            <input
-              name="displayInput"
-              placeholder="Example: jackson11!"
-              value={this.state.displayInput}
-              onChange={this.handleInputChange}
-            />
+            <div>
+              <input
+                name="displayInput"
+                placeholder="Example: jackson11!"
+                value={this.state.displayInput}
+                onChange={this.handleInputChange}
+              />
+            </div>
             <p>*** For privacy reasons, do not use your full name or email address. ***</p>
           </div>
           <div>
@@ -249,7 +257,9 @@ class ReviewInput extends React.Component {
             />
             <p> *** For authentication reasons, you will not be emailed. ***</p>
           </div>
-          <button>Submit Review</button>
+          <div className="submitReview">
+            <button>Submit Review</button>
+          </div>
         </form>
       </div>
     );

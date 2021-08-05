@@ -2,6 +2,25 @@
   padding: 30px;
 }
 
+.reviewInput {
+  padding: 20px;
+}
+
+.uploadPhotos {
+  font-size: 16px;
+  padding: 10px;
+  width: 30%;
+}
+
+.summaryField {
+  width: 40%;
+}
+
+.inputField {
+  padding: 30px;
+  width: 80%;
+}
+
 .characteristics {
   padding: 10px;
 }
@@ -32,4 +51,15 @@
   font-size: 20px;
   padding: 10px;
   width: 70%;
+}
+
+.submitReview {
+  font-size: 20px;
+  padding: 10px;
+  width: 60%;
+}
+
+.cancelReview {
+  font-size: 15px;
+  width: 50%;
 }
