@@ -1,5 +1,5 @@
 import React from "react";
-// import Carousel from "./Products-Components/Carousel.jsx";
+import ExpandedView from "./Products-Components/ExpandedView.jsx";
 import Styles from "././Products-Components/Styles.jsx";
 import axios from "axios";
 import { Carousel } from "react-bootstrap";
@@ -11,6 +11,7 @@ export default class Products extends React.Component {
 
     this.state = {
       carouselIndex: 0,
+      expandView: false,
       styles: [],
       currentStyles: {},
       currentSize: null,
@@ -19,6 +20,8 @@ export default class Products extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.changeStyles = this.changeStyles.bind(this);
     this.changeSize = this.changeSize.bind(this);
+    this.expandView = this.expandView.bind(this);
+    // this.myDiv = React.createRef();
   }
 
   componentDidMount() {
@@ -28,6 +31,7 @@ export default class Products extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.initializeStyles();
+      // console.log(this.myDiv);
     }
   }
 
@@ -65,6 +69,12 @@ export default class Products extends React.Component {
     });
   }
 
+  expandView() {
+    this.setState({
+      expandView: !this.state.expandView,
+    });
+  }
+
   // addToCart() {
   //   if(this.state.)
   // }
@@ -86,6 +96,11 @@ export default class Products extends React.Component {
         <div className="row product-details">
           <div className="col-7 product-image-gallery">
             <div className="product-image-selection">
+              <ExpandedView
+                expandView={this.expandView}
+                handleSelect={this.handleSelect}
+                state={this.state}
+              />
               <Carousel
                 fade
                 activeIndex={this.state.carouselIndex}
@@ -99,6 +114,7 @@ export default class Products extends React.Component {
                         className="d-block w-75 mx-auto"
                         src={photo.url}
                         alt="First slide"
+                        onClick={this.expandView}
                       />
                     </Carousel.Item>
                   );
@@ -132,10 +148,11 @@ export default class Products extends React.Component {
                 ${this.props.currentProduct.default_price}
               </div>
             </div>
-            <div className="product-styles">
+            <div className="product-styles" ref={this.myDiv}>
               <Styles
                 styles={this.state.styles}
                 changeStyles={this.changeStyles}
+                // div={this.}
               />
             </div>
             <div className="product-size-quantity">
