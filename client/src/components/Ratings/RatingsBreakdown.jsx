@@ -25,16 +25,25 @@ class RatingsBreakdown extends React.Component {
         {/* <p>Average Rating in stars</p> */}
         {/* <ReactStars name="averageRating" count={this.props.averageRating}/> */}
         <h3>Ratings Breakdown</h3>
-        <button name="fiveRatingClicked" value="5" style={barStyle} onClick={this.props.toggleRating}>5 Stars</button>
-        <p>{this.props.ratingsCountList['5']}</p>
-        <button name="fourRatingClicked" value="4" style={barStyle} onClick={this.props.toggleRating}>4 Stars</button>
-        <p>{this.props.ratingsCountList['4']}</p>
-        <button name="threeRatingClicked" value="3" style={barStyle} onClick={this.props.toggleRating}>3 Stars</button>
-        <p>{this.props.ratingsCountList['3']}</p>
-        <button name="twoRatingClicked" value="2" style={barStyle} onClick={this.props.toggleRating}>2 Stars</button>
-        <p>{this.props.ratingsCountList['2']}</p>
-        <button name="oneRatingClicked" value="1" style={barStyle} onClick={this.props.toggleRating}>1 Star</button>
-        <p>{this.props.ratingsCountList['1']}</p>
+        <button name="fiveRatingClicked" value="5" style={barStyle} onClick={this.props.toggleRating}>5 Stars</button>&nbsp;&nbsp;
+        <span>{this.props.ratingsCountList['5']}</span>
+        <p></p>
+
+        <button name="fourRatingClicked" value="4" style={barStyle} onClick={this.props.toggleRating}>4 Stars</button>&nbsp;&nbsp;
+        <span>{this.props.ratingsCountList['4']}</span>
+        <p></p>
+
+        <button name="threeRatingClicked" value="3" style={barStyle} onClick={this.props.toggleRating}>3 Stars</button>&nbsp;&nbsp;
+        <span>{this.props.ratingsCountList['3']}</span>
+        <p></p>
+
+        <button name="twoRatingClicked" value="2" style={barStyle} onClick={this.props.toggleRating}>2 Stars</button>&nbsp;&nbsp;
+        <span>{this.props.ratingsCountList['2']}</span>
+        <p></p>
+
+        <button name="oneRatingClicked" value="1" style={barStyle} onClick={this.props.toggleRating}>1 Star</button>&nbsp;&nbsp;
+        <span>{this.props.ratingsCountList['1']}</span>
+        <p></p>
 
         <h4>Characteristics Breakdown</h4>
         <div>

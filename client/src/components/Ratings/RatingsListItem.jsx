@@ -39,6 +39,8 @@ class RatingsItemsList extends React.Component {
 
   render() {
 
+    var barStyle = {height: 25, width: '30%'};
+
     return (
       <div>
         {/* <p>{this.props.post.rating}</p> */}
@@ -55,10 +57,10 @@ class RatingsItemsList extends React.Component {
         <p>{this.props.post.body}</p>
         <p>{this.props.post.recommend}</p>
         <p>{this.props.post.reviewer_name}</p>
-        <h4>Response to Review</h4>
+        <h5>[ Response to Review ]</h5>
         {/* <RatingHelpfulNess incrementHelpfulCount={this.incrementHelpfulCount} /> */}
         <h5>Was this review helpful?</h5>
-        <button value="Yes" onClick={this.incrementHelpfulCount}>Yes</button>
+        <button value="Yes" style={barStyle} onClick={this.incrementHelpfulCount}>Yes</button>
         <p>{this.props.post.helpfulness}</p>
         {/* <button value="No" onClick={this.incrementHelpfulCount}>No</button> */}
         <h2></h2>
