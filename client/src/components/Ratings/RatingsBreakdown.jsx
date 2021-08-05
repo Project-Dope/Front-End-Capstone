@@ -13,7 +13,7 @@ class RatingsBreakdown extends React.Component {
   render() {
 
     // used to style element
-    var barStyle = {height: 20, width: '40%', backgroundColor: 'grey'};
+    var barStyle = {height: 20, width: '35%', backgroundColor: 'grey'};
 
     // console.log('metaData in Breakdown: ', this.props.metaData);
 
@@ -22,6 +22,7 @@ class RatingsBreakdown extends React.Component {
         <h3>Ratings Summary</h3>
         <h4>Average Rating</h4>
         <h4>{this.props.averageRating}</h4>
+        <p></p>
         {/* <p>Average Rating in stars</p> */}
         {/* <ReactStars name="averageRating" count={this.props.averageRating}/> */}
         <h3>Ratings Breakdown</h3>

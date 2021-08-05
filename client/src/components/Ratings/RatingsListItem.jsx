@@ -43,7 +43,6 @@ class RatingsItemsList extends React.Component {
 
     return (
       <div>
-        {/* <p>{this.props.post.rating}</p> */}
         <div style={{fontSize: 30}}>
           <StarRating
           class="reviewRatingStar"
@@ -57,13 +56,14 @@ class RatingsItemsList extends React.Component {
         <p>{this.props.post.body}</p>
         <p>{this.props.post.recommend}</p>
         <p>{this.props.post.reviewer_name}</p>
-        <h5>[ Response to Review ]</h5>
-        {/* <RatingHelpfulNess incrementHelpfulCount={this.incrementHelpfulCount} /> */}
+        <p></p>
+        <h6>[ Response to Review ]</h6>
+        <p></p>
         <h5>Was this review helpful?</h5>
-        <button value="Yes" style={barStyle} onClick={this.incrementHelpfulCount}>Yes</button>
-        <p>{this.props.post.helpfulness}</p>
-        {/* <button value="No" onClick={this.incrementHelpfulCount}>No</button> */}
-        <h2></h2>
+        <button value="Yes" style={barStyle} onClick={this.incrementHelpfulCount}>Yes</button>&nbsp;&nbsp;
+        <span>{this.props.post.helpfulness}</span>
+        <p></p>
+        <p></p>
       </div>
     )
 
@@ -72,22 +72,6 @@ class RatingsItemsList extends React.Component {
 }
 
 export default RatingsItemsList;
-
-// var RatingsItemsList = (props) => (
-//   <div>
-//     <h3>RatingsItemsList</h3>
-//     <p>{props.post.starRating}</p>
-//     <p>{props.post.dateOfReview}</p>
-//     <p>{props.post.reviewSummary}</p>
-//     <p>{props.post.reviewBody}</p>
-//     <p>{props.post.recommend}</p>
-//     <p>{props.post.username}</p>
-//     <h4>Response to Review</h4>
-//     <h4>Rating Helpfulness</h4>
-//     <h2>---------------------------</h2>
-//   </div>
-// )
-
 
 
 // if Ubuntu copy/paste doesn't work

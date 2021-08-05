@@ -200,7 +200,7 @@ class ReviewInput extends React.Component {
             <h2></h2>
             <h5>Do you recommend this product?</h5>
             <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
-              <label>Yes</label>
+              <label>Yes</label>&nbsp;&nbsp;
             <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
               <label>No</label>
           </div>
