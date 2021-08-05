@@ -1,6 +1,7 @@
 import React from "react";
 import Characteristics from './post-components/Characteristics.jsx';
 import UploadPhotos from './post-components/UploadPhotos.jsx';
+import StarRating from "react-star-rating-component";
 import ReactModal from 'react-modal';
 ReactModal.setAppElement('#app');
 
@@ -22,7 +23,8 @@ class ReviewInput extends React.Component {
       displayInput: "",
       emailInput: "",
       recommended: null,
-      wasPhotoUploadClicked: false
+      wasPhotoUploadClicked: false,
+      rating_empty_initial: 0
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -32,6 +34,7 @@ class ReviewInput extends React.Component {
     this.clickCharacteristics = this.clickCharacteristics.bind(this);
     this.clickPhotoUpload = this.clickPhotoUpload.bind(this);
     this.cancelPhotoUpload = this.cancelPhotoUpload.bind(this);
+    this.onStarClickEmptyInitial = this.onStarClickEmptyInitial.bind(this);
   }
 
   handleInputChange(event) {
@@ -89,7 +92,8 @@ class ReviewInput extends React.Component {
       product_id: this.props.productId,
       body: this.state.bodyInput,
       photos: [],
-      rating: this.state.starRating,
+      // rating: this.state.starRating,
+      rating: this.state.rating_empty_initial,
       recommend: this.state.recommended,
       name: this.state.displayInput,
       email: this.state.emailInput,
@@ -162,11 +166,18 @@ class ReviewInput extends React.Component {
     })
   }
 
+  onStarClickEmptyInitial(nextValue, prevValue, name) {
+    console.log('name: %s, nextValue: %s, prevValue: %s', name, nextValue, prevValue);
+    this.setState({
+      rating_empty_initial: nextValue
+    });
+  }
+
   render() {
     return (
       <div>
         <form onSubmit={this.handleInputSubmit}>
-          <div>
+          {/* <div>
             <p>Choose star rating here</p>
             <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
             <label>Poor</label>
@@ -178,6 +189,15 @@ class ReviewInput extends React.Component {
             <label>Good</label>
             <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
             <label>Great</label>
+          </div> */}
+          <h5>Choose star rating here</h5>
+          <div style={{fontSize: 35}}>
+            <StarRating
+            name="inputStarRating"
+            starCount={5}
+            value={this.state.rating_empty_initial}
+            onStarClick={this.onStarClickEmptyInitial}
+            />
           </div>
           <div>
             <Characteristics
@@ -185,6 +205,7 @@ class ReviewInput extends React.Component {
             metaData={this.props.metaData.characteristics}/>
           </div>
           <div>
+            <h2></h2>
             <h5>Do you recommend this product?</h5>
             <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
               <label>Yes</label>
@@ -192,6 +213,7 @@ class ReviewInput extends React.Component {
               <label>No</label>
           </div>
           <div>
+            <h2></h2>
             <h5>Review Summary</h5>
             <input
               name="summaryInput"
@@ -201,6 +223,7 @@ class ReviewInput extends React.Component {
             />
           </div>
           <div>
+            <h2></h2>
             <h5>Review Body</h5>
             <input
               name="bodyInput"

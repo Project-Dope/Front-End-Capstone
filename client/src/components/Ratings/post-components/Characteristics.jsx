@@ -5,7 +5,7 @@ var Characteristics = (props) => {
 
   var sizeDiv = <div>
     <p></p>
-    <p>Size</p>
+    <h5>Size</h5>
     <input type="radio" name="sizeRating" value="1" onClick={props.clickCharacteristics} />
     <label>A size too small</label>
     <input type="radio" name="sizeRating" value="2" onClick={props.clickCharacteristics} />
@@ -20,7 +20,7 @@ var Characteristics = (props) => {
 
   var widthDiv = <div>
     <p></p>
-    <p>Width</p>
+    <h5>Width</h5>
     <input type="radio" name="widthRating" value="1" onClick={props.clickCharacteristics} />
     <label>Too narrow</label>
     <input type="radio" name="widthRating" value="2" onClick={props.clickCharacteristics} />
@@ -35,7 +35,7 @@ var Characteristics = (props) => {
 
   var comfortDiv = <div id={props.metaData.Comfort}>
     <p></p>
-    <p>Comfort</p>
+    <h5>Comfort</h5>
     <input type="radio" name="comfortRating" value="1" onClick={props.clickCharacteristics} />
     <label>Uncomfortable</label>
     <input type="radio" name="comfortRating" value="2" onClick={props.clickCharacteristics} />
@@ -50,7 +50,7 @@ var Characteristics = (props) => {
 
   var qualityDiv = <div>
     <p></p>
-    <p>Quality</p>
+    <h5>Quality</h5>
     <input type="radio" name="qualityRating" value="1" onClick={props.clickCharacteristics} />
     <label>Poor</label>
     <input type="radio" name="qualityRating" value="2" onClick={props.clickCharacteristics} />
@@ -65,7 +65,7 @@ var Characteristics = (props) => {
 
   var lengthDiv = <div>
     <p></p>
-    <p>Length</p>
+    <h5>Length</h5>
     <input type="radio" name="lengthRating" value="1" onClick={props.clickCharacteristics} />
     <label>Runs short</label>
     <input type="radio" name="lengthRating" value="2" onClick={props.clickCharacteristics} />
@@ -80,7 +80,7 @@ var Characteristics = (props) => {
 
   var fitDiv = <div>
     <p></p>
-    <p>Fit</p>
+    <h5>Fit</h5>
     <input type="radio" name="fitRating" value="1" onClick={props.clickCharacteristics} />
     <label>Runs tight</label>
     <input type="radio" name="fitRating" value="2" onClick={props.clickCharacteristics} />
