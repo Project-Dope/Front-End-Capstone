@@ -119,7 +119,6 @@ var Characteristics = (props) => {
     }
   }
 
-  // console.log('divArrayForRender: ', divArrayForRender);
   // console.log('metaData from sub-component: ', props.metaData);
   return divArrayForRender;
 }

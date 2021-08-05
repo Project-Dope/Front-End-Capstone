@@ -92,7 +92,6 @@ class ReviewInput extends React.Component {
       product_id: this.props.productId,
       body: this.state.bodyInput,
       photos: [],
-      // rating: this.state.starRating,
       rating: this.state.rating_empty_initial,
       recommend: this.state.recommended,
       name: this.state.displayInput,
@@ -104,7 +103,6 @@ class ReviewInput extends React.Component {
 
     // using conditionals to add to characteristics object based on meta data
     var metaData = this.props.metaData.characteristics;
-    // console.log('metaData from ReviewInput: ', metaData);
 
     if (this.state.sizeRating !== null) {
       newReview.characteristics[metaData.Size.id] = this.state.sizeRating
@@ -138,7 +136,6 @@ class ReviewInput extends React.Component {
         recommended: false,
       });
     }
-    // console.log("recommended: ", this.state.recommended);
   }
 
   clickStarRating(event) {
@@ -177,7 +174,7 @@ class ReviewInput extends React.Component {
 
   render() {
 
-    console.log('metaData from ReviewInput: ', this.props.metaData.characteristics);
+    // console.log('metaData from ReviewInput: ', this.props.metaData.characteristics);
 
     return (
       <div>

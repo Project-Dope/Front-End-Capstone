@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import axios from 'axios';
-import './Ratings.css'
+import './Ratings.css';
 import RatingsList from './RatingsList.jsx';
 import ratingsSeeds from './seeds.js';
 import ReviewInput from './ReviewInput.jsx';
@@ -14,7 +14,6 @@ export default class Ratings extends React.Component {
     super(props);
     this.state = {
       ratingsList: [],
-      filteredList: [],
       metaData: [],
       averageRating: '',
       ratingsCountList: [],
@@ -80,7 +79,7 @@ export default class Ratings extends React.Component {
         })
       })
       .then(() => {
-        console.log('metaData: ', this.state.metaData);
+        // console.log('metaData: ', this.state.metaData);
         console.log('Received response from Axios POST request in client!');
       })
       .catch((err) => {
@@ -177,14 +176,16 @@ export default class Ratings extends React.Component {
 
     return (
 
-      <div>
+      <div className="ratings">
         <h1>Ratings</h1>
         <h4>Sort Options</h4>
+        <div className="sortOptions">
         <select onChange={this.selectSortOption} value={this.state.selectedSort} >
           <option value="Relevant">Relevant</option>
           <option value="Newest">Newest</option>
           <option value="Helpful">Helpful</option>
         </select>
+        </div>
         <div>
           <RatingsBreakdown
             list={this.state.ratingsList}
@@ -207,9 +208,11 @@ export default class Ratings extends React.Component {
 
           />
 
-          {this.state.listViewLength < this.state.ratingsList.length ? (<button onClick={this.showMoreReviews}>Show More Reviews</button>) : null}
+          {this.state.listViewLength < this.state.ratingsList.length ? (<div className="showMoreReviews"><button  onClick={this.showMoreReviews}>Show More Reviews</button></div>) : null}
 
-          <button onClick={this.clickAddReview}>Add a Review</button>
+          <div className="addAReview" >
+            <button onClick={this.clickAddReview}>Add a Review</button>
+          </div>
         </div>
         <div>
           <ReactModal isOpen={this.state.wasReviewClicked}>
