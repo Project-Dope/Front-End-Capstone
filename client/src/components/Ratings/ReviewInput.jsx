@@ -145,11 +145,9 @@ class ReviewInput extends React.Component {
   }
 
   clickCharacteristics(event) {
-    // console.log('clicked characteristic: ', event.target.value);
     this.setState({
       [event.target.name]: parseInt(event.target.value)
     })
-    // console.log('fitRating: ', this.state.fitRating);
   }
 
   clickPhotoUpload() {
