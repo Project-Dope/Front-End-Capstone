@@ -18,6 +18,7 @@ const configuration = (endpoint, method, queryParams, bodyParams) => ({
   },
   data: bodyParams,
   params: queryParams,
+  data: bodyParams
 });
 
 module.exports = {
@@ -138,6 +139,7 @@ module.exports = {
     getQuestions: (req, res) => {
       queryParams = {
         product_id: req.params.id,
+        count: 100
       };
       axios(configuration("qa/questions", "get", queryParams))
         .then((response) => {
@@ -148,7 +150,10 @@ module.exports = {
         });
     },
     getAnswers: (req, res) => {
-      axios(configuration(`qa/questions/${req.params.id}/answers`, "get"))
+      queryParams = {
+        count: 100
+      };
+      axios(configuration(`qa/questions/${req.params.id}/answers`, "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
         })
@@ -174,11 +179,34 @@ module.exports = {
           res.status(404).send(err);
         });
     },
-
-    // postQuestions:
-
-    // postAnswers:
-
-    //
+    postQuestions: (req, res) => {
+      questionObject = req.body;
+      axios(configuration(`qa/questions/`, "post", null, questionObject))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    postAnswers: (req, res) => {
+      answerObject = req.body;
+      axios(configuration(`qa/questions/${req.params.id}/answers/`, "post", null, answerObject))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    reportAnswer: (req, res) => {
+      axios(configuration(`qa/answers/${req.params.id}/report`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
   },
 };

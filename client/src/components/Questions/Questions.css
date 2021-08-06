@@ -1,5 +1,5 @@
 .questions-search-bar {
-  width: 95%;
+  width: 100%;
 }
 
 .questions-question span {
@@ -28,12 +28,6 @@
   font-size: 11px;
 }
 
-.questions-search-button {
-  width: 5%;
-  height: 30px;
-  float: right;
-}
-
 .questions-more-questions {
   width: 40%;
   white-space: pre;
@@ -58,6 +52,12 @@
 
 .questions-photos {
   width: 10%;
+  height: auto;
+  border: black;
+}
+
+.questions-modal-preview {
+  width: 20%;
   height: auto;
   border: black;
 }

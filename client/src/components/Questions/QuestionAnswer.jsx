@@ -8,24 +8,30 @@ class QuestionAnswer extends React.Component {
     super(props);
 
     this.state = {
-      questionId: this.props.question.question_id,
       answers: [],
-      answersToDisplay: 2
+      answersToDisplay: 2,
+      answersLoaded: false
     }
 
     this.addQuestionHelpfulness = this.addQuestionHelpfulness.bind(this);
     this.showMoreAnswers = this.showMoreAnswers.bind(this);
     this.getProductAnswers = this.getProductAnswers.bind(this);
+    this.collapseAnswers = this.collapseAnswers.bind(this);
 
   }
 
   componentDidMount() {
     this.getProductAnswers()
-    console.log('question ids: ', this.props.question.question_id)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.getProductAnswers();
+    }
   }
 
   getProductAnswers() {
-    axios.get(`/api/qa/questions/${this.state.questionId}/answers`)
+    axios.get(`/api/qa/questions/${this.props.question.question_id}/answers`)
     .then(answers => {
       this.setState({
       answers: answers.data.results
@@ -35,10 +41,23 @@ class QuestionAnswer extends React.Component {
     .catch(err => console.log(err))
   }
 
+  // showMoreAnswers() {
+  //   var twoMoreAnswers = this.state.answersToDisplay + 2;
+  //   this.setState({
+  //     answersToDisplay: twoMoreAnswers
+  //   })
+  // }
+
   showMoreAnswers() {
-    var twoMoreAnswers = this.state.answersToDisplay + 2;
     this.setState({
-      answersToDisplay: twoMoreAnswers
+      answersToDisplay: this.state.answers.length,
+      answersLoaded: true
+    })
+  }
+
+  collapseAnswers() {
+    this.setState({
+      answersToDisplay: 2
     })
   }
 
@@ -56,6 +75,7 @@ class QuestionAnswer extends React.Component {
 
     return (
       <div>
+        {/* {console.log("this.props.question: ", this.props.question)} */}
         <div className="questions-question"><b>Q: {this.props.question.question_body}</b>
           <QuestionHelpful
           questionId={this.props.question.question_id}
@@ -78,6 +98,7 @@ class QuestionAnswer extends React.Component {
         </div>
         <div>
           {this.state.answersToDisplay < this.state.answers.length ? (<span className="questions-more-answers" onClick={this.showMoreAnswers} >LOAD MORE ANSWERS</span>) : null}
+          {this.state.answersToDisplay >= this.state.answers.length && this.state.answersLoaded === true ? (<span className="questions-more-answers" onClick={this.collapseAnswers} >COLLAPSE ANSWERS</span>) : null}
         </div>
       </div>
     )

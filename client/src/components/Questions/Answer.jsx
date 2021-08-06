@@ -9,9 +9,6 @@ class Answer extends React.Component {
     super(props);
 
     this.state = {
-      questionId: this.props.questionId,
-      answers: [],
-      photos: this.props.answer.photos
     }
 
     this.addAnswerHelpfulness = this.addAnswerHelpfulness.bind(this);
@@ -19,9 +16,21 @@ class Answer extends React.Component {
 
   }
 
+
+  // omponentDidUpdate(prevProps) {
+  //   if (prevProps !== this.props) {
+  //     this.reload(!this.state.reload);
+  //   }
+  // }
+
+  // reload(input) {
+  //   this.setState({
+  //     reload: input
+  //   })
+  // }
+
   addAnswerHelpfulness() {
     axios.put(`api/qa/answers/${this.props.answer.answer_id}/helpful`)
-    .then(() => console.log(this.state.photos))
     .then(() => this.props.getProductAnswers())
     .catch(err => console.log(err))
   }
@@ -32,16 +41,15 @@ class Answer extends React.Component {
     .catch(err => console.log(err))
   }
 
-
-  render () {
-    return (
-      <span>
-        <span className="questions-answer-body">{this.props.answer.body}</span>
-        {this.state.photos.length ? (<div> {this.state.photos.map((item, index) => <Photos photo={item} key={index}/>)} </div>) : null}
-        <div className="questions-answer-subtext">by {this.props.answer.answerer_name}, {moment(this.props.answer.date).utc().format('MMMM DD, YYYY')}  |  <AnswerHelpful reportAnswer={this.reportAnswer} openModal={this.props.openModal} answerId={this.props.answer.answer_id} addAnswerHelpfulness={this.addAnswerHelpfulness} answerHelpfulness={this.props.answer.helpfulness}/> </div>
-    </span>
-    )
-  }
+render () {
+  return (
+    <span>
+      <span className="questions-answer-body">{this.props.answer.body}</span>
+      {this.props.answer.photos.length ? (<div> {this.props.answer.photos.map((item, index) => <Photos photo={item} key={index}/>)} </div>) : null}
+      <div className="questions-answer-subtext">by {this.props.answer.answerer_name === "Seller" ? (<b>Seller</b>) : this.props.answer.answerer_name}, {moment(this.props.answer.date).utc().format('MMMM DD, YYYY')}  |  <AnswerHelpful reportAnswer={this.reportAnswer} openModal={this.props.openModal} answerId={this.props.answer.answer_id} addAnswerHelpfulness={this.addAnswerHelpfulness} answerHelpfulness={this.props.answer.helpfulness}/> </div>
+  </span>
+  )
+}
 }
 
 

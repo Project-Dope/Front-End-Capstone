@@ -59,30 +59,19 @@ export default class Ratings extends React.Component {
         })
         console.log('Recevied response from Axios GET request in Ratings.jsx!');
       })
-      .then(() => {
-        this.getAverageRating(this.state.ratingsList);
-        this.getEachRatingCount(this.state.ratingsList);
-        // console.log('ratingsList: ', this.state.ratingsList);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+      // console.log('response data: ', response.data);
+      // console.log('Recevied response from Axios GET request in Ratings.jsx!');
+    })
+    .then(() => {
+      this.getAverageRating(this.state.ratingsList);
+      this.getEachRatingCount(this.state.ratingsList);
 
-  getMetaData() {
-    axios.get(`/api/reviews/meta/${this.props.productId}`)
-      .then((response) => {
-        this.setState({
-          metaData: response.data
-        })
-      })
-      .then(() => {
-        // console.log('metaData: ', this.state.metaData);
-        console.log('Received response from Axios POST request in client!');
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      // console.log('ratingsList: ', this.state.ratingsList);
+      // console.log('averageRating: ', this.state.averageRating);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   clickAddReview() {

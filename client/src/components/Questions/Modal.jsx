@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './Questions.css';
 import axios from 'axios';
+import Photos from './Photos.jsx';
 
 export default class ModalForm extends React.Component {
   constructor(props) {
@@ -19,13 +20,14 @@ export default class ModalForm extends React.Component {
     }
 
     this.onChange = this.onChange.bind(this);
-    this.addQuestion = this.addQuestion.bind(this);
-    this.addAnswer = this.addAnswer.bind(this);
+    this.postQuestion = this.postQuestion.bind(this);
+    this.postAnswer = this.postAnswer.bind(this);
     this.addPhotos = this.addPhotos.bind(this);
+    this.resetAndCloseModal = this.resetAndCloseModal.bind(this);
 
   }
 
-  addQuestion(event) {
+  postQuestion(event) {
     var questionDetails = {
       body: this.state.question,
       name: this.state.name,
@@ -33,19 +35,19 @@ export default class ModalForm extends React.Component {
       product_id: this.props.productId
     }
     axios.post('api/qa/questions', questionDetails)
-    .then(() => console.log('Question submitted successfully'))
+    .then(() => this.resetAndCloseModal())
     .catch(err => console.log(err))
   }
 
-  addAnswer(event) {
+  postAnswer(event) {
     var answerDetails = {
-      body: this.state.question,
+      body: this.state.answer,
       name: this.state.name,
       email: this.state.email,
       photos: this.state.photos
     }
-    axios.post(`qa/questions/${this.props.questionId}/answers`, answerDetails)
-    .then(() => console.log('Question submitted successfully'))
+    axios.post(`api/qa/questions/${this.props.questionId}/answers`, answerDetails)
+    .then(() => this.resetAndCloseModal())
     .catch(err => console.log(err))
   }
 
@@ -53,14 +55,31 @@ export default class ModalForm extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(this.state.photos)
   }
 
   addPhotos(event) {
     this.setState({
-      photos: [...this.state.photos, event.target.value]
-    }, () => (console.log(this.state.photos)))
+      photo: URL.createObjectURL(event.target.files[0])
+    }, () => (console.log(this.state.photo)))
   }
+
+  resetAndCloseModal() {
+    this.setState({
+      name: '',
+      email: '',
+      question: '',
+      answer: '',
+      photos: [],
+      photo: ''
+    })
+    this.props.closeModal();
+  }
+
+  // addPhotos(event) {
+  //   this.setState({
+  //     photos: [...this.state.photos, event.target.value]
+  //   }, () => (console.log(this.state.photos)))
+  // }
 
   // getValidationState() {
   //   const length = this.state.[event.target.name].length;
@@ -76,7 +95,7 @@ export default class ModalForm extends React.Component {
       return (
         <Modal
           show={this.props.show}
-          onHide={this.props.closeModal}
+          onHide={this.resetAndCloseModal}
         >
         <Modal.Header closeButton closeLabel='' >
           <Modal.Title className='question-modal-title'>Ask Your Question</Modal.Title>
@@ -119,7 +138,7 @@ export default class ModalForm extends React.Component {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={() => this.addQuestion()}>
+          <Button variant="primary" type="submit" onClick={() => this.postQuestion()}>
             Submit
           </Button>
         </Modal.Footer>
@@ -131,7 +150,7 @@ export default class ModalForm extends React.Component {
       return (
         <Modal
           show={this.props.show}
-          onHide={this.props.closeModal}
+          onHide={this.resetAndCloseModal}
         >
         <Modal.Header closeButton closeLabel='' >
           <Modal.Title className='question-modal-title'>Submit Your Answer</Modal.Title>
@@ -176,12 +195,16 @@ export default class ModalForm extends React.Component {
             <Form.Control
                 type="file"
                 name="photos"
-                value={event.target.value}
-                onChange={this.addPhotos}/>
+                // value={this.state.photos}
+                onChange={this.addPhotos}
+                />
+            <div>
+              <Photos type='modal' photo={this.state.photo}/>
+            </div>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" type="submit" onClick={() => this.addAnswer()}>
+          <Button variant="primary" type="submit" onClick={() => this.postAnswer()}>
             Submit
           </Button>
         </Modal.Footer>
@@ -191,31 +214,3 @@ export default class ModalForm extends React.Component {
   }
 
 }
-
-<form>
-  <label></label>
-  <input type="radio" ></input>
-</form>
-
-// export default class Modal extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       showModal: false
-//     }
-
-//   }
-
-//   render() {
-//     if (!this.props.show) {
-//       return null;
-//     }
-
-//     return (
-//       <div>
-//         <div>hi</div>
-//         <button onClick={() => this.props.closeModal()}>Close</button>
-//       </div>
-//     )
-//   }

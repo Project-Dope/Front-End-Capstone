@@ -23,6 +23,7 @@ export default class Questions extends React.Component {
     this.setModalType = this.setModalType.bind(this);
     this.getProductQuestions = this.getProductQuestions.bind(this);
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +33,7 @@ export default class Questions extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.getProductQuestions();
+      console.log("product id: ", this.props.productId);
     }
   }
 
@@ -57,7 +59,7 @@ export default class Questions extends React.Component {
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
-    });
+    })
   }
 
   openModal(input) {
@@ -98,12 +100,25 @@ export default class Questions extends React.Component {
             onChange={this.onChange}
             name="searchValue"
             type="text"
-            placeholder="Have a question? Search for answers..."
-          ></input>
-          {/* <button className="questions-search-button"></button> */}
+            placeholder="Have a question? Search for answers...">
+          </input>
         </form>
         <div className="questions-component">
-          {this.state.questions
+          {this.state.searchValue.length >= 3 ? (this.state.questions.filter(value => {
+            if (value.question_body.toLowerCase().includes(this.state.searchValue.toLowerCase())) {
+              return value;
+            }
+          }).map((item, index) => (
+              <QuestionAnswer
+                question={item}
+                getProductQuestions={this.getProductQuestions}
+                key={index}
+                show={this.state.show}
+                openModal={this.openModal}
+                closeModal={this.closeModal}
+                setModalType={this.setModalType}
+              />
+            ))): this.state.questions
             .slice(0, this.state.questionsToDisplay)
             .map((item, index) => (
               <QuestionAnswer
@@ -146,5 +161,5 @@ export default class Questions extends React.Component {
         </div>
       </div>
     );
-  }
-}
+    }
+    }
