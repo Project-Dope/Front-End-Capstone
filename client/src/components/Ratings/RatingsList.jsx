@@ -8,7 +8,11 @@ var RatingsList = (props) => {
     return (
       <div>
         {props.list.slice(0, props.listLength).map((post, index) =>
-          <RatingsItemsList post={post} key={index} />
+          <RatingsItemsList
+          post={post}
+          key={index}
+          getReviewsList={props.getReviewsList}
+          />
         )}
       </div>
     )
@@ -34,7 +38,11 @@ var RatingsList = (props) => {
         }
 
       }).map((post, index) =>
-        <RatingsItemsList post={post} key={index} />
+        <RatingsItemsList
+        post={post}
+        key={index}
+        getReviewsList={props.getReviewsList}
+        />
       )}
     </div>
   )

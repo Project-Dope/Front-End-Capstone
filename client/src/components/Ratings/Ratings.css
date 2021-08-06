@@ -2,8 +2,21 @@
   padding: 30px;
 }
 
+.reviewHelpful {
+  font-size: 14px;
+  width: 25%;
+}
+
 .reviewInput {
   padding: 20px;
+}
+
+.reviewModal {
+  width: 85%;
+}
+
+.ratingsList {
+  padding-top: 30px;
 }
 
 .uploadPhotos {
@@ -32,11 +45,11 @@
 .sortOptions {
   font-size: 16px;
   padding: 10px;
-  width: 35%;
+  width: 20%;
 }
 
 .barRatingBreakdown {
-  height: 20;
+  font-size: 12px;
   width: 35%;
   background-color: grey;
 }
@@ -61,5 +74,5 @@
 
 .cancelReview {
   font-size: 15px;
-  width: 50%;
+  width: 40%;
 }

@@ -122,8 +122,7 @@ module.exports = {
       // console.log('queryParams: ', queryParams);
       axios(configuration(`reviews/${queryParams.review_id}/helpful`, "put", updateObject))
         .then(() => {
-          // no need to send a response back during PUT request
-          res.status(200);
+          res.status(200).send();
           console.log('Received response from axios PUT request in controllers!');
         })
         .catch((err) => {

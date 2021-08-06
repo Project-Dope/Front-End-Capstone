@@ -17,24 +17,24 @@ class RatingsItemsList extends React.Component {
   }
 
   incrementHelpfulCount(event) {
-    console.log(event.target.value);
-    console.log('selectedItem: ', this.props.post);
-
+    // console.log(event.target.value);
+    // console.log('selectedItem: ', this.props.post);
     if (event.target.value === 'Yes') {
-      // create Axios PATCH request for helpfulness
+      // create Axios PUT request for helpfulness
       this.props.post.helpfulness++;
 
       axios.put(`api/reviews/${this.props.post.review_id}/helpful`, this.props.post)
-      .then((response) => {
-        console.log('Axios PUT response: ', response.data)
+      .then(() => {
+        // console.log('Axios PUT response: ', response.data);
+        this.props.getReviewsList();
+        console.log('Received response from PUT request in client!');
       })
       .catch((err) => {
         console.log(err);
       })
 
-    } else {
-      // create Axios PATCH request for helpfulnessNo
     }
+
   }
 
   render() {
@@ -60,7 +60,7 @@ class RatingsItemsList extends React.Component {
         <h6>[ Response to Review ]</h6>
         <p></p>
         <h5>Was this review helpful?</h5>
-        <button value="Yes" style={barStyle} onClick={this.incrementHelpfulCount}>Yes</button>&nbsp;&nbsp;
+        <button className="reviewHelpful" value="Yes" onClick={this.incrementHelpfulCount}>Yes</button>&nbsp;&nbsp;
         <span>{this.props.post.helpfulness}</span>
         <p></p>
         <p></p>

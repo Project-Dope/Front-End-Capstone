@@ -177,8 +177,9 @@ export default class Ratings extends React.Component {
     return (
 
       <div className="ratings">
-        <h1>Ratings</h1>
-        <h4>Sort Options</h4>
+        <h2>Ratings and Reviews</h2>
+        <p></p>
+        <h5>Sort By</h5>
         <div className="sortOptions">
         <select onChange={this.selectSortOption} value={this.state.selectedSort} >
           <option value="Relevant">Relevant</option>
@@ -194,9 +195,10 @@ export default class Ratings extends React.Component {
             averageRating={this.state.averageRating}
             ratingsCountList={this.state.ratingsCountList}
             />
-          <h3>Reviews</h3>
+
         </div>
-        <div>
+        <div className="ratingsList">
+          <h3>Reviews</h3>
           <RatingsList
             list={this.state.ratingsList}
             listLength={this.state.listViewLength}
@@ -205,7 +207,7 @@ export default class Ratings extends React.Component {
             threeRatingClicked={this.state.threeRatingClicked}
             fourRatingClicked={this.state.fourRatingClicked}
             fiveRatingClicked={this.state.fiveRatingClicked}
-
+            getReviewsList={this.getReviewsList}
           />
 
           {this.state.listViewLength < this.state.ratingsList.length ? (<div className="showMoreReviews"><button  onClick={this.showMoreReviews}>Show More Reviews</button></div>) : null}
@@ -215,7 +217,8 @@ export default class Ratings extends React.Component {
           </div>
         </div>
         <div>
-          <ReactModal isOpen={this.state.wasReviewClicked}>
+          <ReactModal
+          isOpen={this.state.wasReviewClicked}>
             <ReviewInput
               productId={this.props.productId}
               list={this.state.ratingsList}
