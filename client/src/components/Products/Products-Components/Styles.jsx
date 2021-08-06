@@ -17,21 +17,13 @@ const Styles = (props) => {
         return (
           <div
             className="product-styles-row"
-            id="product-styles-row"
             style={{ height: `${100 / stylesGroup.length}%` }}
             key={index1}
           >
             {styleList.map((style, index2) => {
               var index = index1 * 4 + index2;
               return (
-                <div
-                  className="product-style-thumbnail"
-                  key={index}
-                  // style={{
-                  //   height: "100%",
-                  //   width: `${177.6 / stylesGroup.length}px`,
-                  // }}
-                >
+                <div className="product-style-thumbnail" key={index}>
                   <img
                     src={style.photos[0] ? style.photos[0].thumbnail_url : null}
                     data-index={index}
