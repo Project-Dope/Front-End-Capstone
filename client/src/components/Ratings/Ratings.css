@@ -2,9 +2,13 @@
   padding: 40px;
 }
 
-.reviewHelpful {
+.reviewText {
   font-size: 14px;
-  width: 25%;
+}
+
+.reviewHelpful {
+  font-size: 12px;
+  width: 15%;
 }
 
 .reviewInput {
@@ -13,6 +17,11 @@
 
 .reviewModal {
   width: 85%;
+}
+
+.reviewSummary {
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .ratingsList {

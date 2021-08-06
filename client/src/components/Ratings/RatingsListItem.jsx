@@ -5,6 +5,7 @@ import moment from 'moment';
 // first review when filtering becomes 5 stars by default
 import ReactStars from 'react-rating-stars-component';
 import StarRating from "react-star-rating-component";
+import Checkmark from 'react-checkmark';
 
 class RatingsItemsList extends React.Component {
 
@@ -48,11 +49,26 @@ class RatingsItemsList extends React.Component {
           editing={true}
           />
         </div>
-        <p>{moment(this.props.post.date).utc().format('MMMM DD, YYYY')}</p>
-        <p>{this.props.post.summary}</p>
+        <div className="reviewText">
+          <p>{moment(this.props.post.date).utc().format('MMMM DD, YYYY')}</p>
+        </div>
+        <div className="reviewSummary">
+          <p>{this.props.post.summary}</p>
+        </div>
         <p>{this.props.post.body}</p>
-        <p>{this.props.post.recommend}</p>
-        <p>{this.props.post.reviewer_name}</p>
+        {/* <p>{this.props.post.recommend}</p> */}
+
+        {this.props.post.recommend === true ? (
+          <div>
+            {/* <Checkmark /> */}
+            <i>I recommend this product!</i>
+          </div>
+        ) : null}
+
+        <p></p>
+        <div className="reviewText">
+          <p>{this.props.post.reviewer_name}</p>
+        </div>
         <p></p>
         {/* <h6>[ Response to Review ]</h6> */}
         <p></p>

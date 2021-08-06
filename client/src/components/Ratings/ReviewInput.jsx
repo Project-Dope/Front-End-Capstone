@@ -200,13 +200,6 @@ class ReviewInput extends React.Component {
               <label>Yes</label>&nbsp;&nbsp;
             <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
               <label>No</label>
-
-            {this.state.recommended === true ? (
-              <div>
-                <p>I recommend this product!</p>
-              </div>
-            ) : null}
-
           </div>
           <div>
             <h2></h2>
