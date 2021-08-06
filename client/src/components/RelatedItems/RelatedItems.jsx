@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
+import RelatedProducts from "./RelatedItems-Components/RelatedProducts.jsx";
 import Table from "./RelatedItems-Components/Table.jsx";
 import { Modal } from "react-bootstrap";
-import { BsStarFill } from "react-icons/bs";
 import "./RelatedItems.css";
 
 export default class RelatedItems extends React.Component {
@@ -17,6 +17,7 @@ export default class RelatedItems extends React.Component {
 
     this.openComparisonModal = this.openComparisonModal.bind(this);
     this.onClickRelatedProduct = this.onClickRelatedProduct.bind(this);
+    this.setCurrentID = this.setCurrentID.bind(this);
   }
 
   componentDidMount() {
@@ -116,45 +117,11 @@ export default class RelatedItems extends React.Component {
           </h5>
         </div>
         <div className="row related-product">
-          <div className="related-carousel">
-            {Object.keys(this.state.relatedItems).map((key, index) => {
-              return (
-                <div className="related-card" key={index}>
-                  <BsStarFill
-                    className="related-star"
-                    style={{
-                      color: "white",
-                      stroke: "black",
-                      strokeWidth: "1",
-                    }}
-                    onMouseOver={({ target }) => (
-                      (target.style.color = "black"),
-                      (target.style.stroke = "white")
-                    )}
-                    onMouseOut={({ target }) => (
-                      (target.style.color = "white"),
-                      (target.style.stroke = "black")
-                    )}
-                    onClick={() => this.setCurrentID(key)}
-                  ></BsStarFill>
-                  <div
-                    className="related-thumbnail"
-                    data-key={key}
-                    onClick={this.onClickRelatedProduct}
-                  >
-                    {/* {console.log(this.state.relatedItems[key])} */}
-                    <img
-                      src={
-                        this.state.relatedItems[key].photos.length
-                          ? this.state.relatedItems[key].photos[0].thumbnail_url
-                          : null
-                      }
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <RelatedProducts
+            state={this.state}
+            setCurrentID={this.setCurrentID}
+            onClickRelatedProduct={this.onClickRelatedProduct}
+          />
         </div>
         <div className="row related-outfit"></div>
       </div>

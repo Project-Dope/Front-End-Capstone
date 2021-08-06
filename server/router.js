@@ -17,5 +17,8 @@ router.route("/reviews/:review_id/helpful").put(controllers.reviews.updateHelpfu
 
 // Question and Answers Routes
 router.route("/qa/questions/:id").get(controllers.qa.getQuestions);
+router.route("/qa/questions/:id/answers").get(controllers.qa.getAnswers);
+router.route("/qa/questions/:id/helpful").put(controllers.qa.updateQuestionHelpfulness);
+router.route("/qa/answers/:id/helpful").put(controllers.qa.updateAnswerHelpfulness);
 
 module.exports = router;

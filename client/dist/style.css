@@ -18,3 +18,36 @@ button {
   width: 100%;
   border: 2px solid gray;
 }
+
+.carousel {
+  height: 100%;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  filter: invert(100%);
+}
+
+.carousel-control-prev > span.sr-only,
+.carousel-control-next > span.sr-only {
+  display: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.carousel-item {
+  height: 100%;
+}

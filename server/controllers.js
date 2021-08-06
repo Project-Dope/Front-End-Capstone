@@ -90,7 +90,6 @@ module.exports = {
     },
 
     addNewReview: (req, res) => {
-
       // make sure req.body is exactly like Postman req
       var addObject = req.body;
 
@@ -103,24 +102,28 @@ module.exports = {
       axios(configuration(`reviews/`, "post", queryParams, addObject))
         .then((response) => {
           res.status(200).send();
-          console.log('Received response from addNewReview!');
+          console.log("Received response from addNewReview!");
         })
         .catch((err) => {
           res.status(404).send();
           console.log(err);
-        })
-
+        });
     },
 
     updateHelpfulCount: (req, res) => {
-
       var updateObject = req.body;
       // console.log('req.body: ', updateObject);
       queryParams = {
-        review_id: req.params.review_id
+        review_id: req.params.review_id,
       };
       // console.log('queryParams: ', queryParams);
-      axios(configuration(`reviews/${queryParams.review_id}/helpful`, "put", updateObject))
+      axios(
+        configuration(
+          `reviews/${queryParams.review_id}/helpful`,
+          "put",
+          updateObject
+        )
+      )
         .then(() => {
           res.status(200).send();
           console.log('Received response from axios PUT request in controllers!');
@@ -128,10 +131,8 @@ module.exports = {
         .catch((err) => {
           res.status(400).send(err);
           console.log(err);
-        })
-
+        });
     },
-
   },
   qa: {
     getQuestions: (req, res) => {
@@ -146,10 +147,38 @@ module.exports = {
           res.status(404).send(err);
         });
     },
-    // getAnswers:
+    getAnswers: (req, res) => {
+      axios(configuration(`qa/questions/${req.params.id}/answers`, "get"))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    updateQuestionHelpfulness: (req, res) => {
+      axios(configuration(`qa/questions/${req.params.id}/helpful`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    updateAnswerHelpfulness: (req, res) => {
+      axios(configuration(`qa/answers/${req.params.id}/helpful`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
 
     // postQuestions:
 
     // postAnswers:
+
+    //
   },
 };

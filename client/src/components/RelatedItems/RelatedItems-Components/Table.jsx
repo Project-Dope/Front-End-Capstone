@@ -24,7 +24,7 @@ const combine = (obj1, obj2) => {
 // Table Component
 const Table = ({ currentProduct, comparedProduct }) => {
   const productObj = combine(currentProduct, comparedProduct);
-  console.log(comparedProduct);
+
   return (
     <table className="related-table">
       <thead>
