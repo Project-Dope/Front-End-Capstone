@@ -1,6 +1,7 @@
 import React from "react";
 import Characteristics from './post-components/Characteristics.jsx';
 import UploadPhotos from './post-components/UploadPhotos.jsx';
+import StarRating from "react-star-rating-component";
 import ReactModal from 'react-modal';
 ReactModal.setAppElement('#app');
 
@@ -22,7 +23,8 @@ class ReviewInput extends React.Component {
       displayInput: "",
       emailInput: "",
       recommended: null,
-      wasPhotoUploadClicked: false
+      wasPhotoUploadClicked: false,
+      rating_empty_initial: 0
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -32,6 +34,7 @@ class ReviewInput extends React.Component {
     this.clickCharacteristics = this.clickCharacteristics.bind(this);
     this.clickPhotoUpload = this.clickPhotoUpload.bind(this);
     this.cancelPhotoUpload = this.cancelPhotoUpload.bind(this);
+    this.onStarClickEmptyInitial = this.onStarClickEmptyInitial.bind(this);
   }
 
   handleInputChange(event) {
@@ -43,12 +46,10 @@ class ReviewInput extends React.Component {
       this.setState({
         summaryLength: this.state.summaryInput.length,
       });
-      // console.log(this.state.summaryLength);
     } else if (event.target.name === "bodyInput") {
       this.setState({
         bodyLength: this.state.bodyInput.length,
       });
-      // console.log(this.state.bodyLength);
     }
 
     if (this.state.bodyInput.length === 50) {
@@ -59,6 +60,7 @@ class ReviewInput extends React.Component {
   handleInputSubmit(event) {
     event.preventDefault();
 
+    // check minimum requirements
     var summaryLength = this.state.summaryLength;
     var bodyLength = this.state.bodyLength;
     var emailLength = this.state.emailInput.length;
@@ -85,45 +87,41 @@ class ReviewInput extends React.Component {
       return;
     }
 
-    var newDate = new Date().toLocaleDateString();
-
+    // input object for POST request
     var newReview = {
-      product_Id: this.props.productId,
+      product_id: this.props.productId,
       body: this.state.bodyInput,
-      // date: newDate,
-      // helpfulness: 0,
       photos: [],
-      rating: this.state.starRating,
+      rating: this.state.rating_empty_initial,
       recommend: this.state.recommended,
-      // response: null,
-      // review_id: null,
       name: this.state.displayInput,
-      // reviewer_name: this.state.displayInput,
       email: this.state.emailInput,
       summary: this.state.summaryInput,
-      // need to have characteristics property
-      characteristics: {
-        Size: {
-          value: this.state.sizeRating
-        },
-        Width: {
-          value: this.state.widthRating
-        },
-        Comfort: {
-          value: this.state.comfortRating
-        },
-        Quality: {
-          value: this.state.qualityRating
-        },
-        Length: {
-          value: this.state.lengthRating
-        },
-        Fit: {
-          value: this.state.fitRating
-        }
-      }
+      characteristics: {}
 
     };
+
+    // using conditionals to add to characteristics object based on meta data
+    var metaData = this.props.metaData.characteristics;
+
+    if (this.state.sizeRating !== null) {
+      newReview.characteristics[metaData.Size.id] = this.state.sizeRating
+    }
+    if (this.state.widthRating !== null) {
+      newReview.characteristics[metaData.Width.id] = this.state.widthRating
+    }
+    if (this.state.comfortRating !== null) {
+      newReview.characteristics[metaData.Comfort.id] = this.state.comfortRating
+    }
+    if (this.state.qualityRating !== null) {
+      newReview.characteristics[metaData.Quality.id] = this.state.qualityRating
+    }
+    if (this.state.lengthRating !== null) {
+      newReview.characteristics[metaData.Length.id] = this.state.lengthRating
+    }
+    if (this.state.fitRating !== null) {
+      newReview.characteristics[metaData.Fit.id] = this.state.fitRating
+    }
 
     this.props.clickSubmitReview(newReview);
   }
@@ -138,7 +136,6 @@ class ReviewInput extends React.Component {
         recommended: false,
       });
     }
-    // console.log("recommended: ", this.state.recommended);
   }
 
   clickStarRating(event) {
@@ -149,11 +146,9 @@ class ReviewInput extends React.Component {
   }
 
   clickCharacteristics(event) {
-    // console.log('clicked characteristic: ', event.target.value);
     this.setState({
       [event.target.name]: parseInt(event.target.value)
     })
-    // console.log('fitRating: ', this.state.fitRating);
   }
 
   clickPhotoUpload() {
@@ -168,36 +163,49 @@ class ReviewInput extends React.Component {
     })
   }
 
+  onStarClickEmptyInitial(nextValue, prevValue, name) {
+    // console.log('name: %s, nextValue: %s, prevValue: %s', name, nextValue, prevValue);
+
+    // nextValue is the star rating chosen
+    this.setState({
+      rating_empty_initial: nextValue
+    });
+  }
+
   render() {
+
+    // console.log('metaData from ReviewInput: ', this.props.metaData.characteristics);
+
     return (
-      <div>
+      <div className="reviewInput">
         <form onSubmit={this.handleInputSubmit}>
-          <div>
-            <p>Choose star rating here</p>
-            <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
-            <label>Poor</label>
-            <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
-            <label>Fair</label>
-            <input type="radio" name="starRating" value="3" onClick={this.clickStarRating}/>
-            <label>Average</label>
-            <input type="radio" name="starRating" value="4" onClick={this.clickStarRating}/>
-            <label>Good</label>
-            <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
-            <label>Great</label>
+          <h5>Choose star rating here</h5>
+          <div style={{fontSize: 35}}>
+            <StarRating
+            name="inputStarRating"
+            starCount={5}
+            value={this.state.rating_empty_initial}
+            onStarClick={this.onStarClickEmptyInitial}
+            />
           </div>
           <div>
-            <Characteristics clickCharacteristics={this.clickCharacteristics}/>
+            <Characteristics
+            clickCharacteristics={this.clickCharacteristics}
+            metaData={this.props.metaData.characteristics}/>
           </div>
           <div>
+            <h2></h2>
             <h5>Do you recommend this product?</h5>
             <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
-              <label>Yes</label>
+              <label>Yes</label>&nbsp;&nbsp;
             <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
               <label>No</label>
           </div>
           <div>
+            <h2></h2>
             <h5>Review Summary</h5>
             <input
+              className="summaryField"
               name="summaryInput"
               placeholder="Example: Best purchase ever!"
               value={this.state.summaryInput}
@@ -205,17 +213,23 @@ class ReviewInput extends React.Component {
             />
           </div>
           <div>
+            <h2></h2>
             <h5>Review Body</h5>
+            <div>
             <input
+              className="inputField"
               name="bodyInput"
               placeholder="Why did you like the product or not?"
               value={this.state.bodyInput}
               onChange={this.handleInputChange}
             />
+            </div>
           </div>
           <div>
             <p></p>
-            <button onClick={this.clickPhotoUpload}>Upload Photos</button>
+            <div className="uploadPhotos">
+              <button onClick={this.clickPhotoUpload}>Upload Photos</button>
+            </div>
             <ReactModal isOpen={this.state.wasPhotoUploadClicked}>
               <UploadPhotos />
               <button onClick={this.cancelPhotoUpload}>Go Back</button>
@@ -223,12 +237,14 @@ class ReviewInput extends React.Component {
           </div>
           <div>
             <h5>Display Name</h5>
-            <input
-              name="displayInput"
-              placeholder="Example: jackson11!"
-              value={this.state.displayInput}
-              onChange={this.handleInputChange}
-            />
+            <div>
+              <input
+                name="displayInput"
+                placeholder="Example: jackson11!"
+                value={this.state.displayInput}
+                onChange={this.handleInputChange}
+              />
+            </div>
             <p>*** For privacy reasons, do not use your full name or email address. ***</p>
           </div>
           <div>
@@ -241,7 +257,9 @@ class ReviewInput extends React.Component {
             />
             <p> *** For authentication reasons, you will not be emailed. ***</p>
           </div>
-          <button>Submit Review</button>
+          <div className="submitReview">
+            <button>Submit Review</button>
+          </div>
         </form>
       </div>
     );
@@ -249,3 +267,39 @@ class ReviewInput extends React.Component {
 }
 
 export default ReviewInput;
+
+
+
+{/* <div>
+  <p>Choose star rating here</p>
+  <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
+  <label>Poor</label>
+  <input type="radio" name="starRating" value="2" onClick={this.clickStarRating}/>
+  <label>Fair</label>
+  <input type="radio" name="starRating" value="3" onClick={this.clickStarRating}/>
+  <label>Average</label>
+  <input type="radio" name="starRating" value="4" onClick={this.clickStarRating}/>
+  <label>Good</label>
+  <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
+  <label>Great</label>
+</div> */}
+
+
+// SAMPLE TEMPLATE FOR POST REQUEST
+
+// {
+//   "product_id": 16056,
+//   "body": "Recently received my jeans in the mail. It's a great fit and looks great! Definitely would like to shop more from here and check out the rest of the catalog!",
+//   "photos": [],
+//   "rating": 5,
+//   "recommend": true,
+//   "name": "jane1234",
+//   "email": "jane@aol.com",
+//   "summary": "Great product!",
+//   "characteristics": {
+//     "53841": 5,
+//     "53842": 5,
+//     "53843": 5,
+//     "53844": 5
+//   }
+// }

@@ -1,12 +1,22 @@
 const axios = require("axios");
 const config = require("./config/config.js");
 
-const configuration = (endpoint, method, queryParams) => ({
+// const configuration = (endpoint, method, queryParams) => ({
+//   method: method,
+//   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
+//   headers: {
+//     Authorization: `${config.TOKEN}`,
+//   },
+//   params: queryParams,
+// });
+
+const configuration = (endpoint, method, queryParams, bodyParams) => ({
   method: method,
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/${config.CAMPUS}/${endpoint}`,
   headers: {
     Authorization: `${config.TOKEN}`,
   },
+  data: bodyParams,
   params: queryParams,
 });
 
@@ -69,6 +79,7 @@ module.exports = {
       queryParams = {
         product_id: req.params.id,
       };
+      // console.log('req.params: ', req.params);
       axios(configuration(`reviews/meta`, "get", queryParams))
         .then((response) => {
           res.status(200).send(response.data);
@@ -79,10 +90,16 @@ module.exports = {
     },
 
     addNewReview: (req, res) => {
+      // make sure req.body is exactly like Postman req
       var addObject = req.body;
-      console.log("addObject: ", addObject);
 
-      axios(configuration(`/reviews`, "post", addObject))
+      queryParams = {
+        product_id: addObject.product_id
+      };
+
+      console.log('addObject: ', addObject);
+
+      axios(configuration(`reviews/`, "post", queryParams, addObject))
         .then((response) => {
           res.status(200).send();
           console.log("Received response from addNewReview!");
@@ -108,11 +125,8 @@ module.exports = {
         )
       )
         .then(() => {
-          // no need to send a response back during PUT request
-          res.status(200);
-          console.log(
-            "Received response from axios PUT request in controllers!"
-          );
+          res.status(200).send();
+          console.log('Received response from axios PUT request in controllers!');
         })
         .catch((err) => {
           res.status(400).send(err);

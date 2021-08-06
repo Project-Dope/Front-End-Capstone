@@ -26,9 +26,12 @@
     "mongoose": "^5.13.3",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
+    "react-checkmark": "^1.4.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
+    "react-rating-stars-component": "^2.2.0",
+    "react-star-rating-component": "^1.4.1"
     "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
