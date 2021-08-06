@@ -11,6 +11,12 @@
   width: 15%;
 }
 
+.reviewBottom {
+  padding-bottom: 30px;
+  border-bottom-style: solid;
+  border-width: thin;
+}
+
 .reviewInput {
   padding: 20px;
 }

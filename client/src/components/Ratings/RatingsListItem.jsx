@@ -73,8 +73,10 @@ class RatingsItemsList extends React.Component {
         {/* <h6>[ Response to Review ]</h6> */}
         <p></p>
         <h5>Was this review helpful?</h5>
+        <div className="reviewBottom">
         <button className="reviewHelpful" value="Yes" onClick={this.incrementHelpfulCount}>Yes</button>&nbsp;&nbsp;
         <span>{this.props.post.helpfulness}</span>
+        </div>
         <p></p>
         <p></p>
       </div>
