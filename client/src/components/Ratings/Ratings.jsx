@@ -63,8 +63,7 @@ export default class Ratings extends React.Component {
       .then(() => {
         this.getAverageRating(this.state.ratingsList);
         this.getEachRatingCount(this.state.ratingsList);
-
-        console.log('ratingsList: ', this.state.ratingsList);
+        // console.log('ratingsList: ', this.state.ratingsList);
       })
       .catch((err) => {
         console.log(err);
