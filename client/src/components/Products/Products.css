@@ -9,45 +9,50 @@
 
 .product-image-gallery {
   height: 100%;
-  border: 4px dotted grey;
+  background-color: lightgray;
 }
 
-/* Left Column */
+/* Default View */
 .product-image-selection {
   height: 80%;
-  display: flex;
-  justify-content: center;
+}
+
+.product-defaultView-box {
+  height: 100%;
+  width: 100%;
   margin: auto;
-  border: 2px dotted lightgray;
+  padding: 2% 15%;
+  background-position: center center;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-  filter: invert(100%);
+.product-defaultView-image {
+  height: 100%;
+  display: block;
+  margin: auto;
 }
 
-.carousel-control-prev > span.sr-only,
-.carousel-control-next > span.sr-only {
-  display: none;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  height: 40px;
-  width: 40px;
-}
-
-.carousel-item {
+/* Expanded View */
+.product-image-expand {
+  position: absolute;
   height: 100%;
 }
 
-/* .carousel-item > img {
+.product-image-expand-icon {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-} */
+  top: 8px;
+  right: 16px;
+  z-index: 10;
+}
 
+.product-image-expand-thumbnail-row {
+  display: flex;
+  width: 70%;
+  margin: 10% auto;
+}
+
+/* Default View Thumbnail */
 .product-mini-image {
   display: flex;
   height: 20%;
@@ -67,13 +72,16 @@
   width: 100%;
 }
 
-/* Right Column */
-.product-selection {
-  height: 100%;
-  border: 4px dotted gray;
+.product-image-carousel-icon {
+  height: 20px;
+  width: 20px;
 }
 
 /* Selections */
+.product-selection {
+  height: 100%;
+}
+
 .product-information {
   height: 50%;
   border: 2px dotted lightgray;
@@ -83,7 +91,8 @@
   height: 30%;
   border: 2px dotted lightgray;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .product-size-quantity {
@@ -102,33 +111,38 @@
 
 /* Information */
 .product-review {
-  height: 15%;
-  border: 2px dotted lightgray;
 }
 
 .product-category {
-  height: 15%;
-  border: 2px dotted lightgray;
 }
 
 .product-title {
-  height: 30%;
-  font-size: 2.5em;
-  border: 2px dotted lightgray;
+  font-size: 2em;
 }
 
 .product-price {
-  border: 2px dotted lightgray;
 }
 
 /* Styles Thumbnail */
+.product-styles-row {
+  display: flex;
+  width: 100%;
+  vertical-align: middle;
+}
+
 .product-style-thumbnail {
-  width: 50px;
-  height: 50px;
+  height: 55px;
+  width: 55px;
+  background-color: grey;
   position: relative;
+  margin: auto 4%;
   overflow: hidden;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.product-style-thumbnail:hover {
+  border: 2px solid black;
 }
 
 .product-style-thumbnail > img {

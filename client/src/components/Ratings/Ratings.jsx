@@ -1,26 +1,25 @@
-import React from 'react';
-import ReactModal from 'react-modal';
-import axios from 'axios';
-import './Ratings.css'
-import RatingsList from './RatingsList.jsx';
-import ratingsSeeds from './seeds.js';
-import ReviewInput from './ReviewInput.jsx';
-import RatingsBreakdown from './RatingsBreakdown.jsx';
-ReactModal.setAppElement('#app');
+import React from "react";
+import ReactModal from "react-modal";
+import axios from "axios";
+import "./Ratings.css";
+import RatingsList from "./RatingsList.jsx";
+import ratingsSeeds from "./seeds.js";
+import ReviewInput from "./ReviewInput.jsx";
+import RatingsBreakdown from "./RatingsBreakdown.jsx";
+ReactModal.setAppElement("#app");
 
 export default class Ratings extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       ratingsList: [],
       filteredList: [],
-      averageRating: '',
+      averageRating: "",
       ratingsCountList: [],
       wasReviewClicked: false,
-      selectedSort: '',
-      listViewLength: 2
-    }
+      selectedSort: "",
+      listViewLength: 2,
+    };
 
     this.getReviewsList = this.getReviewsList.bind(this);
     this.clickAddReview = this.clickAddReview.bind(this);
@@ -45,40 +44,40 @@ export default class Ratings extends React.Component {
   }
 
   getReviewsList() {
-    axios.get(`/api/reviews/${this.props.productId}`)
-    .then((response) => {
-
-      this.setState({
-        ratingsList: response.data.results
+    axios
+      .get(`/api/reviews/${this.props.productId}`)
+      .then((response) => {
+        this.setState({
+          ratingsList: response.data.results,
+        });
+        // console.log('response data: ', response.data);
+        console.log("Recevied response from Axios GET request in Ratings.jsx!");
       })
-      // console.log('response data: ', response.data);
-      console.log('Recevied response from Axios GET request in Ratings.jsx!');
-    })
-    .then(() => {
-      this.getAverageRating(this.state.ratingsList);
-      this.getEachRatingCount(this.state.ratingsList);
+      .then(() => {
+        this.getAverageRating(this.state.ratingsList);
+        this.getEachRatingCount(this.state.ratingsList);
 
-      console.log('ratingsList: ', this.state.ratingsList);
-      // console.log('averageRating: ', this.state.averageRating);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+        console.log("ratingsList: ", this.state.ratingsList);
+        // console.log('averageRating: ', this.state.averageRating);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   clickAddReview() {
     this.setState({
-      wasReviewClicked: true
-    })
+      wasReviewClicked: true,
+    });
   }
 
   clickSubmitReview(addObject) {
-    console.log('addObject: ', addObject);
+    console.log("addObject: ", addObject);
 
     this.setState({
       ratingsList: [...this.state.ratingsList, addObject],
-      wasReviewClicked: false
-    })
+      wasReviewClicked: false,
+    });
     // // invoke getReviewsList when POST req is functional
     // this.getReviewsList();
     // console.log('new ratingsList: ', this.state.ratingsList);
@@ -86,33 +85,33 @@ export default class Ratings extends React.Component {
 
   cancelAddReview() {
     this.setState({
-      wasReviewClicked: false
-    })
+      wasReviewClicked: false,
+    });
   }
 
   selectSortOption(event) {
     this.setState({
-      selectedSort: event.target.value
-    })
+      selectedSort: event.target.value,
+    });
   }
 
   showMoreReviews(event) {
     this.setState({
-      listViewLength: this.state.listViewLength+=2
-    })
+      listViewLength: (this.state.listViewLength += 2),
+    });
   }
 
   getAverageRating(ratingsArray) {
     // console.log('ratingsArray: ', ratingsArray);
     var totalRating = 0;
     ratingsArray.forEach((number) => {
-      totalRating += number.rating
-    })
+      totalRating += number.rating;
+    });
     var averageRating = totalRating / ratingsArray.length;
 
     this.setState({
-      averageRating: averageRating.toFixed(1)
-    })
+      averageRating: averageRating.toFixed(1),
+    });
   }
 
   getEachRatingCount(ratingsArray) {
@@ -120,96 +119,91 @@ export default class Ratings extends React.Component {
 
     ratingsArray.forEach((number) => {
       if (ratingObject[number.rating] === undefined) {
-        ratingObject[number.rating] = 1
+        ratingObject[number.rating] = 1;
       } else {
         ratingObject[number.rating]++;
       }
-    })
+    });
 
     this.setState({
-      ratingsCountList: ratingObject
-    })
+      ratingsCountList: ratingObject,
+    });
     // console.log('ratingsCountList: ', this.state.ratingsCountList);
   }
 
   filterByRating(inputArrayFalse) {
-    console.log('inputArrayFalse: ', inputArrayFalse);
+    console.log("inputArrayFalse: ", inputArrayFalse);
 
     this.setState({
-      filteredList: inputArrayFalse
-    })
+      filteredList: inputArrayFalse,
+    });
 
-    console.log('without selected filter: ', this.state.filteredList);
+    console.log("without selected filter: ", this.state.filteredList);
   }
 
   deselectFilter(inputArrayTrue) {
-    console.log('inputArrayTrue: ', inputArrayTrue);
+    console.log("inputArrayTrue: ", inputArrayTrue);
 
     this.setState({
-      filteredList: inputArrayTrue
-    })
+      filteredList: inputArrayTrue,
+    });
     // cannot remove deselected filter
-    console.log('after deselected filter: ', this.state.filteredList);
+    console.log("after deselected filter: ", this.state.filteredList);
   }
 
-
   render() {
-
     // console.log('selectedSort: ', this.state.selectedSort);
     // console.log('productId: ', this.props.productId);
 
-      return (
-
+    return (
+      <div>
+        <h1>Ratings</h1>
+        <h4>Sort Options</h4>
+        <select
+          onChange={this.selectSortOption}
+          value={this.state.selectedSort}
+        >
+          <option value="Relevant">Relevant</option>
+          <option value="Newest">Newest</option>
+          <option value="Helpful">Helpful</option>
+        </select>
         <div>
-          <h1>Ratings</h1>
-          <h4>Sort Options</h4>
-          <select onChange={this.selectSortOption} value={this.state.selectedSort} >
-            <option value="Relevant">Relevant</option>
-            <option value="Newest">Newest</option>
-            <option value="Helpful">Helpful</option>
-          </select>
-          <div>
-            <RatingsBreakdown
+          <RatingsBreakdown
             list={this.state.ratingsList}
             filteredList={this.state.filteredList}
             deselectFilter={this.deselectFilter}
             averageRating={this.state.averageRating}
             ratingsCountList={this.state.ratingsCountList}
-            filterByRating={this.filterByRating} />
-            <h3>Reviews</h3>
-          </div>
-          <div>
-            <RatingsList
+            filterByRating={this.filterByRating}
+          />
+          <h3>Reviews</h3>
+        </div>
+        <div>
+          <RatingsList
             list={this.state.ratingsList}
-            listLength={this.state.listViewLength} />
+            listLength={this.state.listViewLength}
+          />
 
-            {this.state.listViewLength < this.state.ratingsList.length ? (<button onClick={this.showMoreReviews}>Show More Reviews</button>) : null}
+          {this.state.listViewLength < this.state.ratingsList.length ? (
+            <button onClick={this.showMoreReviews}>Show More Reviews</button>
+          ) : null}
 
-            <button onClick={this.clickAddReview}>Add a Review</button>
-          </div>
-          <div>
+          <button onClick={this.clickAddReview}>Add a Review</button>
+        </div>
+        <div>
           <ReactModal isOpen={this.state.wasReviewClicked}>
             <ReviewInput
               productId={this.props.productId}
               list={this.state.ratingsList}
-              clickSubmitReview={this.clickSubmitReview} />
+              clickSubmitReview={this.clickSubmitReview}
+            />
             <button onClick={this.cancelAddReview}>Cancel</button>
           </ReactModal>
-          </div>
         </div>
-
-      )
-
-
+      </div>
+    );
   }
-
 }
-
-
-
-
-
-
 
 // render() {
 

@@ -1,39 +1,42 @@
 import React from "react";
 import axios from "axios";
 
-export default class Styles extends React.Component {
-  constructor(props) {
-    super(props);
+const groupBy = (list) => {
+  return list.reduce(
+    (r, e, i) => (i % 4 ? r[r.length - 1].push(e) : r.push([e])) && r,
+    []
+  );
+};
 
-    this.state = {
-      styles: [],
-    };
-  }
+const Styles = (props) => {
+  const stylesGroup = groupBy(props.styles);
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.styles !== state.styles) {
-      return {
-        styles: props.styles,
-      };
-    }
-    return null;
-  }
+  return (
+    <>
+      {stylesGroup.map((styleList, index1) => {
+        return (
+          <div
+            className="product-styles-row"
+            style={{ height: `${100 / stylesGroup.length}%` }}
+            key={index1}
+          >
+            {styleList.map((style, index2) => {
+              var index = index1 * 4 + index2;
+              return (
+                <div className="product-style-thumbnail" key={index}>
+                  <img
+                    src={style.photos[0] ? style.photos[0].thumbnail_url : null}
+                    data-index={index}
+                    onClick={props.changeStyles}
+                  ></img>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </>
+  );
+};
 
-  render() {
-    return (
-      <>
-        {this.state.styles.map((style, index) => {
-          return (
-            <div className="product-style-thumbnail" key={index}>
-              <img
-                src={style.photos[0] ? style.photos[0].thumbnail_url : null}
-                data-index={index}
-                onClick={this.props.changeStyles}
-              ></img>
-            </div>
-          );
-        })}
-      </>
-    );
-  }
-}
+export default Styles;
