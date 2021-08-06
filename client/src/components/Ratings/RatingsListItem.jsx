@@ -41,7 +41,7 @@ class RatingsItemsList extends React.Component {
 
     return (
       <div>
-        <div style={{fontSize: 30}}>
+        <div style={{fontSize: 35}}>
           <StarRating
           class="reviewRatingStar"
           name="reviewRating"
@@ -61,7 +61,7 @@ class RatingsItemsList extends React.Component {
         {this.props.post.recommend === true ? (
           <div>
             {/* <Checkmark /> */}
-            <i>I recommend this product!</i>
+            <i>*** I recommend this product! ***</i>
           </div>
         ) : null}
 
