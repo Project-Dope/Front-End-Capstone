@@ -5,10 +5,12 @@ class AnswerHelpful extends React.Component {
     super(props);
 
     this.state = {
-      reported: false
+      reported: false,
+      clickedHelpful: false
     }
 
     this.report = this.report.bind(this);
+    this.incrementHelpful = this.incrementHelpful.bind(this);
   }
 
   report() {
@@ -18,11 +20,19 @@ class AnswerHelpful extends React.Component {
     this.props.reportAnswer();
   }
 
+  incrementHelpful() {
+    this.setState({
+      clickedHelpful: true
+    })
+    this.props.addAnswerHelpfulness();
+  }
+
   render() {
     return (
       <span>
         <span>Helpful?&nbsp;
-          <button className='questions-helpful-buttons' onClick={() => this.props.addAnswerHelpfulness()}>Yes</button>
+          {this.state.clickedHelpful ? (<button className='questions-helpful-buttons' >Yes</button>) :
+          (<button className='questions-helpful-buttons' onClick={this.incrementHelpful}>Yes</button>)}
           <span> {this.props.answerHelpfulness}  |  {this.state.reported ? (<span>Reported</span>) : (<button className='questions-helpful-buttons' onClick={this.report}>Report</button>)}</span>
         </span>
       </span>
