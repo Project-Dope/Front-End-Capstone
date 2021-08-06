@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class QuestionHelpful extends React.Component {
   constructor(props) {
@@ -54,7 +54,5 @@ class QuestionHelpful extends React.Component {
 //       </span>
 //     </span>
 //   )
-
-}
 
 export default QuestionHelpful;

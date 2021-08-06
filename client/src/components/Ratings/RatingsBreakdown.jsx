@@ -1,70 +1,21 @@
 import React from 'react';
+import ReactStars from 'react-rating-stars-component';
+import CharacteristicsBreakdown from './post-components/CharacteristicsItem.jsx';
 
 class RatingsBreakdown extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      // filteredList: [],
-      wasRatingClicked: {
-        fiveRatingClicked: false,
-        fourRatingClicked: false,
-        threeRatingClicked: false,
-        twoRatingClicked: false,
-        oneRatingClicked: false
-      }
-    }
-    this.clickRating = this.clickRating.bind(this);
-  }
-
-  clickRating(event) {
-    // console.log('clicked filter: ', event.target.name);
-
-    // check if event.target.name was already clicked
-    if (!this.state.wasRatingClicked[event.target.name]) {
-
-      var filteredArray = [];
-
-      // iterate over nested object in state
-        // if states are true
-          // use filter and push values to filteredArray
-      this.props.list.filter((item) => {
-        if (item.rating === parseInt(event.target.value)) {
-          filteredArray.push(item);
-        }
-      })
-      // console.log('filteredArray: ', filteredArray);
-      this.props.filterByRating(filteredArray);
-
-      this.setState({
-        wasRatingClicked: {
-          [event.target.name]: true
-        }
-      })
-
-    } else {
-
-      var filteredArrayTrue = [];
-
-      this.props.filteredList.filter((item) => {
-        if (item.rating !== parseInt(event.target.value)) {
-          filteredArrayTrue.push(item);
-        }
-      })
-
-      console.log('filteredArrayTrue: ', filteredArrayTrue);
-      // this.props.deselectFilter(filteredArrayTrue);
-
-      this.setState({
-        wasRatingClicked: {
-          [event.target.name]: false
-        }
-      })
-
     }
   }
 
   render() {
+
+    // used to style element
+    var barStyle = {height: 20, width: '35%', backgroundColor: 'grey'};
+
+    // console.log('metaData in Breakdown: ', this.props.metaData);
 
     return (
       <div>
@@ -84,6 +35,7 @@ class RatingsBreakdown extends React.Component {
         <button name="oneRatingClicked" value="1" onClick={this.clickRating}>1 Star</button>
         <p>{this.props.ratingsCountList['1']}</p>
       </div>
+
 
     )
 

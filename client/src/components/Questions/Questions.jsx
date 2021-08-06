@@ -28,7 +28,6 @@ export default class Questions extends React.Component {
 
   componentDidMount() {
     this.getProductQuestions();
-    console.log("product id: ", this.props.productId);
   }
 
   componentDidUpdate(prevProps) {
