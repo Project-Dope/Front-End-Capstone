@@ -137,7 +137,7 @@ export default class Products extends React.Component {
               rating={5}
               starRatedColor="black"
               numberOfStars={5}
-              starDimension="20px"
+              starDimension="15px"
               name="rating"
             />
             <div className="product-information">

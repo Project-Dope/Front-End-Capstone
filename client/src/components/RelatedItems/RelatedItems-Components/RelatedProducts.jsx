@@ -4,7 +4,7 @@ import { Carousel } from "react-bootstrap";
 
 const groupBy = (list) => {
   return list.reduce(
-    (r, e, i) => (i % 3 ? r[r.length - 1].push(e) : r.push([e])) && r,
+    (r, e, i) => (i % 4 ? r[r.length - 1].push(e) : r.push([e])) && r,
     []
   );
 };
@@ -20,7 +20,7 @@ const RelatedProducts = (props) => {
             <Carousel.Item key={index1}>
               <div className="related-carousel">
                 {relatedList.map((key, index2) => {
-                  var index = index1 * 3 + index2;
+                  var index = index1 * 4 + index2;
                   return (
                     <div className="related-card" key={index}>
                       <BsStarFill

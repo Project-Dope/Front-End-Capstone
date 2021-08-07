@@ -12,13 +12,11 @@
 }
 
 .Products {
-  border: 4px dotted grey;
   height: 100%;
   grid-row: 2 / 3;
 }
 
 .RelatedItems-OutfitCreation {
-  border: 4px dotted grey;
   height: 100%;
   grid-row: 3 / 4;
 }
