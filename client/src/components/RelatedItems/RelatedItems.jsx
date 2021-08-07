@@ -13,7 +13,6 @@ export default class RelatedItems extends React.Component {
       currentID: null,
       relatedItems: null,
       showComparisonModal: false,
-      asdas: false,
     };
 
     this.openComparisonModal = this.openComparisonModal.bind(this);
