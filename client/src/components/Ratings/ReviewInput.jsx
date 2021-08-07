@@ -1,9 +1,9 @@
 import React from "react";
-import Characteristics from './post-components/Characteristics.jsx';
-import UploadPhotos from './post-components/UploadPhotos.jsx';
+import Characteristics from "./post-components/Characteristics.jsx";
+import UploadPhotos from "./post-components/UploadPhotos.jsx";
 import StarRating from "react-star-rating-component";
-import ReactModal from 'react-modal';
-ReactModal.setAppElement('#app');
+import ReactModal from "react-modal";
+ReactModal.setAppElement("#app");
 
 class ReviewInput extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class ReviewInput extends React.Component {
       emailInput: "",
       recommended: null,
       wasPhotoUploadClicked: false,
-      rating_empty_initial: 0
+      rating_empty_initial: 0,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,7 +53,7 @@ class ReviewInput extends React.Component {
     }
 
     if (this.state.bodyInput.length === 50) {
-      console.log('Minimum reached');
+      console.log("Minimum reached");
     }
   }
 
@@ -66,7 +66,12 @@ class ReviewInput extends React.Component {
     var emailLength = this.state.emailInput.length;
     var displayLength = this.state.displayInput.length;
 
-    if (summaryLength === 0 || bodyLength === 0 || emailLength === 0 || displayLength === 0) {
+    if (
+      summaryLength === 0 ||
+      bodyLength === 0 ||
+      emailLength === 0 ||
+      displayLength === 0
+    ) {
       alert("Blank field requires input");
       return;
     }
@@ -97,30 +102,29 @@ class ReviewInput extends React.Component {
       name: this.state.displayInput,
       email: this.state.emailInput,
       summary: this.state.summaryInput,
-      characteristics: {}
-
+      characteristics: {},
     };
 
     // using conditionals to add to characteristics object based on meta data
     var metaData = this.props.metaData.characteristics;
 
     if (this.state.sizeRating !== null) {
-      newReview.characteristics[metaData.Size.id] = this.state.sizeRating
+      newReview.characteristics[metaData.Size.id] = this.state.sizeRating;
     }
     if (this.state.widthRating !== null) {
-      newReview.characteristics[metaData.Width.id] = this.state.widthRating
+      newReview.characteristics[metaData.Width.id] = this.state.widthRating;
     }
     if (this.state.comfortRating !== null) {
-      newReview.characteristics[metaData.Comfort.id] = this.state.comfortRating
+      newReview.characteristics[metaData.Comfort.id] = this.state.comfortRating;
     }
     if (this.state.qualityRating !== null) {
-      newReview.characteristics[metaData.Quality.id] = this.state.qualityRating
+      newReview.characteristics[metaData.Quality.id] = this.state.qualityRating;
     }
     if (this.state.lengthRating !== null) {
-      newReview.characteristics[metaData.Length.id] = this.state.lengthRating
+      newReview.characteristics[metaData.Length.id] = this.state.lengthRating;
     }
     if (this.state.fitRating !== null) {
-      newReview.characteristics[metaData.Fit.id] = this.state.fitRating
+      newReview.characteristics[metaData.Fit.id] = this.state.fitRating;
     }
 
     this.props.clickSubmitReview(newReview);
@@ -139,28 +143,28 @@ class ReviewInput extends React.Component {
   }
 
   clickStarRating(event) {
-    console.log('clicked rating: ', event.target.value);
+    console.log("clicked rating: ", event.target.value);
     this.setState({
-      starRating: parseInt(event.target.value)
-    })
+      starRating: parseInt(event.target.value),
+    });
   }
 
   clickCharacteristics(event) {
     this.setState({
-      [event.target.name]: parseInt(event.target.value)
-    })
+      [event.target.name]: parseInt(event.target.value),
+    });
   }
 
   clickPhotoUpload() {
     this.setState({
-      wasPhotoUploadClicked: true
-    })
+      wasPhotoUploadClicked: true,
+    });
   }
 
   cancelPhotoUpload() {
     this.setState({
-      wasPhotoUploadClicked: false
-    })
+      wasPhotoUploadClicked: false,
+    });
   }
 
   onStarClickEmptyInitial(nextValue, prevValue, name) {
@@ -168,38 +172,48 @@ class ReviewInput extends React.Component {
 
     // nextValue is the star rating chosen
     this.setState({
-      rating_empty_initial: nextValue
+      rating_empty_initial: nextValue,
     });
   }
 
   render() {
-
     // console.log('metaData from ReviewInput: ', this.props.metaData.characteristics);
 
     return (
       <div className="reviewInput">
         <form onSubmit={this.handleInputSubmit}>
           <h5>Choose star rating here</h5>
-          <div style={{fontSize: 35}}>
+          <div style={{ fontSize: 35 }}>
             <StarRating
-            name="inputStarRating"
-            starCount={5}
-            value={this.state.rating_empty_initial}
-            onStarClick={this.onStarClickEmptyInitial}
+              name="inputStarRating"
+              starCount={5}
+              value={this.state.rating_empty_initial}
+              onStarClick={this.onStarClickEmptyInitial}
             />
           </div>
           <div>
             <Characteristics
-            clickCharacteristics={this.clickCharacteristics}
-            metaData={this.props.metaData.characteristics}/>
+              clickCharacteristics={this.clickCharacteristics}
+              metaData={this.props.metaData.characteristics}
+            />
           </div>
           <div>
             <h2></h2>
             <h5>Do you recommend this product?</h5>
-            <input type="radio" name="recommended" onClick={this.recommendClick} value="Yes" />
-              <label>Yes</label>&nbsp;&nbsp;
-            <input type="radio" name="recommended" onClick={this.recommendClick} value="No" />
-              <label>No</label>
+            <input
+              type="radio"
+              name="recommended"
+              onClick={this.recommendClick}
+              value="Yes"
+            />
+            <label>Yes</label>&nbsp;&nbsp;
+            <input
+              type="radio"
+              name="recommended"
+              onClick={this.recommendClick}
+              value="No"
+            />
+            <label>No</label>
           </div>
           <div>
             <h2></h2>
@@ -216,13 +230,13 @@ class ReviewInput extends React.Component {
             <h2></h2>
             <h5>Review Body</h5>
             <div>
-            <input
-              className="inputField"
-              name="bodyInput"
-              placeholder="Why did you like the product or not?"
-              value={this.state.bodyInput}
-              onChange={this.handleInputChange}
-            />
+              <input
+                className="inputField"
+                name="bodyInput"
+                placeholder="Why did you like the product or not?"
+                value={this.state.bodyInput}
+                onChange={this.handleInputChange}
+              />
             </div>
           </div>
           <div>
@@ -245,7 +259,10 @@ class ReviewInput extends React.Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            <p>*** For privacy reasons, do not use your full name or email address. ***</p>
+            <p>
+              *** For privacy reasons, do not use your full name or email
+              address. ***
+            </p>
           </div>
           <div>
             <h5>Your email</h5>
@@ -268,9 +285,8 @@ class ReviewInput extends React.Component {
 
 export default ReviewInput;
 
-
-
-{/* <div>
+{
+  /* <div>
   <p>Choose star rating here</p>
   <input type="radio" name="starRating" value="1" onClick={this.clickStarRating}/>
   <label>Poor</label>
@@ -282,8 +298,8 @@ export default ReviewInput;
   <label>Good</label>
   <input type="radio" name="starRating" value="5" onClick={this.clickStarRating}/>
   <label>Great</label>
-</div> */}
-
+</div> */
+}
 
 // SAMPLE TEMPLATE FOR POST REQUEST
 
