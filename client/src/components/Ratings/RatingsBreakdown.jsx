@@ -12,6 +12,8 @@ class RatingsBreakdown extends React.Component {
 
   render() {
 
+    console.log('Hello from RatingsBreakdown!');
+
     // used to style element
     var barStyle = {height: 20, width: '35%', backgroundColor: 'grey'};
 
