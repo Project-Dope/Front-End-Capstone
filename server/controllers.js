@@ -18,6 +18,7 @@ const configuration = (endpoint, method, queryParams, bodyParams) => ({
   },
   data: bodyParams,
   params: queryParams,
+  data: bodyParams
 });
 
 module.exports = {
@@ -90,7 +91,6 @@ module.exports = {
     },
 
     addNewReview: (req, res) => {
-
       // make sure req.body is exactly like Postman req
       var addObject = req.body;
 
@@ -103,24 +103,28 @@ module.exports = {
       axios(configuration(`reviews/`, "post", queryParams, addObject))
         .then((response) => {
           res.status(200).send();
-          console.log('Received response from addNewReview!');
+          console.log("Received response from addNewReview!");
         })
         .catch((err) => {
           res.status(404).send();
           console.log(err);
-        })
-
+        });
     },
 
     updateHelpfulCount: (req, res) => {
-
       var updateObject = req.body;
       // console.log('req.body: ', updateObject);
       queryParams = {
-        review_id: req.params.review_id
+        review_id: req.params.review_id,
       };
       // console.log('queryParams: ', queryParams);
-      axios(configuration(`reviews/${queryParams.review_id}/helpful`, "put", updateObject))
+      axios(
+        configuration(
+          `reviews/${queryParams.review_id}/helpful`,
+          "put",
+          updateObject
+        )
+      )
         .then(() => {
           res.status(200).send();
           console.log('Received response from axios PUT request in controllers!');
@@ -128,15 +132,14 @@ module.exports = {
         .catch((err) => {
           res.status(400).send(err);
           console.log(err);
-        })
-
+        });
     },
-
   },
   qa: {
     getQuestions: (req, res) => {
       queryParams = {
         product_id: req.params.id,
+        count: 100
       };
       axios(configuration("qa/questions", "get", queryParams))
         .then((response) => {
@@ -146,10 +149,64 @@ module.exports = {
           res.status(404).send(err);
         });
     },
-    // getAnswers:
-
-    // postQuestions:
-
-    // postAnswers:
+    getAnswers: (req, res) => {
+      queryParams = {
+        count: 100
+      };
+      axios(configuration(`qa/questions/${req.params.id}/answers`, "get", queryParams))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    updateQuestionHelpfulness: (req, res) => {
+      axios(configuration(`qa/questions/${req.params.id}/helpful`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    updateAnswerHelpfulness: (req, res) => {
+      axios(configuration(`qa/answers/${req.params.id}/helpful`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    postQuestions: (req, res) => {
+      questionObject = req.body;
+      axios(configuration(`qa/questions/`, "post", null, questionObject))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    postAnswers: (req, res) => {
+      answerObject = req.body;
+      axios(configuration(`qa/questions/${req.params.id}/answers/`, "post", null, answerObject))
+        .then((response) => {
+          res.status(200).send(response.data);
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
+    reportAnswer: (req, res) => {
+      axios(configuration(`qa/answers/${req.params.id}/report`, "put"))
+        .then((response) => {
+          res.status(200).send();
+        })
+        .catch((err) => {
+          res.status(404).send(err);
+        });
+    },
   },
 };

@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
     this.state = {
       currentProduct: {},
-      // currentReview: {},
+      currentReview: {},
       // currentQA: {},
     };
 
@@ -26,9 +26,12 @@ export default class App extends React.Component {
 
   getProducts() {
     axios.get("api/products").then((response) =>
-      axios.get(`api/products/${response.data[0].id}`).then((response) =>
-        this.setState({
-          currentProduct: response.data,
+      axios.get(`api/products/${response.data[0].id}`).then((response1) =>
+        axios.get(`api/reviews/${response.data[0].id}`).then((response2) => {
+          this.setState({
+            currentProduct: response1.data,
+            currentReview: response2.data,
+          });
         })
       )
     );
@@ -49,7 +52,10 @@ export default class App extends React.Component {
               <NavBar />
             </div>
             <div className="Products">
-              <Products currentProduct={this.state.currentProduct} />
+              <Products
+                currentProduct={this.state.currentProduct}
+                currentReview={this.state.currentReview}
+              />
             </div>
             <div className="RelatedItems-OutfitCreation">
               <RelatedItems
@@ -58,7 +64,7 @@ export default class App extends React.Component {
               />
             </div>
             <div className="Questions-Answers">
-              <Questions />
+              <Questions productId={this.state.currentProduct.id} />
             </div>
             <div className="Ratings-Reviews">
               <Ratings productId={this.state.currentProduct.id} />

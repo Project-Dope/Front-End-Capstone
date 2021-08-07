@@ -2,11 +2,15 @@
   text-align: center;
 }
 
+.related-product {
+  display: flex;
+}
+
 .related-carousel {
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: hidden;
+  margin: auto;
 }
 
 .related-card {

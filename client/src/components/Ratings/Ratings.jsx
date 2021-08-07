@@ -9,7 +9,6 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 ReactModal.setAppElement('#app');
 
 export default class Ratings extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -60,10 +59,14 @@ export default class Ratings extends React.Component {
         })
         console.log('Recevied response from Axios GET request in Ratings.jsx!');
       })
+      // console.log('response data: ', response.data);
+      // console.log('Recevied response from Axios GET request in Ratings.jsx!');
       .then(() => {
         this.getAverageRating(this.state.ratingsList);
         this.getEachRatingCount(this.state.ratingsList);
+
         // console.log('ratingsList: ', this.state.ratingsList);
+        // console.log('averageRating: ', this.state.averageRating);
       })
       .catch((err) => {
         console.log(err);
@@ -88,12 +91,12 @@ export default class Ratings extends React.Component {
 
   clickAddReview() {
     this.setState({
-      wasReviewClicked: true
-    })
+      wasReviewClicked: true,
+    });
   }
 
   clickSubmitReview(addObject) {
-    console.log('addObject: ', addObject);
+    console.log("addObject: ", addObject);
 
     axios.post(`/api/reviews/`, addObject)
       .then(() => {
@@ -115,8 +118,8 @@ export default class Ratings extends React.Component {
 
   cancelAddReview() {
     this.setState({
-      wasReviewClicked: false
-    })
+      wasReviewClicked: false,
+    });
   }
 
   selectSortOption(event) {
@@ -136,13 +139,13 @@ export default class Ratings extends React.Component {
   getAverageRating(ratingsArray) {
     var totalRating = 0;
     ratingsArray.forEach((number) => {
-      totalRating += number.rating
-    })
+      totalRating += number.rating;
+    });
     var averageRating = totalRating / ratingsArray.length;
 
     this.setState({
-      averageRating: averageRating.toFixed(1)
-    })
+      averageRating: averageRating.toFixed(1),
+    });
   }
 
   getEachRatingCount(ratingsArray) {
@@ -150,11 +153,11 @@ export default class Ratings extends React.Component {
 
     ratingsArray.forEach((number) => {
       if (ratingObject[number.rating] === undefined) {
-        ratingObject[number.rating] = 1
+        ratingObject[number.rating] = 1;
       } else {
         ratingObject[number.rating]++;
       }
-    })
+    });
 
     this.setState({
       ratingsCountList: ratingObject
@@ -167,9 +170,7 @@ export default class Ratings extends React.Component {
     }))
   }
 
-
   render() {
-
     // console.log('selectedSort: ', this.state.selectedSort);
     // console.log('productId: ', this.props.productId);
 
@@ -231,8 +232,5 @@ export default class Ratings extends React.Component {
       </div>
 
     )
-
   }
-
 }
-

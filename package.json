@@ -20,6 +20,7 @@
   "homepage": "https://github.com/czwong/Front-End-Capstone#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "bootstrap": "^5.0.2",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mongoose": "^5.13.3",
@@ -30,7 +31,8 @@
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
     "react-rating-stars-component": "^2.2.0",
-    "react-star-rating-component": "^1.4.1"
+    "react-star-rating-component": "^1.4.1",
+    "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
