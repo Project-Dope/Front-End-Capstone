@@ -1,4 +1,4 @@
-# Front-End-Capstone
+# Project Catwalk
 
 ### Overview
 Our outdated client-facing retail web-portal has become significantly outdated and has
