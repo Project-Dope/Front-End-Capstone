@@ -5,6 +5,19 @@ Our outdated client-facing retail web-portal has become significantly outdated a
 been proven to be hurting sales numbers. Project Catwalk comprises a complete redesign of
 the retail portal designed to address this concern and modernize the site.
 
+### Programs/Tools Used:
+* Node
+* Express
+* Bootstrap
+* React
+
+### Contributors:
+
+- Ryan Chi
+- Jean-Luc Felix
+- Chris Wong 
+
+
 ### How to run the app locally:
 1) Open your terminal in the downloaded repository.
 2) Run the command `npm install`
